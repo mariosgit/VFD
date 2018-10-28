@@ -7,3 +7,7 @@ Some interesting plain VFDs, that means VFD without driver circuits, are availab
 ### VFD_TPIC_Test
 Arduino programm to test TPIC6b595 based circuits.
 https://www.instructables.com/id/Audio-Level-Meter-From-an-Upcycled-VFD/
+
+### VFD_MN12832JC
+TeensyLC program to drive the MN12832JC graphical display.
+
