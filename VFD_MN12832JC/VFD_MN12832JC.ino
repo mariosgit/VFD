@@ -82,4 +82,5 @@ void loop()
 
     canvas.swapBuffers();
 
+    LOG <<"disp time:" <<canvas.getDisplayTime() <<"us\n";
 }

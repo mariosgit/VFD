@@ -19,11 +19,16 @@ public:
     inline uint8_t *getBuffer(void) { return buffer+_offset; }
     void swapBuffers();
 
+    static uint32_t getDisplayTime();  //24us
+
 private:
     static void nextGate(byte gate);
     static void displayRefresh();
     uint8_t *buffer;
     uint32_t _offset = 0;
+
+    static uint8_t _gate;
+    static uint32_t _displayTime;
 
     static MN12832JC *_the;
 };

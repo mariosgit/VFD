@@ -7,7 +7,7 @@
 #include <SPI.h>
 #include <mbLog.h>
 
-#include "mbGFX_MN12832JC.h"
+#include "mbGFX_MN12864K.h"
 
 // display spi kann bis 200ns/5MHz geht aber auch mit 16 noch ???
 #ifdef __STM32F1__

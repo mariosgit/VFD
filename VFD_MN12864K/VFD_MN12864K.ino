@@ -4,7 +4,7 @@
 #include <SPI.h>
 #include <mbLog.h>
 
-#include "mbGFX_MN12832JC.h"
+#include "mbGFX_MN12864K.h"
 
 // useable space is 126 width, one coloum missing at the sides
 MN12864K canvas;  //  uint8_t *getBuffer(void);
