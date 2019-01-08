@@ -3,6 +3,8 @@
 /// double buffer:
 ///   buffer+offset is the one to draw, the other will be for display
 
+// #include <FreeMonoBold18pt7b.h> Not contained in Teensys AdaGFX lib.
+
 #include <SPI.h>
 #include "mbGFX_MN12832JC.h"
 
@@ -23,7 +25,6 @@ const byte pinPWM = 20;
 
 // Create an IntervalTimer object 
 IntervalTimer myTimer;
-
 
 MN12832JC *MN12832JC::_the  = nullptr;
 uint8_t    MN12832JC::_gate = 0;
