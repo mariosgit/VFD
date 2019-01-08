@@ -22,8 +22,11 @@ const byte pinGSIN = 9;
 const byte pinPWM = 20;
 
 // Create an IntervalTimer object 
+#ifdef __STM32F1__
+HardwareTimer timer(2);
+#else
 IntervalTimer myTimer;
-
+#endif
 
 byte *ptr;
 unsigned long displayTime;
