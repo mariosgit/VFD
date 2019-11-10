@@ -22,15 +22,15 @@ const byte pinGSIN = 9;
 const byte pinPWM = 20;
 
 // Create an IntervalTimer object 
+#ifdef __STM32F1__
+HardwareTimer timer(2);
+#else
 IntervalTimer myTimer;
+#endif
 
-
-byte *ptr;
-unsigned long displayTime;
-
-
-MN12832JC *MN12832JC::_the = nullptr;
-
+MN12832JC *MN12832JC::_the  = nullptr;
+uint8_t    MN12832JC::_gate = 0;
+uint32_t   MN12832JC::_displayTime = 0;
 
 MN12832JC::MN12832JC() : Adafruit_GFX(128, 32) {
     uint16_t bytes = ((128 + 7) / 8) * 32;
@@ -81,10 +81,8 @@ void MN12832JC::begin()
 
     SPI.beginTransaction(settingsA);
 
-    myTimer.begin(displayRefresh, 2000);
-
+    myTimer.begin(displayRefresh, 100);
 }
-
 
 void MN12832JC::drawPixel(int16_t x, int16_t y, uint16_t color) {
 #ifdef __AVR__
@@ -134,12 +132,16 @@ void MN12832JC::swapBuffers()
     {
         _offset = bytes;
     }
-
-    unsigned long time = displayTime;
     interrupts();
-    // LOG << "dispTime:" <<time <<"us\n";
-    // 1500us, mhm not so bad
+}
 
+uint32_t MN12832JC::getDisplayTime()
+{
+    uint32_t result;
+    noInterrupts();
+    result = _the->_displayTime;
+    interrupts();
+    return result;
 }
 
 void MN12832JC::nextGate(byte gate)
@@ -160,7 +162,7 @@ void MN12832JC::nextGate(byte gate)
 
 void MN12832JC::displayRefresh()
 {
-    unsigned long time = micros();
+    uint32_t time = micros();
 
     uint32_t bytes = ((_the->width() + 7) / 8) * _the->height();
     byte* drawBuffer;
@@ -173,14 +175,15 @@ void MN12832JC::displayRefresh()
         drawBuffer = _the->getBuffer() + bytes;
     }
 
-    for(byte gate = 0; gate < 64; )  // ein gate = 2 x pixel
+    // for(gate = 0; gate < 64; )  // ein gate = 2 x pixel
     {
-        ptr = drawBuffer + gate*8 -8;
+        byte *ptr;
+        ptr = drawBuffer + _gate * 8 - 8;
         for(byte i = 0; i < 8; i++)
         {
-            // if(gate & 0x01 && i==3)
-            //     SPI.transfer( ~(0x01 << (gate-1)) );
-            if(gate < 1)
+            // if(_gate & 0x01 && i==3)
+            //     SPI.transfer( ~(0x01 << (_gate-1)) );
+            if(_gate < 1)
                 SPI.transfer(0); // 1 Spalte ganz links is komisch.
             else
                 SPI.transfer(ptr[7-i]);
@@ -188,7 +191,7 @@ void MN12832JC::displayRefresh()
 
         digitalWrite(pinBLK1, HIGH);
         digitalWrite(pinBLK2, HIGH);
-        nextGate(gate);
+        nextGate(_gate);
 
         // volatile int bla;
         // for(int i = 0; i < 100; i++)
@@ -197,7 +200,7 @@ void MN12832JC::displayRefresh()
         digitalWrite(pinLAT12, HIGH);
         digitalWrite(pinLAT12, LOW);
 
-        if(gate & 0x01)
+        if(_gate & 0x01)
         {
             // cb
             digitalWrite(pinBLK1, HIGH);
@@ -210,10 +213,13 @@ void MN12832JC::displayRefresh()
             digitalWrite(pinBLK2, HIGH);
         }
 
-        gate++;
+        _gate++;
     }
     // shift the gates out...
-    nextGate(64);
-    nextGate(65);
-    displayTime = micros() - time;;
+    _the->_displayTime = micros() - time;
+
+    if(_gate > 63)
+        nextGate(64);
+    if(_gate > 65)
+        _gate = 0;
 }
