@@ -11,3 +11,25 @@ https://www.instructables.com/id/Audio-Level-Meter-From-an-Upcycled-VFD/
 ### VFD_MN12832JC
 TeensyLC program to drive the MN12832JC graphical display.
 
+# PCB
+
+## Status
+**In Test !!!**
+
+## Comments
+
+At the moment I use Eagle (also playing with conversion to KiCAD 5..)
+
+The folder PCB-Eagle contains my library with
+- The displays
+- The chips used (XL6009, ZXBM5210)
+
+The folder PCB-Eagle-Blocks contains some design blocks which can be dropped in a PCB project.
+- For the power converter
+
+They all use a similar net naming
+- +5V
+- VPP for the 50V anode voltage
+- F1 and F2 for the fillament AC voltage
+
+The ZIP file is a set of production files.
