@@ -31,3 +31,8 @@
 *.out
 *.app
 .vscode/
+
+# Eagle
+PCB-Eagle/*.b#*
+PCB-Eagle/*.s#*
+PCB-Eagle/*.l#*

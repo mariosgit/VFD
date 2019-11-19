@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="8.7.1">
+<eagle version="9.5.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -60,36 +60,36 @@
 <library>
 <packages>
 <package name="MN12832JC">
-<pad name="F1_1" x="-48.61" y="-17.24" drill="0.6" shape="square"/>
-<pad name="F1_2" x="-46.61" y="-17.24" drill="0.6" shape="square"/>
-<pad name="F1_3" x="-44.61" y="-17.24" drill="0.6" shape="square"/>
+<pad name="F1_1" x="-48.61" y="-17.24" drill="1" shape="square"/>
+<pad name="F1_2" x="-46.61" y="-17.24" drill="1" shape="square"/>
+<pad name="F1_3" x="-44.61" y="-17.24" drill="1" shape="square"/>
 <wire x1="-54.61" y1="17.76" x2="-54.61" y2="-15.24" width="0.127" layer="21"/>
 <wire x1="-54.61" y1="-15.24" x2="55.39" y2="-15.24" width="0.127" layer="21"/>
 <wire x1="55.39" y1="-15.24" x2="55.39" y2="17.76" width="0.127" layer="21"/>
 <wire x1="55.39" y1="17.76" x2="-54.61" y2="17.76" width="0.127" layer="21"/>
-<pad name="BLK1" x="1.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="LAT1" x="3.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="CLK1" x="5.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="SIN1" x="7.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="NC_1" x="9.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="VDD2_1" x="11.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="VDD2_2" x="13.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="VSS" x="15.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="VSS_2" x="17.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="VDD1" x="19.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="GBLK" x="21.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="GLAT" x="23.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="GCLK" x="25.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="GSIN" x="27.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="GSOUT" x="29.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="NC_2" x="31.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="SIN2" x="33.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="CLK2" x="35.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="LAT2" x="37.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="BLK2" x="39.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="F2_1" x="45.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="F2_2" x="47.39" y="-17.24" drill="0.6" shape="square"/>
-<pad name="F2_3" x="49.39" y="-17.24" drill="0.6" shape="square"/>
+<pad name="BLK1" x="1.39" y="-17.24" drill="1" shape="square"/>
+<pad name="LAT1" x="3.39" y="-17.24" drill="1" shape="square"/>
+<pad name="CLK1" x="5.39" y="-17.24" drill="1" shape="square"/>
+<pad name="SIN1" x="7.39" y="-17.24" drill="1" shape="square"/>
+<pad name="NC_1" x="9.39" y="-17.24" drill="1" shape="square"/>
+<pad name="VDD2_1" x="11.39" y="-17.24" drill="1" shape="square"/>
+<pad name="VDD2_2" x="13.39" y="-17.24" drill="1" shape="square"/>
+<pad name="VSS" x="15.39" y="-17.24" drill="1" shape="square"/>
+<pad name="VSS_2" x="17.39" y="-17.24" drill="1" shape="square"/>
+<pad name="VDD1" x="19.39" y="-17.24" drill="1" shape="square"/>
+<pad name="GBLK" x="21.39" y="-17.24" drill="1" shape="square"/>
+<pad name="GLAT" x="23.39" y="-17.24" drill="1" shape="square"/>
+<pad name="GCLK" x="25.39" y="-17.24" drill="1" shape="square"/>
+<pad name="GSIN" x="27.39" y="-17.24" drill="1" shape="square"/>
+<pad name="GSOUT" x="29.39" y="-17.24" drill="1" shape="square"/>
+<pad name="NC_2" x="31.39" y="-17.24" drill="1" shape="square"/>
+<pad name="SIN2" x="33.39" y="-17.24" drill="1" shape="square"/>
+<pad name="CLK2" x="35.39" y="-17.24" drill="1" shape="square"/>
+<pad name="LAT2" x="37.39" y="-17.24" drill="1" shape="square"/>
+<pad name="BLK2" x="39.39" y="-17.24" drill="1" shape="square"/>
+<pad name="F2_1" x="45.39" y="-17.24" drill="1" shape="square"/>
+<pad name="F2_2" x="47.39" y="-17.24" drill="1" shape="square"/>
+<pad name="F2_3" x="49.39" y="-17.24" drill="1" shape="square"/>
 <wire x1="-41.61" y1="-9.24" x2="-41.61" y2="10.76" width="0.127" layer="21"/>
 <wire x1="-41.61" y1="10.76" x2="42.39" y2="10.76" width="0.127" layer="21"/>
 <wire x1="42.39" y1="10.76" x2="42.39" y2="-9.24" width="0.127" layer="21"/>
