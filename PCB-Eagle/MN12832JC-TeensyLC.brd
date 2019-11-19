@@ -2086,6 +2086,9 @@ Your Multi-CB Team
 <param name="cfChangeDir" value="25"/>
 </pass>
 </autorouter>
+<groups>
+<board_group name="PROTOAREA"/>
+</groups>
 <elements>
 <element name="U$3" library="Teensy_3_and_LC_Series_Boards_v1.4" package="TEENSY_3.0-3.2&amp;LC_DIL" value="TEENSY_LC_DIL" x="27.94" y="22.86" smashed="yes">
 <attribute name="NAME" x="24.13" y="36.83" size="1.27" layer="25" font="vector"/>
@@ -2410,6 +2413,17 @@ Your Multi-CB Team
 <via x="95.25" y="8.89" extent="1-16" drill="0.2"/>
 <via x="41.91" y="6.35" extent="1-16" drill="0.2"/>
 <via x="17.78" y="29.21" extent="1-16" drill="0.2"/>
+<via x="168.91" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="171.45" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="173.99" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="176.53" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="179.07" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="181.61" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="184.15" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="186.69" y="25.4" extent="1-16" drill="0.9" locked="yes"/>
+<via x="181.61" y="27.94" extent="1-16" drill="0.9" locked="yes"/>
+<via x="184.15" y="27.94" extent="1-16" drill="0.9" locked="yes"/>
+<via x="186.69" y="27.94" extent="1-16" drill="0.9" locked="yes"/>
 </signal>
 <signal name="+5V" class="1">
 <contactref element="U$3" pad="VIN"/>
@@ -2916,244 +2930,244 @@ Your Multi-CB Team
 <via x="32.86125" y="31.75" extent="1-16" drill="0.2"/>
 </signal>
 <signal name="X1" class="1">
-<via x="168.91" y="22.86" extent="1-16" drill="0.9"/>
-<via x="171.45" y="22.86" extent="1-16" drill="0.9"/>
-<via x="173.99" y="22.86" extent="1-16" drill="0.9"/>
-<via x="176.53" y="22.86" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="22.875" x2="169" y2="22.875" width="0.8128" layer="1"/>
-<wire x1="169" y1="22.875" x2="168.91" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="22.875" x2="171.45" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="22.875" x2="173.875" y2="22.875" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="22.875" x2="173.99" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="22.875" x2="171.45" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="22.875" x2="176.5" y2="22.875" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="22.875" x2="176.53" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="22.875" x2="173.99" y2="22.86" width="0.8128" layer="1"/>
+<via x="168.91" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="22.875" x2="169" y2="22.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="22.875" x2="168.91" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="22.875" x2="171.45" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="22.875" x2="173.875" y2="22.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="22.875" x2="173.99" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="22.875" x2="171.45" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="22.875" x2="176.5" y2="22.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="22.875" x2="176.53" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="22.875" x2="173.99" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="X2" class="1">
-<via x="168.91" y="20.32" extent="1-16" drill="0.9"/>
-<via x="171.45" y="20.32" extent="1-16" drill="0.9"/>
-<via x="173.99" y="20.32" extent="1-16" drill="0.9"/>
-<via x="176.53" y="20.32" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="20.375" x2="169" y2="20.375" width="0.8128" layer="1"/>
-<wire x1="169" y1="20.375" x2="168.91" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="20.375" x2="171.45" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="20.375" x2="173.875" y2="20.375" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="20.375" x2="173.99" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="20.375" x2="171.45" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="20.375" x2="176.5" y2="20.375" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="20.375" x2="176.53" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="20.375" x2="173.99" y2="20.32" width="0.8128" layer="1"/>
+<via x="168.91" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="20.375" x2="169" y2="20.375" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="20.375" x2="168.91" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="20.375" x2="171.45" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="20.375" x2="173.875" y2="20.375" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="20.375" x2="173.99" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="20.375" x2="171.45" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="20.375" x2="176.5" y2="20.375" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="20.375" x2="176.53" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="20.375" x2="173.99" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="X3" class="1">
-<via x="168.91" y="17.78" extent="1-16" drill="0.9"/>
-<via x="171.45" y="17.78" extent="1-16" drill="0.9"/>
-<via x="173.99" y="17.78" extent="1-16" drill="0.9"/>
-<via x="176.53" y="17.78" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="17.875" x2="169" y2="17.875" width="0.8128" layer="1"/>
-<wire x1="169" y1="17.875" x2="168.91" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="17.875" x2="171.45" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="17.875" x2="173.875" y2="17.875" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="17.875" x2="173.99" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="17.875" x2="171.45" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="17.875" x2="176.5" y2="17.875" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="17.875" x2="176.53" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="17.875" x2="173.99" y2="17.78" width="0.8128" layer="1"/>
+<via x="168.91" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="17.875" x2="169" y2="17.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="17.875" x2="168.91" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="17.875" x2="171.45" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="17.875" x2="173.875" y2="17.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="17.875" x2="173.99" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="17.875" x2="171.45" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="17.875" x2="176.5" y2="17.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="17.875" x2="176.53" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="17.875" x2="173.99" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="X4" class="1">
-<via x="168.91" y="15.24" extent="1-16" drill="0.9"/>
-<via x="171.45" y="15.24" extent="1-16" drill="0.9"/>
-<via x="173.99" y="15.24" extent="1-16" drill="0.9"/>
-<via x="176.53" y="15.24" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="15.25" x2="169" y2="15.25" width="0.8128" layer="1"/>
-<wire x1="169" y1="15.25" x2="168.91" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="15.25" x2="171.45" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="15.25" x2="173.875" y2="15.25" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="15.25" x2="173.99" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="15.25" x2="171.45" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="15.25" x2="176.5" y2="15.25" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="15.25" x2="176.53" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="15.25" x2="173.99" y2="15.24" width="0.8128" layer="1"/>
+<via x="168.91" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="15.25" x2="169" y2="15.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="15.25" x2="168.91" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="15.25" x2="171.45" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="15.25" x2="173.875" y2="15.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="15.25" x2="173.99" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="15.25" x2="171.45" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="15.25" x2="176.5" y2="15.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="15.25" x2="176.53" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="15.25" x2="173.99" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="X5" class="1">
-<via x="168.91" y="12.7" extent="1-16" drill="0.9"/>
-<via x="171.45" y="12.7" extent="1-16" drill="0.9"/>
-<via x="173.99" y="12.7" extent="1-16" drill="0.9"/>
-<via x="176.53" y="12.7" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="12.75" x2="169" y2="12.75" width="0.8128" layer="1"/>
-<wire x1="169" y1="12.75" x2="168.91" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="12.75" x2="171.45" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="171.875" y1="12.625" x2="173.875" y2="12.625" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="12.625" x2="173.99" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="171.875" y1="12.625" x2="171.45" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="12.75" x2="176.5" y2="12.75" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="12.75" x2="176.53" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="12.75" x2="173.99" y2="12.7" width="0.8128" layer="1"/>
+<via x="168.91" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="12.75" x2="169" y2="12.75" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="12.75" x2="168.91" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="12.75" x2="171.45" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.875" y1="12.625" x2="173.875" y2="12.625" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="12.625" x2="173.99" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.875" y1="12.625" x2="171.45" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="12.75" x2="176.5" y2="12.75" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="12.75" x2="176.53" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="12.75" x2="173.99" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y2" class="1">
-<via x="179.07" y="20.32" extent="1-16" drill="0.9"/>
-<via x="181.61" y="20.32" extent="1-16" drill="0.9"/>
-<via x="184.15" y="20.32" extent="1-16" drill="0.9"/>
-<via x="186.69" y="20.32" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="20.375" x2="179.125" y2="20.375" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="20.375" x2="179.07" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="20.375" x2="181.61" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="182" y1="20.375" x2="184.125" y2="20.375" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="20.375" x2="184.15" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="182" y1="20.375" x2="181.61" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="20.375" x2="186.625" y2="20.375" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="20.375" x2="186.69" y2="20.32" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="20.375" x2="184.15" y2="20.32" width="0.8128" layer="1"/>
+<via x="179.07" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="20.32" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="20.375" x2="179.125" y2="20.375" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="20.375" x2="179.07" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="20.375" x2="181.61" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="20.375" x2="184.125" y2="20.375" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="20.375" x2="184.15" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="20.375" x2="181.61" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="20.375" x2="186.625" y2="20.375" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="20.375" x2="186.69" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="20.375" x2="184.15" y2="20.32" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y3" class="1">
-<via x="179.07" y="17.78" extent="1-16" drill="0.9"/>
-<via x="181.61" y="17.78" extent="1-16" drill="0.9"/>
-<via x="184.15" y="17.78" extent="1-16" drill="0.9"/>
-<via x="186.69" y="17.78" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="17.875" x2="179.125" y2="17.875" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="17.875" x2="179.07" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="17.875" x2="181.61" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="182" y1="17.875" x2="184.125" y2="17.875" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="17.875" x2="184.15" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="182" y1="17.875" x2="181.61" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="17.875" x2="186.625" y2="17.875" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="17.875" x2="186.69" y2="17.78" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="17.875" x2="184.15" y2="17.78" width="0.8128" layer="1"/>
+<via x="179.07" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="17.78" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="17.875" x2="179.125" y2="17.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="17.875" x2="179.07" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="17.875" x2="181.61" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="17.875" x2="184.125" y2="17.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="17.875" x2="184.15" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="17.875" x2="181.61" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="17.875" x2="186.625" y2="17.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="17.875" x2="186.69" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="17.875" x2="184.15" y2="17.78" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y4" class="1">
-<via x="179.07" y="15.24" extent="1-16" drill="0.9"/>
-<via x="181.61" y="15.24" extent="1-16" drill="0.9"/>
-<via x="184.15" y="15.24" extent="1-16" drill="0.9"/>
-<via x="186.69" y="15.24" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="15.25" x2="179.125" y2="15.25" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="15.25" x2="179.07" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="15.25" x2="181.61" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="182" y1="15.25" x2="184.125" y2="15.25" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="15.25" x2="184.15" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="182" y1="15.25" x2="181.61" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="15.25" x2="186.625" y2="15.25" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="15.25" x2="186.69" y2="15.24" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="15.25" x2="184.15" y2="15.24" width="0.8128" layer="1"/>
+<via x="179.07" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="15.24" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="15.25" x2="179.125" y2="15.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="15.25" x2="179.07" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="15.25" x2="181.61" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="15.25" x2="184.125" y2="15.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="15.25" x2="184.15" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="15.25" x2="181.61" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="15.25" x2="186.625" y2="15.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="15.25" x2="186.69" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="15.25" x2="184.15" y2="15.24" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y5" class="1">
-<via x="179.07" y="12.7" extent="1-16" drill="0.9"/>
-<via x="181.61" y="12.7" extent="1-16" drill="0.9"/>
-<via x="184.15" y="12.7" extent="1-16" drill="0.9"/>
-<via x="186.69" y="12.7" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="12.75" x2="179.125" y2="12.75" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="12.75" x2="179.07" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="12.75" x2="181.61" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="182" y1="12.75" x2="184.125" y2="12.75" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="12.75" x2="184.15" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="182" y1="12.75" x2="181.61" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="12.75" x2="186.625" y2="12.75" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="12.75" x2="186.69" y2="12.7" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="12.75" x2="184.15" y2="12.7" width="0.8128" layer="1"/>
+<via x="179.07" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="12.7" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="12.75" x2="179.125" y2="12.75" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="12.75" x2="179.07" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="12.75" x2="181.61" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="12.75" x2="184.125" y2="12.75" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="12.75" x2="184.15" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="12.75" x2="181.61" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="12.75" x2="186.625" y2="12.75" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="12.75" x2="186.69" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="12.75" x2="184.15" y2="12.7" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y1" class="1">
-<via x="179.07" y="22.86" extent="1-16" drill="0.9"/>
-<via x="181.61" y="22.86" extent="1-16" drill="0.9"/>
-<via x="184.15" y="22.86" extent="1-16" drill="0.9"/>
-<via x="186.69" y="22.86" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="22.875" x2="179.125" y2="22.875" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="22.875" x2="179.07" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="22.875" x2="181.61" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="182" y1="22.875" x2="184.125" y2="22.875" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="22.875" x2="184.15" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="182" y1="22.875" x2="181.61" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="22.875" x2="186.625" y2="22.875" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="22.875" x2="186.69" y2="22.86" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="22.875" x2="184.15" y2="22.86" width="0.8128" layer="1"/>
+<via x="179.07" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="22.86" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="22.875" x2="179.125" y2="22.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="22.875" x2="179.07" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="22.875" x2="181.61" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="22.875" x2="184.125" y2="22.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="22.875" x2="184.15" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="22.875" x2="181.61" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="22.875" x2="186.625" y2="22.875" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="22.875" x2="186.69" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="22.875" x2="184.15" y2="22.86" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="X6" class="1">
-<via x="168.91" y="10.16" extent="1-16" drill="0.9"/>
-<via x="171.45" y="10.16" extent="1-16" drill="0.9"/>
-<via x="173.99" y="10.16" extent="1-16" drill="0.9"/>
-<via x="176.53" y="10.16" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="10.25" x2="169" y2="10.25" width="0.8128" layer="1"/>
-<wire x1="169" y1="10.25" x2="168.91" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="10.25" x2="171.45" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="10.25" x2="173.875" y2="10.25" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="10.25" x2="173.99" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="10.25" x2="171.45" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="10.25" x2="176.5" y2="10.25" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="10.25" x2="176.53" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="10.25" x2="173.99" y2="10.16" width="0.8128" layer="1"/>
+<via x="168.91" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="10.25" x2="169" y2="10.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="10.25" x2="168.91" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="10.25" x2="171.45" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="10.25" x2="173.875" y2="10.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="10.25" x2="173.99" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="10.25" x2="171.45" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="10.25" x2="176.5" y2="10.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="10.25" x2="176.53" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="10.25" x2="173.99" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="X7" class="1">
-<via x="168.91" y="7.62" extent="1-16" drill="0.9"/>
-<via x="171.45" y="7.62" extent="1-16" drill="0.9"/>
-<via x="173.99" y="7.62" extent="1-16" drill="0.9"/>
-<via x="176.53" y="7.62" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="7.625" x2="169" y2="7.625" width="0.8128" layer="1"/>
-<wire x1="169" y1="7.625" x2="168.91" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="7.625" x2="171.45" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="7.625" x2="173.875" y2="7.625" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="7.625" x2="173.99" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="171.75" y1="7.625" x2="171.45" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="7.625" x2="176.5" y2="7.625" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="7.625" x2="176.53" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="7.625" x2="173.99" y2="7.62" width="0.8128" layer="1"/>
+<via x="168.91" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="7.625" x2="169" y2="7.625" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="7.625" x2="168.91" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="7.625" x2="171.45" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="7.625" x2="173.875" y2="7.625" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="7.625" x2="173.99" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.75" y1="7.625" x2="171.45" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="7.625" x2="176.5" y2="7.625" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="7.625" x2="176.53" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="7.625" x2="173.99" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="X8" class="1">
-<via x="168.91" y="5.08" extent="1-16" drill="0.9"/>
-<via x="171.45" y="5.08" extent="1-16" drill="0.9"/>
-<via x="173.99" y="5.08" extent="1-16" drill="0.9"/>
-<via x="176.53" y="5.08" extent="1-16" drill="0.9"/>
-<wire x1="171.375" y1="5.125" x2="169" y2="5.125" width="0.8128" layer="1"/>
-<wire x1="169" y1="5.125" x2="168.91" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="171.375" y1="5.125" x2="171.45" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="171.875" y1="5" x2="173.875" y2="5" width="0.8128" layer="1"/>
-<wire x1="173.875" y1="5" x2="173.99" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="171.875" y1="5" x2="171.45" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="5.125" x2="176.5" y2="5.125" width="0.8128" layer="1"/>
-<wire x1="176.5" y1="5.125" x2="176.53" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="174.375" y1="5.125" x2="173.99" y2="5.08" width="0.8128" layer="1"/>
+<via x="168.91" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="171.45" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="173.99" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="176.53" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="5.125" x2="169" y2="5.125" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="169" y1="5.125" x2="168.91" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.375" y1="5.125" x2="171.45" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.875" y1="5" x2="173.875" y2="5" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="173.875" y1="5" x2="173.99" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="171.875" y1="5" x2="171.45" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="5.125" x2="176.5" y2="5.125" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="176.5" y1="5.125" x2="176.53" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="174.375" y1="5.125" x2="173.99" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y6" class="1">
-<via x="179.07" y="10.16" extent="1-16" drill="0.9"/>
-<via x="181.61" y="10.16" extent="1-16" drill="0.9"/>
-<via x="184.15" y="10.16" extent="1-16" drill="0.9"/>
-<via x="186.69" y="10.16" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="10.25" x2="179.125" y2="10.25" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="10.25" x2="179.07" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="10.25" x2="181.61" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="182" y1="10.25" x2="184.125" y2="10.25" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="10.25" x2="184.15" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="182" y1="10.25" x2="181.61" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="10.25" x2="186.625" y2="10.25" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="10.25" x2="186.69" y2="10.16" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="10.25" x2="184.15" y2="10.16" width="0.8128" layer="1"/>
+<via x="179.07" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="10.16" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="10.25" x2="179.125" y2="10.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="10.25" x2="179.07" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="10.25" x2="181.61" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="10.25" x2="184.125" y2="10.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="10.25" x2="184.15" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="10.25" x2="181.61" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="10.25" x2="186.625" y2="10.25" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="10.25" x2="186.69" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="10.25" x2="184.15" y2="10.16" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y7" class="1">
-<via x="179.07" y="7.62" extent="1-16" drill="0.9"/>
-<via x="181.61" y="7.62" extent="1-16" drill="0.9"/>
-<via x="184.15" y="7.62" extent="1-16" drill="0.9"/>
-<via x="186.69" y="7.62" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="7.625" x2="179.125" y2="7.625" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="7.625" x2="179.07" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="7.625" x2="181.61" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="182" y1="7.625" x2="184.125" y2="7.625" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="7.625" x2="184.15" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="182" y1="7.625" x2="181.61" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="7.625" x2="186.625" y2="7.625" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="7.625" x2="186.69" y2="7.62" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="7.625" x2="184.15" y2="7.62" width="0.8128" layer="1"/>
+<via x="179.07" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="7.62" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="7.625" x2="179.125" y2="7.625" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="7.625" x2="179.07" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="7.625" x2="181.61" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="7.625" x2="184.125" y2="7.625" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="7.625" x2="184.15" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="7.625" x2="181.61" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="7.625" x2="186.625" y2="7.625" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="7.625" x2="186.69" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="7.625" x2="184.15" y2="7.62" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="Y8" class="1">
-<via x="179.07" y="5.08" extent="1-16" drill="0.9"/>
-<via x="181.61" y="5.08" extent="1-16" drill="0.9"/>
-<via x="184.15" y="5.08" extent="1-16" drill="0.9"/>
-<via x="186.69" y="5.08" extent="1-16" drill="0.9"/>
-<wire x1="181.5" y1="5.125" x2="179.125" y2="5.125" width="0.8128" layer="1"/>
-<wire x1="179.125" y1="5.125" x2="179.07" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="181.5" y1="5.125" x2="181.61" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="182" y1="5.125" x2="184.125" y2="5.125" width="0.8128" layer="1"/>
-<wire x1="184.125" y1="5.125" x2="184.15" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="182" y1="5.125" x2="181.61" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="5.125" x2="186.625" y2="5.125" width="0.8128" layer="1"/>
-<wire x1="186.625" y1="5.125" x2="186.69" y2="5.08" width="0.8128" layer="1"/>
-<wire x1="184.5" y1="5.125" x2="184.15" y2="5.08" width="0.8128" layer="1"/>
+<via x="179.07" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="181.61" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="184.15" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<via x="186.69" y="5.08" extent="1-16" drill="0.9" locked="yes" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="5.125" x2="179.125" y2="5.125" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="179.125" y1="5.125" x2="179.07" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="181.5" y1="5.125" x2="181.61" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="5.125" x2="184.125" y2="5.125" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.125" y1="5.125" x2="184.15" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="182" y1="5.125" x2="181.61" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="5.125" x2="186.625" y2="5.125" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="186.625" y1="5.125" x2="186.69" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
+<wire x1="184.5" y1="5.125" x2="184.15" y2="5.08" width="0.8128" layer="1" grouprefs="PROTOAREA"/>
 </signal>
 <signal name="N$13">
 <contactref element="R8" pad="1"/>
@@ -3343,6 +3357,15 @@ will not be understood (or retained) with this version.
 Since Version 8.3, EAGLE supports the association of 3D packages
 with devices in libraries, schematics, and board files. Those 3D
 packages will not be understood (or retained) with this version.
+</note>
+<note version="9.5" severity="warning">
+Since Version 9.5, EAGLE supports persistent groups with
+schematics, and board files. Those persistent groups
+will not be understood (or retained) with this version.
+</note>
+<note version="8.5" severity="warning">
+Since Version 8.5, EAGLE supports locking for holes, vias, wires and polygons. 
+The locking property on all objects of these types will not be understood in this version. 
 </note>
 </compatibility>
 </eagle>
