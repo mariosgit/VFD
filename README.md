@@ -10,6 +10,7 @@ https://www.instructables.com/id/Audio-Level-Meter-From-an-Upcycled-VFD/
 
 ### VFD_MN12832JC
 TeensyLC program to drive the MN12832JC graphical display.
+![VFD in action](/images/mn12832jc.gif)
 
 ## PCBs
 

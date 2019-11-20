@@ -32,7 +32,10 @@
 *.app
 .vscode/
 
+.DS_Store
+
 # Eagle
+PCB-Eagle/.DS_Store
 PCB-Eagle/*.b#*
 PCB-Eagle/*.s#*
 PCB-Eagle/*.l#*
