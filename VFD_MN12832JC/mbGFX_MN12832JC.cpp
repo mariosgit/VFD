@@ -68,7 +68,8 @@ void MN12832JC::begin()
     SPI.setSCK(SDCARD_SCK_PIN);
     SPI.begin();
 
-    analogWrite(pinPWM, 128);
+    digitalWrite(pinPWM, HIGH);
+    // analogWrite(pinPWM, 128);
     
     digitalWrite(pinGSIN, LOW);
     for(byte i = 0; i < 64; i++)
