@@ -56,7 +56,7 @@
 <layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
-<layer number="99" name="SpiceOrder" color="5" fill="1" visible="yes" active="yes"/>
+<layer number="99" name="SpiceOrder" color="5" fill="1" visible="no" active="yes"/>
 </layers>
 <schematic xreflabel="%F%N/%S.%C%R" xrefpart="/%S.%C%R">
 <libraries>
@@ -22793,7 +22793,7 @@ Source: coiltronics_dr_series.pdf</description>
 <part name="SW3" library="vfds" deviceset="EC12E_SW" device="" package3d_urn="urn:adsk.eagle:package:27083/1"/>
 <part name="SW4" library="vfds" deviceset="EC12E_SW" device="" package3d_urn="urn:adsk.eagle:package:27083/1"/>
 <part name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="2.7k"/>
-<part name="C19" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="4.7n"/>
+<part name="C19" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="100n"/>
 <part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="IC4" library="vfds" deviceset="ZXBM5210" device=""/>
 <part name="IC5" library="vfds" deviceset="XL6009" device="" package3d_urn="urn:adsk.eagle:package:16438/2"/>
@@ -22829,10 +22829,16 @@ Source: coiltronics_dr_series.pdf</description>
 <part name="P+12" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="R12" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="0411/15" package3d_urn="urn:adsk.eagle:package:23568/1" value="22"/>
 <part name="L1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="L-EU" device="L1812" package3d_urn="urn:adsk.eagle:package:23494/2" value="10u"/>
+<part name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="DIODE-" device="SMB" package3d_urn="urn:adsk.eagle:package:43404/2"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
+<text x="287.782" y="19.304" size="1.778" layer="97">5kHz, ZXBM has a diretion change dead time of 3.9us !</text>
+<text x="147.32" y="-7.62" size="1.778" layer="97">Lower digital valtage, makes the thing 3.3V level compatible</text>
+<wire x1="154.94" y1="-5.08" x2="157.48" y2="0" width="0.1524" layer="97"/>
+<wire x1="157.48" y1="-2.032" x2="157.48" y2="0" width="0.1524" layer="97"/>
+<wire x1="157.48" y1="0" x2="155.702" y2="-1.27" width="0.1524" layer="97"/>
 </plain>
 <instances>
 <instance part="+3V1" gate="G$1" x="139.7" y="81.28" smashed="yes">
@@ -22862,8 +22868,8 @@ Source: coiltronics_dr_series.pdf</description>
 <instance part="SUPPLY1" gate="G$1" x="193.04" y="58.42" smashed="yes">
 <attribute name="VALUE" x="191.135" y="61.595" size="1.778" layer="96"/>
 </instance>
-<instance part="P+2" gate="1" x="160.02" y="5.08" smashed="yes">
-<attribute name="VALUE" x="157.48" y="0" size="1.778" layer="96" rot="R90"/>
+<instance part="P+2" gate="1" x="147.32" y="5.08" smashed="yes">
+<attribute name="VALUE" x="144.78" y="0" size="1.778" layer="96" rot="R90"/>
 </instance>
 <instance part="U$3" gate="G$1" x="91.44" y="38.1" smashed="yes">
 <attribute name="NAME" x="85.852" y="74.93" size="1.27" layer="95" font="vector" ratio="15"/>
@@ -23136,6 +23142,10 @@ Source: coiltronics_dr_series.pdf</description>
 <attribute name="NAME" x="285.75" y="79.7814" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="285.75" y="84.582" size="1.778" layer="96" rot="R180"/>
 </instance>
+<instance part="D1" gate="G$1" x="157.48" y="2.54" smashed="yes">
+<attribute name="NAME" x="160.02" y="3.0226" size="1.778" layer="95"/>
+<attribute name="VALUE" x="160.02" y="0.2286" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -23314,12 +23324,6 @@ Source: coiltronics_dr_series.pdf</description>
 <pinref part="U$3" gate="G$1" pin="VIN"/>
 </segment>
 <segment>
-<pinref part="P+2" gate="1" pin="+5V"/>
-<wire x1="160.02" y1="2.54" x2="165.1" y2="2.54" width="0.1524" layer="91"/>
-<wire x1="165.1" y1="2.54" x2="165.1" y2="7.62" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="VDD1"/>
-</segment>
-<segment>
 <pinref part="P+9" gate="1" pin="+5V"/>
 <wire x1="266.7" y1="40.64" x2="266.7" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="C20" gate="G$1" pin="1"/>
@@ -23380,6 +23384,11 @@ Source: coiltronics_dr_series.pdf</description>
 <pinref part="R11" gate="G$1" pin="2"/>
 <pinref part="P+12" gate="1" pin="+5V"/>
 <wire x1="276.86" y1="66.04" x2="276.86" y2="68.58" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="D1" gate="G$1" pin="A"/>
+<pinref part="P+2" gate="1" pin="+5V"/>
+<wire x1="154.94" y1="2.54" x2="147.32" y2="2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="+3V3" class="2">
@@ -23964,6 +23973,14 @@ Source: coiltronics_dr_series.pdf</description>
 <pinref part="R12" gate="G$1" pin="2"/>
 <wire x1="332.74" y1="91.44" x2="332.74" y2="78.74" width="0.1524" layer="91"/>
 <wire x1="332.74" y1="78.74" x2="320.04" y2="78.74" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$3" class="1">
+<segment>
+<wire x1="165.1" y1="2.54" x2="165.1" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="VDD1"/>
+<pinref part="D1" gate="G$1" pin="C"/>
+<wire x1="165.1" y1="2.54" x2="160.02" y2="2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
