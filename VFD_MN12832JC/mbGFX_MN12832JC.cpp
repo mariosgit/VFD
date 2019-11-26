@@ -16,6 +16,7 @@ const byte pinGBLK = 3;
 const byte pinGLAT = 2;
 const byte pinGCLK = 8;
 const byte pinGSIN = 9;
+const byte pinGSIN2 = 13;
 #define SDCARD_MOSI_PIN 7
 #define SDCARD_SCK_PIN 14
 
@@ -54,6 +55,7 @@ void MN12832JC::begin()
     pinMode(pinGLAT , OUTPUT);
     pinMode(pinGCLK , OUTPUT);
     pinMode(pinGSIN , OUTPUT);
+    pinMode(pinGSIN2 , OUTPUT);
 
     digitalWrite(pinBLK1, HIGH);
     digitalWrite(pinBLK2, HIGH);
@@ -63,6 +65,7 @@ void MN12832JC::begin()
     digitalWrite(pinGLAT, LOW);
     digitalWrite(pinGCLK, HIGH);
     digitalWrite(pinGSIN, LOW);
+    digitalWrite(pinGSIN2, LOW);
 
     SPI.setMOSI(SDCARD_MOSI_PIN);
     SPI.setSCK(SDCARD_SCK_PIN);
@@ -70,9 +73,11 @@ void MN12832JC::begin()
 
     pinMode(pinPWM , OUTPUT);
     digitalWrite(pinPWM, HIGH);
-    // analogWrite(pinPWM, 128);
+    //analogWriteFrequency(pinPWM, 25000);
+    //analogWrite(pinPWM, 128);
     
     digitalWrite(pinGSIN, LOW);
+    digitalWrite(pinGSIN2, LOW);
     for(byte i = 0; i < 64; i++)
     {
         digitalWrite(pinGCLK, LOW);
@@ -149,9 +154,15 @@ uint32_t MN12832JC::getDisplayTime()
 void MN12832JC::nextGate(byte gate)
 {
     if(gate < 2)
+    {
         digitalWrite(pinGSIN, HIGH);
+        digitalWrite(pinGSIN2, HIGH);
+    }
     else
+    {
         digitalWrite(pinGSIN, LOW);
+        digitalWrite(pinGSIN2, LOW);
+    }
     // clk
     digitalWrite(pinGCLK, LOW);
     digitalWrite(pinGCLK, HIGH);
