@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="8.7.1">
+<eagle version="9.5.1">
 <designblock>
 <description>&lt;h1&gt;VFD Power&lt;/h1&gt;
 
-provides 50V and 4V AC.</description>
+50V for Anode,
+4VAC for Fillament</description>
 <attributes>
-<attribute name="BOARDSIZE" value="3700 x 1431 mil"/>
+<attribute name="BOARDSIZE" value="3456 x 1406 mil"/>
 <attribute name="LAYERS" value="2: 1, 16"/>
 </attributes>
 <drawings>
@@ -19985,8 +19986,8 @@ In this library the device names are the same as the pin names of the symbols, t
 <part name="L3" library="inductors" library_urn="urn:adsk.eagle:library:243" deviceset="DR125" device="" package3d_urn="urn:adsk.eagle:package:15121/1"/>
 <part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="D2" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="DIODE-" device="SMB" package3d_urn="urn:adsk.eagle:package:43404/2"/>
-<part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="39"/>
-<part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="1k"/>
+<part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="1.5k"/>
+<part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="39"/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="100n"/>
 <part name="GND8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -20004,48 +20005,159 @@ In this library the device names are the same as the pin names of the symbols, t
 <plain>
 </plain>
 <instances>
-<instance part="R1" gate="G$1" x="48.26" y="25.4"/>
-<instance part="C1" gate="G$1" x="33.02" y="33.02"/>
-<instance part="GND1" gate="1" x="33.02" y="17.78"/>
-<instance part="IC3" gate="G$1" x="55.88" y="78.74"/>
-<instance part="IC2" gate="G$1" x="129.54" y="76.2"/>
-<instance part="P+1" gate="1" x="7.62" y="88.9"/>
-<instance part="P+2" gate="1" x="15.24" y="45.72"/>
-<instance part="P+3" gate="1" x="147.32" y="88.9"/>
-<instance part="GND2" gate="1" x="15.24" y="17.78"/>
-<instance part="GND3" gate="1" x="86.36" y="78.74"/>
-<instance part="FILLAMENT" gate="1" x="55.88" y="99.06" rot="R270"/>
-<instance part="POWER" gate="1" x="2.54" y="33.02"/>
-<instance part="D1" gate="G$1" x="17.78" y="78.74"/>
-<instance part="L1" gate="G$1" x="30.48" y="78.74"/>
-<instance part="L2" gate="G$1" x="30.48" y="86.36"/>
-<instance part="C2" gate="G$1" x="20.32" y="33.02"/>
-<instance part="C3" gate="G$1" x="25.4" y="33.02"/>
-<instance part="GND4" gate="1" x="35.56" y="58.42"/>
-<instance part="C5" gate="G$1" x="142.24" y="68.58"/>
-<instance part="C6" gate="G$1" x="147.32" y="68.58"/>
-<instance part="GND5" gate="1" x="147.32" y="55.88"/>
-<instance part="GND6" gate="1" x="111.76" y="76.2"/>
-<instance part="L3" gate="G$1" x="101.6" y="63.5" rot="R270"/>
-<instance part="P+4" gate="1" x="101.6" y="88.9"/>
-<instance part="D2" gate="G$1" x="129.54" y="48.26" rot="R270"/>
-<instance part="R2" gate="G$1" x="129.54" y="33.02" rot="R90"/>
-<instance part="R3" gate="G$1" x="129.54" y="20.32" rot="R90"/>
-<instance part="GND7" gate="1" x="129.54" y="10.16"/>
-<instance part="C7" gate="G$1" x="142.24" y="33.02"/>
-<instance part="GND8" gate="1" x="144.78" y="10.16"/>
-<instance part="SUPPLY1" gate="G$1" x="152.4" y="43.18"/>
-<instance part="C8" gate="G$1" x="35.56" y="68.58"/>
-<instance part="C4" gate="G$1" x="147.32" y="33.02"/>
-<instance part="50V" gate="1" x="162.56" y="35.56" rot="R180"/>
-<instance part="IC1" gate="A" x="50.8" y="38.1"/>
-<instance part="IC1" gate="B" x="76.2" y="38.1"/>
-<instance part="IC1" gate="D" x="50.8" y="55.88"/>
-<instance part="IC1" gate="C" x="76.2" y="55.88"/>
-<instance part="IC1" gate="P" x="15.24" y="33.02"/>
-<instance part="R4" gate="G$1" x="25.4" y="60.96" rot="R90"/>
-<instance part="P+5" gate="1" x="25.4" y="71.12"/>
-<instance part="R5" gate="G$1" x="76.2" y="91.44"/>
+<instance part="R1" gate="G$1" x="48.26" y="25.4" smashed="yes">
+<attribute name="NAME" x="44.45" y="26.8986" size="1.778" layer="95"/>
+<attribute name="VALUE" x="44.45" y="22.098" size="1.778" layer="96"/>
+</instance>
+<instance part="C1" gate="G$1" x="33.02" y="33.02" smashed="yes">
+<attribute name="NAME" x="34.544" y="33.401" size="1.778" layer="95"/>
+<attribute name="VALUE" x="34.544" y="28.321" size="1.778" layer="96"/>
+</instance>
+<instance part="GND1" gate="1" x="33.02" y="17.78" smashed="yes">
+<attribute name="VALUE" x="30.48" y="15.24" size="1.778" layer="96"/>
+</instance>
+<instance part="IC3" gate="G$1" x="55.88" y="78.74" smashed="yes">
+<attribute name="NAME" x="48.26" y="84.328" size="1.778" layer="95"/>
+<attribute name="VALUE" x="48.26" y="68.58" size="1.778" layer="96"/>
+</instance>
+<instance part="IC2" gate="G$1" x="129.54" y="76.2" smashed="yes">
+<attribute name="NAME" x="121.92" y="82.55" size="1.778" layer="95"/>
+<attribute name="VALUE" x="132.08" y="82.55" size="1.778" layer="96"/>
+</instance>
+<instance part="P+1" gate="1" x="7.62" y="88.9" smashed="yes">
+<attribute name="VALUE" x="5.08" y="83.82" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="P+2" gate="1" x="15.24" y="45.72" smashed="yes">
+<attribute name="VALUE" x="12.7" y="40.64" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="P+3" gate="1" x="147.32" y="88.9" smashed="yes">
+<attribute name="VALUE" x="144.78" y="83.82" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GND2" gate="1" x="15.24" y="17.78" smashed="yes">
+<attribute name="VALUE" x="12.7" y="15.24" size="1.778" layer="96"/>
+</instance>
+<instance part="GND3" gate="1" x="86.36" y="78.74" smashed="yes">
+<attribute name="VALUE" x="83.82" y="76.2" size="1.778" layer="96"/>
+</instance>
+<instance part="FILLAMENT" gate="1" x="55.88" y="99.06" smashed="yes" rot="R270">
+<attribute name="VALUE" x="45.72" y="100.33" size="1.778" layer="96" rot="R270"/>
+<attribute name="NAME" x="61.722" y="100.33" size="1.778" layer="95" rot="R270"/>
+</instance>
+<instance part="POWER" gate="1" x="2.54" y="33.02" smashed="yes">
+<attribute name="VALUE" x="1.27" y="20.32" size="1.778" layer="96"/>
+<attribute name="NAME" x="1.27" y="41.402" size="1.778" layer="95"/>
+</instance>
+<instance part="D1" gate="G$1" x="17.78" y="78.74" smashed="yes">
+<attribute name="NAME" x="20.32" y="79.2226" size="1.778" layer="95"/>
+<attribute name="VALUE" x="20.32" y="76.4286" size="1.778" layer="96"/>
+</instance>
+<instance part="L1" gate="G$1" x="30.48" y="78.74" smashed="yes">
+<attribute name="NAME" x="26.67" y="80.518" size="1.778" layer="95"/>
+<attribute name="VALUE" x="26.67" y="75.184" size="1.778" layer="96"/>
+</instance>
+<instance part="L2" gate="G$1" x="30.48" y="86.36" smashed="yes">
+<attribute name="NAME" x="26.67" y="88.138" size="1.778" layer="95"/>
+<attribute name="VALUE" x="26.67" y="82.804" size="1.778" layer="96"/>
+</instance>
+<instance part="C2" gate="G$1" x="20.32" y="33.02" smashed="yes">
+<attribute name="NAME" x="21.844" y="33.401" size="1.778" layer="95"/>
+<attribute name="VALUE" x="21.844" y="28.321" size="1.778" layer="96"/>
+</instance>
+<instance part="C3" gate="G$1" x="25.4" y="33.02" smashed="yes">
+<attribute name="NAME" x="26.543" y="33.5026" size="1.778" layer="95"/>
+<attribute name="VALUE" x="26.543" y="28.4226" size="1.778" layer="96"/>
+</instance>
+<instance part="GND4" gate="1" x="35.56" y="58.42" smashed="yes">
+<attribute name="VALUE" x="33.02" y="55.88" size="1.778" layer="96"/>
+</instance>
+<instance part="C5" gate="G$1" x="142.24" y="68.58" smashed="yes">
+<attribute name="NAME" x="143.764" y="68.961" size="1.778" layer="95"/>
+<attribute name="VALUE" x="143.764" y="63.881" size="1.778" layer="96"/>
+</instance>
+<instance part="C6" gate="G$1" x="147.32" y="68.58" smashed="yes">
+<attribute name="NAME" x="148.463" y="69.0626" size="1.778" layer="95"/>
+<attribute name="VALUE" x="148.463" y="63.9826" size="1.778" layer="96"/>
+</instance>
+<instance part="GND5" gate="1" x="147.32" y="55.88" smashed="yes">
+<attribute name="VALUE" x="144.78" y="53.34" size="1.778" layer="96"/>
+</instance>
+<instance part="GND6" gate="1" x="111.76" y="76.2" smashed="yes">
+<attribute name="VALUE" x="109.22" y="73.66" size="1.778" layer="96"/>
+</instance>
+<instance part="L3" gate="G$1" x="101.6" y="63.5" smashed="yes" rot="R270">
+<attribute name="NAME" x="103.886" y="67.31" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="98.552" y="67.437" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="P+4" gate="1" x="101.6" y="88.9" smashed="yes">
+<attribute name="VALUE" x="99.06" y="83.82" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="D2" gate="G$1" x="129.54" y="48.26" smashed="yes" rot="R270">
+<attribute name="NAME" x="130.0226" y="45.72" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="127.2286" y="45.72" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="R2" gate="G$1" x="129.54" y="33.02" smashed="yes" rot="R90">
+<attribute name="NAME" x="128.0414" y="29.21" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="132.842" y="29.21" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R3" gate="G$1" x="129.54" y="20.32" smashed="yes" rot="R90">
+<attribute name="NAME" x="128.0414" y="16.51" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="132.842" y="16.51" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GND7" gate="1" x="129.54" y="10.16" smashed="yes">
+<attribute name="VALUE" x="127" y="7.62" size="1.778" layer="96"/>
+</instance>
+<instance part="C7" gate="G$1" x="142.24" y="33.02" smashed="yes">
+<attribute name="NAME" x="143.764" y="33.401" size="1.778" layer="95"/>
+<attribute name="VALUE" x="143.764" y="28.321" size="1.778" layer="96"/>
+</instance>
+<instance part="GND8" gate="1" x="144.78" y="10.16" smashed="yes">
+<attribute name="VALUE" x="142.24" y="7.62" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY1" gate="G$1" x="152.4" y="43.18" smashed="yes">
+<attribute name="VALUE" x="150.495" y="46.355" size="1.778" layer="96"/>
+</instance>
+<instance part="C8" gate="G$1" x="35.56" y="68.58" smashed="yes">
+<attribute name="NAME" x="36.703" y="69.0626" size="1.778" layer="95"/>
+<attribute name="VALUE" x="36.703" y="63.9826" size="1.778" layer="96"/>
+</instance>
+<instance part="C4" gate="G$1" x="147.32" y="33.02" smashed="yes">
+<attribute name="NAME" x="148.463" y="33.5026" size="1.778" layer="95"/>
+<attribute name="VALUE" x="148.463" y="28.4226" size="1.778" layer="96"/>
+</instance>
+<instance part="50V" gate="1" x="162.56" y="35.56" smashed="yes" rot="R180">
+<attribute name="VALUE" x="163.83" y="45.72" size="1.778" layer="96" rot="R180"/>
+<attribute name="NAME" x="163.83" y="29.718" size="1.778" layer="95" rot="R180"/>
+</instance>
+<instance part="IC1" gate="A" x="50.8" y="38.1" smashed="yes">
+<attribute name="NAME" x="53.34" y="41.275" size="1.778" layer="95"/>
+<attribute name="VALUE" x="53.34" y="33.02" size="1.778" layer="96"/>
+</instance>
+<instance part="IC1" gate="B" x="76.2" y="38.1" smashed="yes">
+<attribute name="NAME" x="78.74" y="41.275" size="1.778" layer="95"/>
+<attribute name="VALUE" x="78.74" y="33.02" size="1.778" layer="96"/>
+</instance>
+<instance part="IC1" gate="D" x="50.8" y="55.88" smashed="yes">
+<attribute name="NAME" x="53.34" y="59.055" size="1.778" layer="95"/>
+<attribute name="VALUE" x="53.34" y="50.8" size="1.778" layer="96"/>
+</instance>
+<instance part="IC1" gate="C" x="76.2" y="55.88" smashed="yes">
+<attribute name="NAME" x="78.74" y="59.055" size="1.778" layer="95"/>
+<attribute name="VALUE" x="78.74" y="50.8" size="1.778" layer="96"/>
+</instance>
+<instance part="IC1" gate="P" x="15.24" y="33.02" smashed="yes">
+<attribute name="NAME" x="14.605" y="32.385" size="1.778" layer="95"/>
+</instance>
+<instance part="R4" gate="G$1" x="25.4" y="60.96" smashed="yes" rot="R90">
+<attribute name="NAME" x="23.9014" y="57.15" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="28.702" y="57.15" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="P+5" gate="1" x="25.4" y="71.12" smashed="yes">
+<attribute name="VALUE" x="22.86" y="66.04" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="R5" gate="G$1" x="76.2" y="91.44" smashed="yes">
+<attribute name="NAME" x="72.39" y="92.9386" size="1.778" layer="95"/>
+<attribute name="VALUE" x="72.39" y="88.138" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -22172,6 +22284,9 @@ Your Multi-CB Team
 <param name="checkRestrict" value="1"/>
 <param name="checkStop" value="0"/>
 <param name="checkValues" value="0"/>
+<param name="checkNames" value="1"/>
+<param name="checkWireStubs" value="1"/>
+<param name="checkPolygonWidth" value="0"/>
 <param name="useDiameter" value="13"/>
 <param name="maxErrors" value="50"/>
 </designrules>
@@ -22272,84 +22387,136 @@ Your Multi-CB Team
 </pass>
 </autorouter>
 <elements>
-<element name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="4.7n" x="58.42" y="3.81" rot="R270">
+<element name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="4.7n" x="58.42" y="3.81" smashed="yes" rot="R270">
+<attribute name="NAME" x="59.69" y="5.08" size="1.27" layer="25" rot="R270"/>
 <attribute name="SPICEPREFIX" value="C" x="58.42" y="3.81" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="55.88" y="5.08" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="2.7k" x="62.23" y="3.81" rot="R270">
+<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="2.7k" x="62.23" y="3.81" smashed="yes" rot="R270">
+<attribute name="NAME" x="63.5" y="5.08" size="1.27" layer="25" rot="R270"/>
 <attribute name="SPICEPREFIX" value="R" x="62.23" y="3.81" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="59.69" y="5.08" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="IC3" library="vfds" package="SO8" value="ZXBM5210" x="71.12" y="21.59" rot="R180">
+<element name="IC3" library="vfds" package="SO8" value="ZXBM5210" x="71.12" y="21.59" smashed="yes" rot="R180">
+<attribute name="NAME" x="74.295" y="23.495" size="1.27" layer="25" rot="R270"/>
 <attribute name="PARTNAME" value="ZXBM5210" x="71.12" y="21.59" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="66.675" y="23.495" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="IC2" library="vfds" package="TO263-5" package3d_urn="urn:adsk.eagle:package:16438/2" value="" x="29.21" y="16.51"/>
-<element name="FILLAMENT" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA04-1" package3d_urn="urn:adsk.eagle:package:8337/1" value="" x="81.28" y="17.78" rot="R90">
+<element name="IC2" library="vfds" package="TO263-5" package3d_urn="urn:adsk.eagle:package:16438/2" value="" x="29.21" y="16.51" smashed="yes">
+<attribute name="NAME" x="23.622" y="10.922" size="1.27" layer="25" rot="R90"/>
+<attribute name="VALUE" x="36.068" y="10.922" size="1.27" layer="27" rot="R90"/>
+</element>
+<element name="FILLAMENT" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA04-1" package3d_urn="urn:adsk.eagle:package:8337/1" value="" x="81.28" y="17.78" smashed="yes" rot="R90">
 <attribute name="MF" value="" x="81.28" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="81.28" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="79.629" y="12.7" size="1.27" layer="25" ratio="10" rot="R90"/>
 <attribute name="OC_FARNELL" value="unknown" x="81.28" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="81.28" y="17.78" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="79.629" y="18.415" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="POWER" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA06-1" package3d_urn="urn:adsk.eagle:package:8340/1" value="" x="2.54" y="15.24" rot="R270">
+<element name="POWER" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA06-1" package3d_urn="urn:adsk.eagle:package:8340/1" value="" x="2.54" y="15.24" smashed="yes" rot="R270">
 <attribute name="MF" value="" x="2.54" y="15.24" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MPN" value="" x="2.54" y="15.24" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="4.191" y="22.86" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="OC_FARNELL" value="unknown" x="2.54" y="15.24" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="2.54" y="15.24" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="-0.381" y="17.78" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" package="SMB" package3d_urn="urn:adsk.eagle:package:43404/2" value="" x="50.8" y="20.32" rot="R270"/>
-<element name="L1" library="inductor-neosid" library_urn="urn:adsk.eagle:library:241" package="SM-NE45" package3d_urn="urn:adsk.eagle:package:14692/1" value="" x="58.42" y="17.78">
+<element name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" package="SMB" package3d_urn="urn:adsk.eagle:package:43404/2" value="" x="50.8" y="20.32" smashed="yes" rot="R270">
+<attribute name="NAME" x="52.959" y="22.479" size="1.27" layer="25" rot="R270"/>
+<attribute name="VALUE" x="47.371" y="22.479" size="1.27" layer="27" rot="R270"/>
+</element>
+<element name="L1" library="inductor-neosid" library_urn="urn:adsk.eagle:library:241" package="SM-NE45" package3d_urn="urn:adsk.eagle:package:14692/1" value="" x="58.42" y="17.78" smashed="yes">
 <attribute name="MF" value="" x="58.42" y="17.78" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="" x="58.42" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="56.339" y="19.531" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="58.42" y="17.78" size="1.778" layer="27" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="58.42" y="17.78" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="56.339" y="14.775" size="1.27" layer="27"/>
 </element>
-<element name="L2" library="inductor-neosid" library_urn="urn:adsk.eagle:library:241" package="MS85" package3d_urn="urn:adsk.eagle:package:14698/1" value="" x="58.42" y="21.59" rot="R270">
+<element name="L2" library="inductor-neosid" library_urn="urn:adsk.eagle:library:241" package="MS85" package3d_urn="urn:adsk.eagle:package:14698/1" value="" x="58.42" y="21.59" smashed="yes" rot="R270">
 <attribute name="MF" value="" x="58.42" y="21.59" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MPN" value="" x="58.42" y="21.59" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="56.089" y="17.318" size="1.27" layer="25"/>
 <attribute name="OC_FARNELL" value="unknown" x="58.42" y="21.59" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="58.42" y="21.59" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="55.962" y="24.558" size="1.27" layer="27"/>
 </element>
-<element name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="100n" x="64.77" y="21.59" rot="R270">
+<element name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="100n" x="64.77" y="21.59" smashed="yes" rot="R270">
+<attribute name="NAME" x="66.04" y="22.86" size="1.27" layer="25" rot="R270"/>
 <attribute name="SPICEPREFIX" value="C" x="64.77" y="21.59" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="62.23" y="22.86" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0807" package3d_urn="urn:adsk.eagle:package:23400/1" value="10u" x="50.8" y="6.35" rot="R90">
+<element name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0807" package3d_urn="urn:adsk.eagle:package:23400/1" value="10u" x="50.8" y="6.35" smashed="yes" rot="R90">
+<attribute name="NAME" x="46.27" y="2.06" size="1.27" layer="25" rot="R90"/>
 <attribute name="SPICEPREFIX" value="C" x="50.8" y="6.35" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="56.585" y="2.025" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="19.05" y="6.35" rot="R90">
+<element name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="" x="19.05" y="6.35" smashed="yes" rot="R90">
+<attribute name="NAME" x="17.78" y="5.08" size="1.27" layer="25" rot="R90"/>
 <attribute name="SPICEPREFIX" value="C" x="19.05" y="6.35" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="21.59" y="5.08" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="C6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0807" package3d_urn="urn:adsk.eagle:package:23400/1" value="" x="11.43" y="6.35" rot="R270">
+<element name="C6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0807" package3d_urn="urn:adsk.eagle:package:23400/1" value="" x="11.43" y="6.35" smashed="yes" rot="R270">
+<attribute name="NAME" x="15.96" y="10.64" size="1.27" layer="25" rot="R270"/>
 <attribute name="SPICEPREFIX" value="C" x="11.43" y="6.35" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="5.645" y="10.675" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="L3" library="inductors" library_urn="urn:adsk.eagle:library:243" package="DR125" package3d_urn="urn:adsk.eagle:package:15121/1" value="DR125" x="13.97" y="19.05">
+<element name="L3" library="inductors" library_urn="urn:adsk.eagle:library:243" package="DR125" package3d_urn="urn:adsk.eagle:package:15121/1" value="DR125" x="13.97" y="19.05" smashed="yes">
+<attribute name="NAME" x="11.47" y="22.05" size="1.27" layer="25"/>
 <attribute name="SPICEPREFIX" value="L" x="13.97" y="19.05" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="10.97" y="14.55" size="1.27" layer="27"/>
 </element>
-<element name="D2" library="diode" library_urn="urn:adsk.eagle:library:210" package="SMB" package3d_urn="urn:adsk.eagle:package:43404/2" value="" x="39.37" y="21.59" rot="R90"/>
-<element name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="39" x="31.75" y="5.08">
+<element name="D2" library="diode" library_urn="urn:adsk.eagle:library:210" package="SMB" package3d_urn="urn:adsk.eagle:package:43404/2" value="" x="39.37" y="21.59" smashed="yes" rot="R90">
+<attribute name="NAME" x="37.211" y="19.431" size="1.27" layer="25" rot="R90"/>
+<attribute name="VALUE" x="42.799" y="19.431" size="1.27" layer="27" rot="R90"/>
+</element>
+<element name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="1.5k" x="31.75" y="5.08" smashed="yes">
+<attribute name="NAME" x="30.48" y="6.35" size="1.27" layer="25"/>
 <attribute name="SPICEPREFIX" value="R" x="31.75" y="5.08" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="30.48" y="2.54" size="1.27" layer="27"/>
 </element>
-<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="1k" x="25.4" y="5.08">
+<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="39" x="25.4" y="5.08" smashed="yes">
+<attribute name="NAME" x="24.13" y="6.35" size="1.27" layer="25"/>
 <attribute name="SPICEPREFIX" value="R" x="25.4" y="5.08" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="24.13" y="2.54" size="1.27" layer="27"/>
 </element>
-<element name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="100n" x="39.37" y="11.43">
+<element name="C7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C1206" package3d_urn="urn:adsk.eagle:package:23618/2" value="100n" x="39.37" y="11.43" smashed="yes">
+<attribute name="NAME" x="38.1" y="12.7" size="1.27" layer="25"/>
 <attribute name="SPICEPREFIX" value="C" x="39.37" y="11.43" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="38.1" y="8.89" size="1.27" layer="27"/>
 </element>
-<element name="C8" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0505" package3d_urn="urn:adsk.eagle:package:23402/1" value="1u" x="59.69" y="11.43">
+<element name="C8" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0505" package3d_urn="urn:adsk.eagle:package:23402/1" value="1u" x="59.69" y="11.43" smashed="yes">
+<attribute name="NAME" x="56.95" y="14.41" size="1.27" layer="25"/>
 <attribute name="SPICEPREFIX" value="C" x="59.69" y="11.43" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="56.915" y="7.195" size="1.27" layer="27"/>
 </element>
-<element name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0505" package3d_urn="urn:adsk.eagle:package:23402/1" value="1u" x="39.37" y="5.08" rot="R180">
+<element name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="153CLV-0505" package3d_urn="urn:adsk.eagle:package:23402/1" value="1u" x="39.37" y="5.08" smashed="yes" rot="R180">
+<attribute name="NAME" x="42.11" y="2.1" size="1.27" layer="25" rot="R180"/>
 <attribute name="SPICEPREFIX" value="C" x="39.37" y="5.08" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="42.145" y="9.315" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="50V" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA04-1" package3d_urn="urn:adsk.eagle:package:8337/1" value="" x="45.72" y="17.78" rot="R270">
+<element name="50V" library="con-lstb" library_urn="urn:adsk.eagle:library:162" package="MA04-1" package3d_urn="urn:adsk.eagle:package:8337/1" value="" x="45.72" y="17.78" smashed="yes" rot="R270">
 <attribute name="MF" value="" x="45.72" y="17.78" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="MPN" value="" x="45.72" y="17.78" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="47.371" y="22.86" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="OC_FARNELL" value="unknown" x="45.72" y="17.78" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="OC_NEWARK" value="unknown" x="45.72" y="17.78" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="47.371" y="17.145" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="IC1" library="74xx-eu" library_urn="urn:adsk.eagle:library:85" package="SO14" package3d_urn="urn:adsk.eagle:package:2007/1" value="74HC132D" x="69.85" y="7.62"/>
-<element name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="2.7k" x="67.31" y="13.97" rot="R180">
+<element name="IC1" library="74xx-eu" library_urn="urn:adsk.eagle:library:85" package="SO14" package3d_urn="urn:adsk.eagle:package:2007/1" value="74HC132D" x="69.85" y="7.62" smashed="yes">
+<attribute name="NAME" x="65.024" y="5.715" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="66.675" y="6.858" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R1206" package3d_urn="urn:adsk.eagle:package:23540/2" value="2.7k" x="67.31" y="13.97" smashed="yes" rot="R180">
+<attribute name="NAME" x="68.58" y="12.7" size="1.27" layer="25" rot="R180"/>
 <attribute name="SPICEPREFIX" value="R" x="67.31" y="13.97" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="68.58" y="16.51" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0411/15" package3d_urn="urn:adsk.eagle:package:23568/1" value="22" x="77.47" y="17.78" rot="R270">
+<element name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0411/15" package3d_urn="urn:adsk.eagle:package:23568/1" value="22" x="77.47" y="17.78" smashed="yes" rot="R270">
+<attribute name="NAME" x="79.883" y="22.86" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="SPICEPREFIX" value="R" x="77.47" y="17.78" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="76.835" y="21.3614" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
 </elements>
 <signals>
@@ -22684,6 +22851,13 @@ Your Multi-CB Team
 <wire x1="77.47" y1="10.16" x2="77.47" y2="10.4775" width="0.6096" layer="1"/>
 </signal>
 </signals>
+<mfgpreviewcolors>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
+<mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
+<mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
+<mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
+<mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
+</mfgpreviewcolors>
 </board>
 </drawing>
 </drawings>

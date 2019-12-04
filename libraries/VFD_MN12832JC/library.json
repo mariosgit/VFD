@@ -1,0 +1,15 @@
+{
+  "name": "VFD-MN12832JC",
+  "keywords": "display",
+  "description": "Arduino library to handle 128x32 pixel VFD display",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/mariosgit/VFD.git"
+  },
+  "frameworks": "*",
+  "platforms": "*",
+  "examples": [
+    "[Ee]xamples/*.ino"
+  ]
+}
