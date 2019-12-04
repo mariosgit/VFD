@@ -9,12 +9,15 @@ Arduino programm to test TPIC6b595 based circuits.
 https://www.instructables.com/id/Audio-Level-Meter-From-an-Upcycled-VFD/
 
 ### VFD_MN12832JC
-TeensyLC program to drive the MN12832JC graphical display.
+TeensyLC program to drive the MN12832JC graphical display. Works! Just mind the signal level gap, use a level shifter or bring down VDD1 to ~4.3V (diode), high is specified as 80% of VDD1. When turning down VDD1 the display will transition from eratic to clean.
 
 ## PCBs
 
+PCB-Eagle contains one for the MN12832JC + all the power supply.
+
 ### Status
-**In Test !!!**
+
+See README in subdirectories.
 
 ### Comments
 
