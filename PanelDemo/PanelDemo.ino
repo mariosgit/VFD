@@ -1,10 +1,5 @@
-/**
- * @author Mario Becker 2019
- * Sketch to work with the control panel in the PCB-Eagle dir.
- * In addition to the display, it has 2 encoders and 2 flip switches.
- */
-
 #include <Arduino.h>
+#include <Wire.h>
 #include <SPI.h>
 #include <mbLog.h>
 #include <elapsedMillis.h>
@@ -26,6 +21,9 @@ const byte pinSWRU = 22;
 const byte pinSWRD = 23;
 const byte pinSWLU = 0;
 const byte pinSWLD = 1;
+
+const byte pinSDA = 18;
+const byte pinSCL = 19;
 
 // useable space is 126 width, one coloum missing at the sides
 MN12832JC canvas;  //  uint8_t *getBuffer(void);
@@ -85,8 +83,40 @@ void drawSomething()
 */
 }
 
+byte buffer[6*4];
+void checkDevice()
+{
+    // register 0-5 je 4 bytes  pro kanal const,hold,decay
+    const byte addr = 0x68 >> 1;
+
+    // write register addr 0
+    Wire.beginTransmission(addr);
+    Wire.write(0);  // address high byte
+    Wire.write(0);  // address low byte
+    Wire.endTransmission(false);
+  
+    // read...
+    int readlen = 4;
+    Wire.requestFrom(addr, readlen);
+    // int len = Wire.available();
+    int idx = 0;
+    while(Wire.available())    // slave may send less than requested
+    {
+        buffer[idx++] = Wire.read();    // receive a byte as character
+        if(idx > readlen)
+          break;
+    }
+    //if(idx)
+    {
+        LOG << "i2c length: " <<idx <<" buf:" <<buffer[0] <<"," <<buffer[1] <<"," <<buffer[2] <<"," <<buffer[3] <<"\n";
+    }
+}
+
 void setup()
 {
+    Wire.setSDA(pinSDA);
+    Wire.setSCL(pinSCL);
+    Wire.begin();
     Serial.begin(115200);
     //Wait for console...
     // while (!Serial);
@@ -137,7 +167,7 @@ void loop()
 //        if(0) //b1 || v1)
         {
             //Log.notice("Enc1: %d %d, Enc2: %d %d\n", b1, v1, b2, v2);
-            LOG << "enc1:" <<b1 <<" " <<v1 <<pos1   << "  enc2:" <<b2 <<v2 <<"\n";
+            // LOG << "enc1:" <<b1 <<" " <<v1 <<pos1   << "  enc2:" <<b2 <<v2 <<"\n";
         }
 //        if(b2 || v2)
         {
@@ -202,6 +232,8 @@ void loop()
 
         pos2 -= 1;
         pos2 = (pos2 % 300);
+
+        checkDevice();
 
     }
 }

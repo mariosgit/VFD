@@ -2746,7 +2746,7 @@ Your Multi-CB Team
 <wire x1="144.78" y1="27.94" x2="147.955" y2="24.765" width="0.6096" layer="1"/>
 <wire x1="147.955" y1="5.08" x2="147.861" y2="4.731" width="0.6096" layer="1"/>
 </signal>
-<signal name="N$1">
+<signal name="SCL">
 <contactref element="SV1" pad="2"/>
 <contactref element="U$3" pad="19/A5"/>
 <contactref element="R3" pad="2"/>
@@ -2761,7 +2761,7 @@ Your Multi-CB Team
 <wire x1="30.48" y1="26.67" x2="22.5425" y2="26.67" width="0.25" layer="16"/>
 <wire x1="35.56" y1="21.59" x2="30.48" y2="26.67" width="0.25" layer="16"/>
 </signal>
-<signal name="N$2">
+<signal name="SDA">
 <contactref element="SV1" pad="3"/>
 <contactref element="U$3" pad="18/A4"/>
 <contactref element="R2" pad="2"/>

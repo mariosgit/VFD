@@ -23655,7 +23655,7 @@ Source: coiltronics_dr_series.pdf</description>
 <label x="53.34" y="27.94" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$1" class="0">
+<net name="SCL" class="0">
 <segment>
 <pinref part="SV1" gate="G$1" pin="2"/>
 <pinref part="U$3" gate="G$1" pin="19/A5/T/SCL"/>
@@ -23667,7 +23667,7 @@ Source: coiltronics_dr_series.pdf</description>
 <junction x="45.72" y="20.32"/>
 </segment>
 </net>
-<net name="N$2" class="0">
+<net name="SDA" class="0">
 <segment>
 <pinref part="SV1" gate="G$1" pin="3"/>
 <pinref part="U$3" gate="G$1" pin="18/A4/T/SDA"/>
@@ -23676,6 +23676,7 @@ Source: coiltronics_dr_series.pdf</description>
 <wire x1="43.18" y1="22.86" x2="68.58" y2="22.86" width="0.1524" layer="91"/>
 <wire x1="43.18" y1="27.94" x2="43.18" y2="22.86" width="0.1524" layer="91"/>
 <junction x="43.18" y="22.86"/>
+<label x="48.26" y="22.86" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="BLK1" class="0">

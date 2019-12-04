@@ -9,4 +9,3 @@ Works with TeensyLC, could be possible on Arduinos too, displayRefresh is called
 
 ### Pinout, Connections
 - These are hardcoded, see mbGFX_MN12832JC.cpp
-
