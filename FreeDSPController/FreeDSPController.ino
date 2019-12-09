@@ -30,6 +30,7 @@ elapsedMillis encoderTime;
 elapsedMillis frameTime;
 elapsedMillis textChangeTime;
 elapsedMillis peakDecrementTime;
+elapsedMillis waitForDSP;     // "waiting" starts at zero
 
 IntervalTimer encoderUpdater;
 
@@ -58,6 +59,10 @@ void encoderServiceFunc()
 
 void checkDevice()
 {
+    if(waitForDSP < 3000)
+        return;
+    waitForDSP = 5000; //avoid overruns
+
     // register 0-5 je 4 bytes  pro kanal const,hold,decay
     const byte addr = 0x68 >> 1;
 
@@ -285,7 +290,8 @@ void loop()
         i = (i + dir);
         */
 
-        int smileX = 8+pos1+32+level1;
+        // Face
+        int smileX = 8+pos1+32+level1/4;
         int size = 4 + (32 + level2) / 8;
         int i12 = (i) / 14 ;
         canvas.fillCircle(   smileX,     2+pos1y,size, 1);

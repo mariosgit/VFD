@@ -70,7 +70,7 @@ void MN12832JC::begin()
 
     pinMode(pinPWM , OUTPUT);
     digitalWrite(pinPWM, HIGH);
-    // analogWrite(pinPWM, 128);
+    analogWrite(pinPWM, 30);
     
     digitalWrite(pinGSIN, LOW);
     for(byte i = 0; i < 64; i++)
