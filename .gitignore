@@ -39,3 +39,7 @@ PCB-Eagle/.DS_Store
 PCB-Eagle/*.b#*
 PCB-Eagle/*.s#*
 PCB-Eagle/*.l#*
+
+# KiCad
+PCB-KiCad/*/*.zip
+PCB-KiCad/*/*.lck
