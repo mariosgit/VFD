@@ -74,20 +74,8 @@
   "project": {
     "files": [
       {
-        "name": "GP1294-Teens4.kicad_pcb",
-        "open": false,
-        "window": {
-          "display": 1,
-          "maximized": false,
-          "pos_x": -2600,
-          "pos_y": -138,
-          "size_x": 2596,
-          "size_y": 1438
-        }
-      },
-      {
         "name": "GP1294-Teens4.kicad_sch",
-        "open": false,
+        "open": true,
         "window": {
           "display": 1,
           "maximized": false,
@@ -95,6 +83,18 @@
           "pos_y": -260,
           "size_x": 1512,
           "size_y": 944
+        }
+      },
+      {
+        "name": "GP1294-Teens4.kicad_pcb",
+        "open": true,
+        "window": {
+          "display": 1,
+          "maximized": false,
+          "pos_x": -2600,
+          "pos_y": -138,
+          "size_x": 2596,
+          "size_y": 1438
         }
       }
     ]
