@@ -40,3 +40,7 @@ PCB-Eagle/*.b#*
 PCB-Eagle/*.s#*
 PCB-Eagle/*.l#*
 PCB-Eagle/eagle.epf
+
+# KiCad
+PCB-KiCad/*/*.zip
+PCB-KiCad/*/*.lck
