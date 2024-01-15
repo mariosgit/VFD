@@ -2133,8 +2133,8 @@
     (property "Datasheet" "" (at 201.93 106.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid f2655591-3668-45ab-9748-d23f5380da29))
     (pin "1" (uuid a0648f3f-36b6-441b-b657-4e192c311d33))
+    (pin "2" (uuid f2655591-3668-45ab-9748-d23f5380da29))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/9e049bd2-8c7e-4a7a-b856-b0fbd11ae8df"
@@ -2793,9 +2793,9 @@
     (property "Datasheet" "https://www.recom-power.com/pdf/Innoline/R-78Bxx-2.0.pdf" (at 144.78 53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "3" (uuid 1bc1990b-6cbc-46f7-b49d-6e8cfe1d9563))
     (pin "1" (uuid 70743718-c122-41f3-a8a7-0285c94157ac))
     (pin "2" (uuid b0cefbe9-d2b5-42b4-9cd8-a7d6d8932675))
+    (pin "3" (uuid 1bc1990b-6cbc-46f7-b49d-6e8cfe1d9563))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/9e049bd2-8c7e-4a7a-b856-b0fbd11ae8df"

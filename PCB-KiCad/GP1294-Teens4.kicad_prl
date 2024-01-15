@@ -1,7 +1,7 @@
 {
   "board": {
     "active_layer": 40,
-    "active_layer_preset": "All Layers",
+    "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
     "hidden_nets": [],
@@ -61,7 +61,6 @@
       34,
       35,
       36,
-      39,
       40
     ],
     "visible_layers": "fffffff_ffffffff",
@@ -72,31 +71,6 @@
     "version": 3
   },
   "project": {
-    "files": [
-      {
-        "name": "GP1294-Teens4.kicad_sch",
-        "open": true,
-        "window": {
-          "display": 1,
-          "maximized": false,
-          "pos_x": -2946,
-          "pos_y": -260,
-          "size_x": 1512,
-          "size_y": 944
-        }
-      },
-      {
-        "name": "GP1294-Teens4.kicad_pcb",
-        "open": true,
-        "window": {
-          "display": 1,
-          "maximized": false,
-          "pos_x": -2600,
-          "pos_y": -138,
-          "size_x": 2596,
-          "size_y": 1438
-        }
-      }
-    ]
+    "files": []
   }
 }
