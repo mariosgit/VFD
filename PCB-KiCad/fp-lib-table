@@ -3,4 +3,5 @@
   (lib (name "VFD-Power")(type "KiCad")(uri "$(KIPRJMOD)/VFD-Power.pretty")(options "")(descr ""))
   (lib (name "MN12832JC-TeensyLC")(type "KiCad")(uri "$(KIPRJMOD)/MN12832JC-TeensyLC.pretty")(options "")(descr ""))
   (lib (name "VFDs-Library")(type "KiCad")(uri "${KIPRJMOD}/VFDs-Library.pretty")(options "")(descr ""))
+  (lib (name "FreeDSP")(type "KiCad")(uri "/Users/mario/DevelSelf/freeDSP-ALLinONE/SOURCES/FreeDSPLibrary.pretty")(options "")(descr ""))
 )

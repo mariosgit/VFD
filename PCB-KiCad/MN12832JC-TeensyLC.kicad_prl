@@ -72,19 +72,6 @@
     "version": 3
   },
   "project": {
-    "files": [
-      {
-        "name": "MN12832JC-TeensyLC.kicad_pcb",
-        "open": false,
-        "window": {
-          "display": 1,
-          "maximized": false,
-          "pos_x": -2600,
-          "pos_y": -138,
-          "size_x": 2596,
-          "size_y": 1438
-        }
-      }
-    ]
+    "files": []
   }
 }
