@@ -6,30 +6,36 @@ To edit a schematic/pcb, open the .pro file first (double click) KiCad needs thi
 
 ## GP1294
 
+![image](GP1294-Teens4.png)
+
 A Panel with that display and an Teensy4.
 
-Intended Use: Graphical EQ.
+Intended Use: Graphical EQ. The bottom PCB is a FreeDSP-AllInOne.
+ * Infopage https://freedsp.github.io/
+ * Github: https://github.com/freeDSP/freeDSP-ALLinONE 
 
 Contains
-* Power for VFD and 5V for other stuff.
-* Teensy4
+* Power for VFD (~3V fillament, 30-50V for anode and grid) and 5V for other stuff.
+* Teensy4 - Controls the Amp and shows vintage spectrum analyser.
 * 2 Encoders
-* 6 Buttons.
+* 5 Buttons.
 
 ### Todo
 
 * Power in/out detection circuit ! To control Amp muting.
-* pin through for freedsp-llinone ?
-* Teensy3 ?
-* Teensy use SMD pins !? No throughole stuff under the disp
-* move Disp down a bit -> use drawing / rendering ?
-* FreeDSPAIO - speaker mute bei shutdown, mute in den pin 1 des 7414 rein, also da den elko short'n, dann geht der aus ?
-  * Richtig sanft is das dann auch nich...
-  * Oder pin 5 auf aehh 0 dann geht spk_sleep auf 1 und das is ein mute !? Ja irgendwie kackt der chip manchmal ab beim betaetigen !?
-  * also am besten beides gegen 0 shorten, oder die caps mit ner externen spannung aufladen, also z diode.. aber ja aber nein dann dauerts ja auch bis die aus gehen -> see amp-off-mute-circuts...
-  * mehr caps auf vpp/gnd am amp chip !
+* Teensy3 ? cheeper / better ?
+* Test audio connection to/from teensy I2S slave ! Can it do USB playback ?
+* Generate DSP C interface files. Test ! (It worked with the FreeDSP controller project)
+* FreeDSP-AIO flaws
+  * speaker mute before shutdown...
+    * it hase a startup unmute circuit but no shutdown...
+    * mute = ground pin 5 of 7414 would trigger a mute ? Does it work -> test!!!
+  * Not much capacitance at Vin, more caps ! Could delay the shutdown ! More time to mute !
+* Add 3d Knobs for encoder and buttons
+* Classic flip switches instead of se buttons ?
 
 # Refs
 
-Some Kicad 3d models...
-https://gitlab.com/MountyRox/kicad-packages3D.git 
+Used Kicad 3d models:
+ * models https://gitlab.com/MountyRox/kicad-packages3D.git 
+ * sources https://gitlab.com/kicad/libraries/kicad-packages3D-source.git

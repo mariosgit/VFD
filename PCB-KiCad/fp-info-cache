@@ -1,4 +1,4 @@
-22707197421029572
+22708903205574041
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -55255,7 +55255,7 @@ FreeDSP-allinone
 
 
 0
-18
+16
 16
 Fuse
 FuseHolder_Blade_ATO_Littelfuse_FLR_178.6165
@@ -92499,6 +92499,13 @@ GP1294AI
 31
 VFDs-Library
 Teensy4.0
+
+
+0
+28
+28
+VFDs-Library
+Teensy4.0_smd
 
 
 0

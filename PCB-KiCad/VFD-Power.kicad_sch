@@ -2597,37 +2597,6 @@
     )
   )
 
-  (symbol (lib_id "VFD-Power-eagle-import:CPOL-EU153CLV-0807") (at 29.21 146.05 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 84a6b245-f518-4ad1-a748-7a4a805d3104)
-    (property "Reference" "C6" (at 30.353 145.5674 0)
-      (effects (font (size 1.778 1.5113)) (justify left bottom))
-    )
-    (property "Value" "CPOL-EU153CLV-0807" (at 30.353 150.6474 0)
-      (effects (font (size 1.778 1.5113)) (justify left bottom) hide)
-    )
-    (property "Footprint" "VFD-Power:153CLV-0807" (at 29.21 146.05 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 29.21 146.05 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "+" (uuid 0865e02a-aa68-435f-bdff-6310353dc122))
-    (pin "-" (uuid 9368f368-fd29-4b95-abc6-1955cf4dd11b))
-    (instances
-      (project "GP1294-Teens4"
-        (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/9e049bd2-8c7e-4a7a-b856-b0fbd11ae8df"
-          (reference "C6") (unit 1)
-        )
-      )
-      (project "VFD-Power"
-        (path "/d66e9896-ee3f-419d-ab82-78a854ae4100"
-          (reference "C6") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "VFD-Power-eagle-import:DIODE-SMB") (at 171.45 53.34 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8a3963ac-2f32-4566-b0a1-7e1ea105dd0b)
