@@ -2269,6 +2269,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 0))
     )
+    (model "${KIPRJMOD}/3D-Models/EncKnob.step"
+      (offset (xyz 7 -3 13))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (footprint "FreeDSP:FreeDSP-allinone" (layer "B.Cu")
@@ -2668,6 +2673,11 @@
       (offset (xyz 1.3 3.5 0))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 0))
+    )
+    (model "${KIPRJMOD}/3D-Models/EncKnob.step"
+      (offset (xyz 7 -3 13))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
     )
   )
 
