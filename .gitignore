@@ -44,3 +44,6 @@ PCB-Eagle/eagle.epf
 # KiCad
 PCB-KiCad/*/*.zip
 PCB-KiCad/*/*.lck
+
+GP1294-software/attinclickEncoder
+GP1294-software/TinyWireS/
