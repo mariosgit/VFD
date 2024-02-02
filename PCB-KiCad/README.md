@@ -22,10 +22,10 @@ Contains
 
 ### Todo
 
-* Teensy3 ? cheeper / better ?
+* Connect ATtiny I2C which pins ? Test !
 * Test VFD
 * Test Serial Buttons 74165
-  * Breadboard not working ! Me too doof. Measure on Shruthi !
+  * Breadboard not working, Q outputs sometimes have 3V ??? LS chip strange ??? ! Me too doof. Measure on Shruthi !
 * Test audio connection to/from teensy I2S slave ! Can it do USB playback ? T3.2 or T4.0 ?
 * Generate DSP C interface files. Test ! (It worked with the FreeDSP controller project)
 * FreeDSP-AIO flaws ✅
