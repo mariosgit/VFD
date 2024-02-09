@@ -20,6 +20,10 @@ Contains
 * 2 Encoders
 * 5 Buttons.
 
+### Status
+
+not tested
+
 ### Todo
 
 * Connect ATtiny I2C which pins ? Test !

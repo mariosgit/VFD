@@ -19744,11 +19744,14 @@
     (property "Value" "" (at 2.54 -2.3114 0)
       (effects (font (size 1.778 1.5113)) (justify left bottom))
     )
-    (property "Footprint" "Diode_SMD:Nexperia_CFP3_SOD-123W" (at 0 -2.54 0)
+    (property "Footprint" "VFD-Power:SOD123" (at 0 -2.54 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (at 0 0 0)
       (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "ki_locked" "" (at 0 0 0)
+      (effects (font (size 1.27 1.27)))
     )
     (symbol "DIODE-SOD123_1_0"
       (polyline
