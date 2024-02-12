@@ -73,6 +73,18 @@
   "project": {
     "files": [
       {
+        "name": "GP1294-Teens4.kicad_sch",
+        "open": true,
+        "window": {
+          "display": 1,
+          "maximized": false,
+          "pos_x": -2712,
+          "pos_y": -265,
+          "size_x": 2109,
+          "size_y": 1340
+        }
+      },
+      {
         "name": "GP1294-Teens4.kicad_pcb",
         "open": true,
         "window": {

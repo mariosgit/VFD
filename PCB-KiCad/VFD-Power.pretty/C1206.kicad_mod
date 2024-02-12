@@ -1,6 +1,7 @@
 (footprint "C1206" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
   (descr "<b>CAPACITOR</b>")
+  (attr smd)
   (fp_text reference "REF**" (at -1.27 -1.27) (layer "F.SilkS")
       (effects (font (size 1.1684 1.1684) (thickness 0.1016)) (justify left bottom))
     (tstamp 9a9d0505-49c7-4b1d-b7b2-ed81c81b6f3f)
@@ -52,4 +53,9 @@
     (solder_mask_margin 0.0508) (thermal_bridge_angle 0) (tstamp 10fe24af-6216-4cd2-b30c-3daa878eb49c))
   (pad "2" smd rect (at 1.4 0) (size 1.6 1.8) (layers "F.Cu" "F.Paste" "F.Mask")
     (solder_mask_margin 0.0508) (thermal_bridge_angle 0) (tstamp 8fc1e90e-0306-4ac8-b408-b62790891216))
+  (model "/Users/mario/DevelSelf/kicad-packages3D/Capacitor_SMD.3dshapes/C_1206_3216Metric.wrl"
+    (offset (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
 )
