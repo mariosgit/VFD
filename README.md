@@ -4,11 +4,25 @@ A collection of upcycling projects for Vakuum Fluorescent Displays (VFD). These 
 
 ## New structure...
 
-I will move things a bit in order to make (my) live easier :) I might keep the old version in a tag "unstructured-version".
+I changed this into a PlatformIO project and moved out the display libraries. This should make it easier to integrate a lib into your project. Just add it as a git submodule like i did here.
 
-This will become a PlatformIO project with a bit of example code.
-* Libraries will move into seperate repos which can be linked as submodules.
-* PCBs ? stay or move out.. will see.
+You can also add a ref to the repo in the platformio.ini lib_deps (if you do not plane to change the lib code)
+```
+lib_deps =
+    ; external Git resource
+    https://github.com/mariosgit/VFD_MN12832JC.git
+```
+
+VFD_TPIC.. stuff was not integrated into this platformio project yet..
+
+### src/main
+
+You can switch between demo programms by commenting in/out the defines.. only one at a time...
+
+```
+// #define RUN_FREEDSPCONTROLLER
+#define RUN_PANELDEMO
+```
 
 ### VFD_TPIC_Test
 
@@ -18,17 +32,9 @@ The TPIC.. is a shift register with a gate or anode attached to each output. You
 
 Works, but.. the open drain of these drivers is suboptimal because of high voltage and many pullup resistors a significant amount of current is running and it's getting hot and inefficient.
 
-### VFD_MN12832JC
-
-TeensyLC program to drive the MN12832JC graphical display.
-
-![VFD in action](/images/mn12832jc.gif)
-
-Works! Just mind the signal level gap, use a level shifter or bring down VDD1 to ~4.3V (diode), high is specified as 80% of VDD1. When turning down VDD1 the display will transition from eratic to clean.
-
 ## PCBs
 
-PCB-Eagle contains one for the MN12832JC + all the power supply.
+PCB-Kicad contains one for the MN12832JC + all the power supply.
 
 ### Status
 
@@ -36,24 +42,10 @@ See README in subdirectories.
 
 ### Comments
 
-At the moment I use Eagle (also playing with conversion to KiCAD 5..)
-
-The folder PCB-Eagle contains my library with
-- The displays
-- The chips used (XL6009, ZXBM5210)
-
-The folder PCB-Eagle-Blocks contains some design blocks which can be dropped in a PCB project.
-- For the power converter
+PCBs...
 
 They all use a similar net naming
 - +5V
 - VPP for the 50V anode voltage
 - F1 and F2 for the fillament AC voltage
-
-The ZIP file is a set of production files.
-
-
-# Refs
-
-### Used Libs and Stuff
 

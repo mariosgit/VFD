@@ -1,0 +1,9 @@
+[submodule "lib/VFD_MN12832JC"]
+	path = lib/VFD_MN12832JC
+	url = https://github.com/mariosgit/VFD_MN12832JC.git
+[submodule "lib/mbLog"]
+	path = lib/mbLog
+	url = https://github.com/mariosgit/mbLog.git
+[submodule "lib/VFD_MN12864K"]
+	path = lib/VFD_MN12864K
+	url = https://github.com/mariosgit/VFD_MN12864K.git
