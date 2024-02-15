@@ -15,6 +15,8 @@ lib_deps =
 
 VFD_TPIC.. stuff was not integrated into this platformio project yet..
 
+New display types might be added/developed under lib before they move into own repos.
+
 ### src/main
 
 You can switch between demo programms by commenting in/out the defines.. only one at a time...
