@@ -19,24 +19,23 @@ class MN12832Ltest
     }
     void loop()
     {
-        if(checker > 1000)
+        if(checker > 200)
         {
             checker = 0;
 
-
             uint32_t time = millis();
             display.fillScreen(0);
-            display.drawLine(0,0,127,31, 1);
-            display.drawRect(10,20,10,10,1);
-            display.setCursor(30,1);
+            display.drawLine(0,10,127,10, 1);
+            // display.drawRect(10,20,10,10,1);
+            display.setCursor(30,0);
             // display.setTextSize(2,2);
             display.print("mb was here");
 
-            // for(int16_t x = 0; x < 120; x+=16)
-            // {
-            //     int16_t hi = random(24);
-            //     display.fillRect(x,32 - hi, 12, hi, 1);
-            // }
+            for(int16_t x = 0; x < 128; x+=8)
+            {
+                int16_t hi = random(16);
+                display.fillRect(x,32 - hi, 7, hi, 1);
+            }
 
             uint32_t drawtime = millis() - time;
 
