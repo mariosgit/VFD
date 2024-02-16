@@ -31,9 +31,9 @@ public:
 private:
     static void nextGate();
     static void displayRefresh();                   // timer isr
-    static const int16_t bufferSize = 128 / 8 * 32; // black'n'white
-    uint8_t bufferOdd[bufferSize];
-    uint8_t bufferEven[bufferSize];
+    static const int16_t bufferSize = 136 / 8 * 32; // black'n'white, + margin
+    uint8_t bufferOdd[bufferSize*2];
+    uint8_t bufferEven[bufferSize*2];
     uint16_t bufferOffset = 0;
 
     uint8_t  gate;
@@ -41,6 +41,9 @@ private:
     uint32_t displayTime;
     uint32_t displayLast;
     uint32_t displayFps1;
+
+    uint32_t loadLast;
+    uint32_t loadFps1;
 
     const byte pinBLK;
     const byte pinLAT;

@@ -5,6 +5,10 @@ InProgress... ultra experimental...
 | This is brainf***, motivate pls me ! | <a href="https://www.buymeacoffee.com/mariosgeu" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> |
 |---|---|
 
+### Step 4
+
+![step4](images/IMG_0861.gif)
+
 ### Step 3
 
 Ok, sort of does it. Wrote a setPixel func. 

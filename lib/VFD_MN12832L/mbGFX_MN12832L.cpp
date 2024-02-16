@@ -7,7 +7,7 @@
 #include "mbGFX_MN12832L.h"
 #include <mbLog.h>
 
-const int16_t targetFps = 200 * 44; // this is per gate
+const int16_t targetFps = 150 * 44; // this is per gate
 
 // display spi kann bis 200ns/5MHz geht aber auch mit 16 noch ???
 SPISettings settingsA(16000000, MSBFIRST, SPI_MODE0);
@@ -123,9 +123,18 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
         fetch = pixp;
     } // 4th             xxxxxxxx xxxxxxxx xx111111
 
-    bufferEven[24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
-    bufferEven[24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
-    bufferEven[24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
+    if(color)
+    {
+        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
+        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
+        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
+    }
+    else
+    {
+        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 0] &= ~((fetch & 0x00FF0000) >> 16);
+        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 1] &= ~((fetch & 0x0000FF00) >> 8);
+        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 2] &= ~((fetch & 0x000000FF));
+    }
 
     // same again for defabc pixel order...
     x-= 3;
@@ -178,9 +187,18 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
         fetch = pixp;
     } // 4th             xxxxxxxx xxxxxxxx xx111111
 
-    bufferOdd[24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
-    bufferOdd[24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
-    bufferOdd[24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
+    if(color)
+    {
+        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
+        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
+        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
+    }
+    else
+    {
+        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 0] &= ~((fetch & 0x00FF0000) >> 16);
+        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 1] &= ~((fetch & 0x0000FF00) >> 8);
+        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 2] &= ~((fetch & 0x000000FF));
+    }
 
     // LOG << LOG.dec << "pixel: " << x << "," << y << " gate:" << gate << " pixl:" << pixl << " yblk:" << yblk << " yoff:" << yoff  ;
     // LOG <<" buf:" <<LOG.bin;
@@ -192,7 +210,8 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
 
 void MN12832L::fillScreen(uint8_t color)
 {
-    memset(bufferEven /*+bufferOffset*/, color, bufferSize);
+    memset(bufferEven+bufferOffset, color, bufferSize);
+    memset(bufferOdd+bufferOffset , color, bufferSize);
 
     // byte tempBuffer[24] = {
     //     B10000010, B00001000, B00100000, // 4 rows | a
@@ -217,16 +236,16 @@ void MN12832L::fillScreen(uint8_t color)
 
 void MN12832L::swapBuffers()
 {
-    noInterrupts();
-    // if(bufferOffset)
-    // {
-    //     bufferOffset = 0;
-    // }
-    // else
-    // {
-    //     bufferOffset = bufferSize;
-    // }
-    interrupts();
+    // noInterrupts();
+    if(bufferOffset)
+    {
+        bufferOffset = 0;
+    }
+    else
+    {
+        bufferOffset = bufferSize;
+    }
+    // interrupts();
 }
 
 uint32_t MN12832L::getDisplayTime()
@@ -277,14 +296,20 @@ void MN12832L::displayRefresh()
     _the->displayLast = micros();
     uint32_t time = micros();
 
-    // if(_the->_offset)
-    // {
-    //     ptr = _the->getBuffer() - bufferSize;
-    // }
-    // else
-    // {
-    //     ptr = _the->getBuffer() + bufferSize;
-    // }
+    byte tempBuffer[24];
+
+    uint8_t *bufferEven = nullptr;
+    uint8_t *bufferOdd = nullptr;
+    if(_the->bufferOffset)
+    {
+        bufferEven = _the->bufferEven - bufferSize;
+        bufferOdd  = _the->bufferOdd  - bufferSize;
+    }
+    else
+    {
+        bufferEven = _the->bufferEven + bufferSize;
+        bufferOdd  = _the->bufferOdd  + bufferSize;
+    }
 
     // LOG <<"draw buffer: " <<LOG.hex <<(uint32_t)ptr <<": " <<LOG.bin <<*ptr++ <<*ptr++ <<LOG.endl;
 
@@ -293,7 +318,6 @@ void MN12832L::displayRefresh()
 
     // LOG <<_the->gate <<LOG.endl;
     // spi.transfer will read back into the buffer.. !!! So we use a temp..
-    byte tempBuffer[24];
     if (_the->gate % 2 == 1)
     {
         memcpy(tempBuffer, _the->bufferOdd + 24 * (_the->gate/2 + 0), 24); // + 24 * _the->gate;
