@@ -75,7 +75,7 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
     register uint8_t yblk = y / 4;
     register uint8_t yoff = y % 4;
 
-    if(pixl > 3) gate++; // ja da is overlap !?
+    // if(pixl > 3) gate++; // ja da is overlap !?
 
     register uint8_t pixp = 0;
     if (pixl == 0)
@@ -126,7 +126,7 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
     bufferEven[24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
 
     // same again for defabc pixel order...
-    // x-= 3;
+    x-= 3;
     gate = x / 6;
     pixl = x % 6;
     yblk = y / 4;
@@ -246,7 +246,7 @@ uint32_t MN12832L::getDisplayFps1()
 
 void MN12832L::nextGate()
 {
-    uint8_t gate = _the->gate + 2;
+    uint8_t gate = _the->gate;
 
     uint8_t endstop = 43;
     if (gate > endstop)
@@ -255,13 +255,13 @@ void MN12832L::nextGate()
     // bits 192-236 are the gates..
     // but shifter has 48 bits / 6 bytes, use upper 6 bytes of gateBuf / last 5 hex digits unuses !
     if (gate == 0)
-        _the->gateBuf = 0xC000000000000000;
+        _the->gateBuf = 0x8000000000000000;
     else if (gate == endstop)
-        _the->gateBuf = 0x8000000000100000;
+        _the->gateBuf = 0x0000000000100000;
     else
-        _the->gateBuf = _the->gateBuf >> 2;
+        _the->gateBuf = _the->gateBuf >> 1;
 
-    _the->gate = gate;
+    _the->gate = gate + 1;
 
     // LOG <<"gate:" <<LOG.dec <<gate <<LOG.hex <<" gb:" <<_the->gateBuf <<LOG.endl;
 }
@@ -289,17 +289,22 @@ void MN12832L::displayRefresh()
     // LOG <<_the->gate <<LOG.endl;
     // spi.transfer will read back into the buffer.. !!! So we use a temp..
     byte tempBuffer[24];
-    if (_the->gate % 2 == 0)
-        memcpy(tempBuffer, _the->bufferEven + 24 * (_the->gate/2 + 0), 24); // + 24 * _the->gate;
+    if (_the->gate % 2 == 1)
+    {
+        memcpy(tempBuffer, _the->bufferOdd + 24 * (_the->gate/2 + 0), 24); // + 24 * _the->gate;
+        // memset(tempBuffer, 0, 24);// skip
+    }
     else
-        memcpy(tempBuffer, _the->bufferOdd + 24 * (_the->gate/2 + 1), 24); // + 24 * _the->gate;
-    // memset(tempBuffer, 0, 24);//
+    {
+        memcpy(tempBuffer, _the->bufferEven + 24 * (_the->gate/2 + 0), 24); // + 24 * _the->gate;
+        // memset(tempBuffer, 0, 24);// skip
+    }
+
 
     uint8_t *ptr = tempBuffer;
 
     // copy columns from display buffer !
     {
-        nextGate();
 
         // LOG <<"data[0]:" <<LOG.bin <<*ptr <<LOG.endl;
 
@@ -334,6 +339,9 @@ void MN12832L::displayRefresh()
 
         digitalWrite(_the->pinBLK, LOW);
     }
+
+    nextGate();
+
 
     _the->displayTime = micros() - time;
 }
