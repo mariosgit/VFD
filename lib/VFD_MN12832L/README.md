@@ -1,8 +1,49 @@
 # Status
 
-none. Trying again after some years... seen a video proof on hackaday projects but nothing more :(
+InProgress... ultra experimental...
 
-<a href="https://www.buymeacoffee.com/mariosgeu" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+| This is brainf***, motivate pls me ! | <a href="https://www.buymeacoffee.com/mariosgeu" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a> |
+|---|---|
+
+### Step 3
+
+Ok, sort of does it. Wrote a setPixel func. 
+
+![step3](images/IMG_0855.jpeg)
+
+There is bluring between neightbouring gates, because I skip one in between where I would have to change the bitorder of the output from abcdef to defa+b+c+ (+ marks the next 6er block) in fact in memory it would cahnge from afbecd to urg.. dcebfa ? My brain hurts.
+
+Is it simply bitswapped ??? still a pain to do? Maybe with a second draw buffer, then drawing takes double time !? Lookup 
+
+Mapping for odd grid pos...
+
+|    | disp | mem | bin | bin | bin | bin | bin | bin |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| this | abcdef | afbecd | 100000 | 010000 | 001000 | 000100 | 000010 | 000001 |
+| becomes | defabc | dcebfa | 000001 | 000010 | 000100 | 001000 | 010000 | 100000 |
+
+ * removing one of the parallel shift inputs makes the thing dim a bit, I wonder if that's how greyscales could work. But way does the datasheet says 8 greyscales ???
+ * Still found no use for GCP pin.
+
+### Step 2
+
+Ohhh it scans through all gates... changed to SPI MSBFIRST, this makes more sense now. Data is a fixed vertical pixel stripe for starters...
+
+![bild2](images/IMG_0853.gif)
+
+### Step 1
+
+It does something, that's cygling through the 44 gates using the last 6 bytes of the row data. Did not see the pixel data yet
+
+ * It does not activate the last gate
+ * Bit order is backwards? Gate 1 should be left.
+ * GCP pin ??? no effect seen
+ * No data seen yet
+
+ * Shift inputs are in parallel, removing one, leads to flicker / column skipping or so, so maybe it's an internal thing ?
+
+![bild](images/IMG_0852.gif)
+
 
 # How does it work ???
 

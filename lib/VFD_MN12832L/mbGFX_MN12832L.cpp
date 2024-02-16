@@ -7,48 +7,47 @@
 #include "mbGFX_MN12832L.h"
 #include <mbLog.h>
 
+const int16_t targetFps = 200 * 44; // this is per gate
+
 // display spi kann bis 200ns/5MHz geht aber auch mit 16 noch ???
-SPISettings settingsA(16000000, LSBFIRST, SPI_MODE0);
+SPISettings settingsA(16000000, MSBFIRST, SPI_MODE0);
 
-// display port
-const byte pinBLK = 4;
-const byte pinLAT = 6;
-const byte pinGCP = 3;
-const byte MOSI_PIN = 7;
-const byte SCK_PIN = 14;
-
-// pwm to control filament driver
-const byte pinPWM = 20;
-
-// Create an IntervalTimer object 
+// Create an IntervalTimer object
 #ifdef __STM32F1__
 HardwareTimer timer(2);
 #else
 IntervalTimer myTimer;
 #endif
 
-MN12832L *MN12832L::_the  = nullptr;
+MN12832L *MN12832L::_the = nullptr;
 
-MN12832L::MN12832L() : Adafruit_GFX(128, 32),
-    _gate(50),
-    _displayTime(0)
+MN12832L::MN12832L(
+    byte pinBLK,
+    byte pinLAT,
+    byte pinGCP,
+    byte MOSI_PIN,
+    byte SCK_PIN,
+    byte pinPWM) : Adafruit_GFX(128, 32),
+                   gate(50),
+                   displayTime(0),
+                   pinBLK(pinBLK),
+                   pinLAT(pinLAT),
+                   pinGCP(pinGCP),
+                   MOSI_PIN(MOSI_PIN),
+                   SCK_PIN(SCK_PIN),
+                   pinPWM(pinPWM)
 {
-    uint16_t bytes = getBufferSize();
-    if((buffer = (uint8_t *)malloc(bytes*2))) {
-        memset(buffer, 0, bytes*2);
-    }
-    LOG << "MN12832L:: allocated 2x " <<bytes <<"B screen buffer" <<LOG.endl;
     _the = this;
 }
 
-MN12832L::~MN12832L(void) {
-    if(buffer) free(buffer);
+MN12832L::~MN12832L(void)
+{
 }
 
 void MN12832L::begin()
 {
-    pinMode(pinBLK , OUTPUT);
-    pinMode(pinGCP , OUTPUT);
+    pinMode(pinBLK, OUTPUT);
+    pinMode(pinGCP, OUTPUT);
     pinMode(pinLAT, OUTPUT);
 
     digitalWrite(pinBLK, HIGH);
@@ -59,61 +58,186 @@ void MN12832L::begin()
     SPI.setSCK(SCK_PIN);
     SPI.begin();
 
-    pinMode(pinPWM , OUTPUT);
+    pinMode(pinPWM, OUTPUT);
     analogWrite(pinPWM, 128); // 50% duty
-    
+
     // display needs to cygle all the time !
-    myTimer.begin(displayRefresh, 1000000); // starting slowly
+    myTimer.begin(displayRefresh, 1000000 / targetFps); // starting slowly
 }
 
-void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color) {
-#ifdef __AVR__
-    // Bitmask tables of 0x80>>X and ~(0x80>>X), because X>>Y is slow on AVR
-    static const uint8_t PROGMEM
-        GFXsetBit[] = { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 },
-        GFXclrBit[] = { 0x7F, 0xBF, 0xDF, 0xEF, 0xF7, 0xFB, 0xFD, 0xFE };
-#endif
-
-    if(buffer)
-    {
-        if((x < 0) || (y < 0) || (x >= _width) || (y >= _height)) return;
-
-        register uint8_t    xU3 = x & 0x3;
-        // register uint8_t   s1s2 = (xU3==0 || xU3==3) ? 0 : 1;
-        register uint8_t    adr = x/2; // (((x/4) << 1) | s1s2);
-        register uint8_t   *ptr = &buffer[adr*8+_offset];
-        register uint8_t offset = y/4;
-
-        ptr += offset;
-
-        register uint8_t bitpos = (y%4 << 1);
-        bitpos += (xU3 == 2 || xU3 == 0) ? 1 : 0;
-
-        if(color) *ptr |=   0x80 >> (bitpos & 7);
-        else      *ptr &= ~(0x80 >> (bitpos & 7));
-    }
-}
-
-void MN12832L::fillScreen(uint16_t color)
+void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
 {
-    if(buffer) {
-        uint16_t bytes = getBufferSize();
-        memset(buffer+_offset, color ? 0xFF : 0x00, bytes);
-    }
+    if ((x < 0) || (y < 0) || (x >= _width) || (y >= _height))
+        return;
+
+    // if (color)
+    //     *ptr |= 0x80 >> (bitpos & 7);
+    // else
+    //     *ptr &= ~(0x80 >> (bitpos & 7));
+
+    register uint8_t gate = x / 6;
+    register uint8_t pixl = x % 6;
+    register uint8_t yblk = y / 4;
+    register uint8_t yoff = y % 4;
+
+    if(pixl > 3) gate++; // ja da is overlap !?
+
+    register uint8_t pixp = 0;
+    if (pixl == 0)
+    {
+        pixp = B100000;
+    } // a
+    else if (pixl == 1)
+    {
+        pixp = B001000;
+    } // b
+    else if (pixl == 2)
+    {
+        pixp = B000010;
+    } // c
+    else if (pixl == 3)
+    {
+        pixp = B000001;
+    } // d
+    else if (pixl == 4)
+    {
+        pixp = B000100;
+    } // e
+    else if (pixl == 5)
+    {
+        pixp = B010000;
+    } // f
+
+    register uint32_t fetch = 0;
+    if (yoff == 0)
+    {
+        fetch = pixp << 18;
+    } // write 1st 6pack 111111xx xxxxxxxx xxxxxxxx
+    else if (yoff == 1)
+    {
+        fetch = pixp << 12;
+    } // 2nd/3rd         xxxxxx11 1111xxxx xxxxxxxx
+    else if (yoff == 2)
+    {
+        fetch = pixp << 6;
+    } // 3rd/4th         xxxxxxxx xxxx1111 11xxxxxx
+    else if (yoff == 3)
+    {
+        fetch = pixp;
+    } // 4th             xxxxxxxx xxxxxxxx xx111111
+
+    // swap ???
+    // fetch = ((fetch >> 24) & 0xff) |      // move byte 3 to byte 0
+    //         ((fetch << 8) & 0xff0000) |   // move byte 1 to byte 2
+    //         ((fetch >> 8) & 0xff00) |     // move byte 2 to byte 1
+    //         ((fetch << 24) & 0xff000000); // byte 0 to byte 3
+
+    bufferEven[24 * gate + yblk*3 + 0] |= (fetch & 0x00FF0000) >> 16;
+    bufferEven[24 * gate + yblk*3 + 1] |= (fetch & 0x0000FF00) >> 8;
+    bufferEven[24 * gate + yblk*3 + 2] |= (fetch & 0x000000FF);
+
+
+
+
+
+
+    if (pixl == 0)
+    {
+        pixp = B000001;
+    } // a
+    else if (pixl == 1)
+    {
+        pixp = B000100;
+    } // b
+    else if (pixl == 2)
+    {
+        pixp = B010000;
+    } // c
+    else if (pixl == 3)
+    {
+        pixp = B100000;
+    } // d
+    else if (pixl == 4)
+    {
+        pixp = B001000;
+    } // e
+    else if (pixl == 5)
+    {
+        pixp = B000010;
+    } // f
+
+    fetch = 0;
+    if (yoff == 0)
+    {
+        fetch = pixp << 18;
+    } // write 1st 6pack 111111xx xxxxxxxx xxxxxxxx
+    else if (yoff == 1)
+    {
+        fetch = pixp << 12;
+    } // 2nd/3rd         xxxxxx11 1111xxxx xxxxxxxx
+    else if (yoff == 2)
+    {
+        fetch = pixp << 6;
+    } // 3rd/4th         xxxxxxxx xxxx1111 11xxxxxx
+    else if (yoff == 3)
+    {
+        fetch = pixp;
+    } // 4th             xxxxxxxx xxxxxxxx xx111111
+
+    // swap ???
+    // fetch = ((fetch >> 24) & 0xff) |      // move byte 3 to byte 0
+    //         ((fetch << 8) & 0xff0000) |   // move byte 1 to byte 2
+    //         ((fetch >> 8) & 0xff00) |     // move byte 2 to byte 1
+    //         ((fetch << 24) & 0xff000000); // byte 0 to byte 3
+
+    bufferOdd[24 * gate + yblk*3 + 0] |= (fetch & 0x00FF0000) >> 16;
+    bufferOdd[24 * gate + yblk*3 + 1] |= (fetch & 0x0000FF00) >> 8;
+    bufferOdd[24 * gate + yblk*3 + 2] |= (fetch & 0x000000FF);
+
+    // LOG << LOG.dec << "pixel: " << x << "," << y << " gate:" << gate << " pixl:" << pixl << " yblk:" << yblk << " yoff:" << yoff  ;
+    // LOG <<" buf:" <<LOG.bin;
+    // LOG <<" " <<buffer[24 * gate + yblk + 0];
+    // LOG <<" " <<buffer[24 * gate + yblk + 1];
+    // LOG <<" " <<buffer[24 * gate + yblk + 2];
+    // LOG << LOG.endl;
+}
+
+void MN12832L::fillScreen(uint8_t color)
+{
+    memset(bufferEven /*+bufferOffset*/, color, bufferSize);
+
+    byte tempBuffer[24] = {
+        B10000010, B00001000, B00100000, // 4 rows | a
+        B00100000, B10000010, B00001000, // 4 rows | b
+        B00001000, B00100000, B10000010, // 4 rows | c
+        B00000100, B00010000, B01000001, // 4 rows | d
+        B00010000, B01000001, B00000100, // 4 rows | e
+        B01000001, B00000100, B00010000, // 4 rows | f
+        0, 0, 0,
+        0, 0, 0};
+
+    // copy to some gates...
+    memcpy(bufferEven + 24 * 0, tempBuffer, 24);
+    memcpy(bufferEven + 24 * 1, tempBuffer, 24);
+    memcpy(bufferEven + 24 * 2, tempBuffer, 24);
+    // memcpy(buffer + 24 * 3, tempBuffer, 24);
+    // memcpy(buffer + 24 * 4, tempBuffer, 24);
+    // memcpy(buffer + 24 * 5, tempBuffer, 24);
+
+    // LOG << "mset buffer: " << LOG.hex << (uint32_t)buffer << ": " << LOG.bin << buffer[0] << buffer[1] << buffer[2] << buffer[3] << LOG.endl;
 }
 
 void MN12832L::swapBuffers()
 {
     noInterrupts();
-    uint16_t bytes = getBufferSize(); // size of one screen
-    if(_offset)
-    {
-        _offset = 0;
-    }
-    else
-    {
-        _offset = bytes;
-    }
+    // if(bufferOffset)
+    // {
+    //     bufferOffset = 0;
+    // }
+    // else
+    // {
+    //     bufferOffset = bufferSize;
+    // }
     interrupts();
 }
 
@@ -121,84 +245,90 @@ uint32_t MN12832L::getDisplayTime()
 {
     uint32_t result;
     noInterrupts();
-    result = _the->_displayTime;
+    result = _the->displayTime;
+    interrupts();
+    return result;
+}
+
+uint32_t MN12832L::getDisplayFps1()
+{
+    uint32_t result;
+    noInterrupts();
+    result = _the->displayFps1;
     interrupts();
     return result;
 }
 
 void MN12832L::nextGate()
 {
-    uint8_t gate = _the->_gate + 1;
+    uint8_t gate = _the->gate + 2;
 
-    if(gate > 43)
+    uint8_t endstop = 43;
+    if (gate > endstop)
         gate = 0;
 
-    // bits 192-236 are the gates..  
+    // bits 192-236 are the gates..
     // but shifter has 48 bits / 6 bytes, use upper 6 bytes of gateBuf / last 5 hex digits unuses !
-    if(gate == 0)
-        _the->_gateBuf = 0xC000000000000000;
-    else if(gate == 43)
-        _the->_gateBuf = 0x8000000000100000;
-    else 
-        _the->_gateBuf = _the->_gateBuf >> 1;
+    if (gate == 0)
+        _the->gateBuf = 0xC000000000000000;
+    else if (gate == endstop)
+        _the->gateBuf = 0x8000000000100000;
+    else
+        _the->gateBuf = _the->gateBuf >> 2;
 
-    _the->_gate = gate;
+    _the->gate = gate;
 
-    // LOG <<"gate:" <<LOG.dec <<gate <<LOG.hex <<" gb:" <<_the->_gateBuf <<LOG.endl;
+    // LOG <<"gate:" <<LOG.dec <<gate <<LOG.hex <<" gb:" <<_the->gateBuf <<LOG.endl;
 }
 
 void MN12832L::displayRefresh()
 {
+    _the->displayFps1 = micros() - _the->displayLast;
+    _the->displayLast = micros();
     uint32_t time = micros();
 
-    byte* drawBuffer;
-    uint16_t bytes = _the->getBufferSize();
-    if(_the->_offset)
-    {
-        drawBuffer = _the->getBuffer() - bytes;
-    }
-    else
-    {
-        drawBuffer = _the->getBuffer() + bytes;
-    }
+    // if(_the->_offset)
+    // {
+    //     ptr = _the->getBuffer() - bufferSize;
+    // }
+    // else
+    // {
+    //     ptr = _the->getBuffer() + bufferSize;
+    // }
 
-    // copy rows from display buffer !
+    // LOG <<"draw buffer: " <<LOG.hex <<(uint32_t)ptr <<": " <<LOG.bin <<*ptr++ <<*ptr++ <<LOG.endl;
+
+    // LOG <<_the->gate <<LOG.endl;
+    // spi.transfer will read back into the buffer.. !!! So we use a temp..
+    byte tempBuffer[24];
+    if(_the->gate && 0x1)
+        memcpy(tempBuffer, _the->bufferEven + 24 * _the->gate/2, 24); // + 24 * _the->gate;
+    else
+        memset(tempBuffer, 0, 24);// memcpy(tempBuffer, _the->bufferEven + 24 * _the->gate/2, 24); // + 24 * _the->gate;
+    uint8_t *ptr = tempBuffer;
+
+    // copy columns from display buffer !
     {
         nextGate();
 
-        uint8_t *ptr;
-        ptr = drawBuffer ;//+ _the->_gate * 24;
-        LOG <<"data[0]:" <<LOG.bin <<*ptr <<LOG.endl;
-
-        // toggle GCP ???
-        digitalWrite(pinGCP, HIGH);
-        digitalWrite(pinGCP, LOW);
+        // LOG <<"data[0]:" <<LOG.bin <<*ptr <<LOG.endl;
 
         SPI.beginTransaction(settingsA);
         // shift out 24 bytes = 192 bits = 32rows * 3depth * 2colomns
         SPI.transfer(ptr, 24);
 
-
-        // toggle GCP ???
-        digitalWrite(pinGCP, HIGH);
-        digitalWrite(pinGCP, LOW);
-
-
         // shift out gates
-        // LOG <<"gate:" <<LOG.dec <<_the->_gate <<LOG.hex <<" gb:\t" <<_the->_gateBuf <<LOG.endl;
-        union u64u8 {
+        // LOG <<"gate:" <<LOG.dec <<_the->_gate <<LOG.hex <<" gb:\t" <<_the->gateBuf <<LOG.endl;
+        union u64u8
+        {
             uint64_t u64;
             uint8_t u8[8];
-        } gbuf = {_the->_gateBuf};
+        } gbuf = {_the->gateBuf};
         ptr = gbuf.u8;
         ptr += 7;
 
-        // toggle GCP ???
-        digitalWrite(pinGCP, HIGH);
-        digitalWrite(pinGCP, LOW);
-
         // LOG <<LOG.hex <<"         :\t";
-        for(int i =0; i< 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             SPI.transfer(*ptr);
             // LOG <<*ptr;
@@ -207,25 +337,13 @@ void MN12832L::displayRefresh()
         // LOG <<LOG.endl;
         SPI.endTransaction();
 
-        // toggle GCP ???
-        digitalWrite(pinGCP, HIGH);
-        digitalWrite(pinGCP, LOW);
+        digitalWrite(_the->pinBLK, HIGH);
 
-        // toggle GCP ???
-        digitalWrite(pinGCP, HIGH);
-        digitalWrite(pinGCP, LOW);
+        digitalWrite(_the->pinLAT, HIGH);
+        digitalWrite(_the->pinLAT, LOW);
 
-
-        digitalWrite(pinBLK, HIGH);
-
-        digitalWrite(pinLAT, HIGH);
-        digitalWrite(pinLAT, LOW);
-
-        digitalWrite(pinBLK, LOW);
-
+        digitalWrite(_the->pinBLK, LOW);
     }
-    // shift the gates out...
-    _the->_displayTime = micros() - time;
 
-    // special case gate 44 should turn on gate 1
+    _the->displayTime = micros() - time;
 }
