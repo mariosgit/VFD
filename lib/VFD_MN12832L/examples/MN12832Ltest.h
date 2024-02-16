@@ -29,7 +29,8 @@ class MN12832Ltest
             display.print("MARIO");
             // display.swapBuffers();
 
-            LOG <<"disp time: " <<display.getDisplayTime() <<"us, possible fps:" <<1000000/display.getDisplayTime() <<" current fps:" <<1000000/display.getDisplayFps1() <<LOG.endl;
+            // gps = gates per second, fps ~ gps/44
+            LOG <<"disp time: " <<display.getDisplayTime() <<"us, possible gps:" <<1000000/display.getDisplayTime() <<" current gps:" <<1000000/display.getDisplayFps1() <<LOG.endl;
         }
     }
 

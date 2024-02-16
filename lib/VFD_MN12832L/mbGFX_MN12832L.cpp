@@ -70,11 +70,6 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
     if ((x < 0) || (y < 0) || (x >= _width) || (y >= _height))
         return;
 
-    // if (color)
-    //     *ptr |= 0x80 >> (bitpos & 7);
-    // else
-    //     *ptr &= ~(0x80 >> (bitpos & 7));
-
     register uint8_t gate = x / 6;
     register uint8_t pixl = x % 6;
     register uint8_t yblk = y / 4;
@@ -126,20 +121,16 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
         fetch = pixp;
     } // 4th             xxxxxxxx xxxxxxxx xx111111
 
-    // swap ???
-    // fetch = ((fetch >> 24) & 0xff) |      // move byte 3 to byte 0
-    //         ((fetch << 8) & 0xff0000) |   // move byte 1 to byte 2
-    //         ((fetch >> 8) & 0xff00) |     // move byte 2 to byte 1
-    //         ((fetch << 24) & 0xff000000); // byte 0 to byte 3
+    bufferEven[24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
+    bufferEven[24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
+    bufferEven[24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
 
-    bufferEven[24 * gate + yblk*3 + 0] |= (fetch & 0x00FF0000) >> 16;
-    bufferEven[24 * gate + yblk*3 + 1] |= (fetch & 0x0000FF00) >> 8;
-    bufferEven[24 * gate + yblk*3 + 2] |= (fetch & 0x000000FF);
-
-
-
-
-
+    // same again for defabc pixel order...
+    // x-= 3;
+    gate = x / 6;
+    pixl = x % 6;
+    yblk = y / 4;
+    yoff = y % 4;
 
     if (pixl == 0)
     {
@@ -184,15 +175,9 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
         fetch = pixp;
     } // 4th             xxxxxxxx xxxxxxxx xx111111
 
-    // swap ???
-    // fetch = ((fetch >> 24) & 0xff) |      // move byte 3 to byte 0
-    //         ((fetch << 8) & 0xff0000) |   // move byte 1 to byte 2
-    //         ((fetch >> 8) & 0xff00) |     // move byte 2 to byte 1
-    //         ((fetch << 24) & 0xff000000); // byte 0 to byte 3
-
-    bufferOdd[24 * gate + yblk*3 + 0] |= (fetch & 0x00FF0000) >> 16;
-    bufferOdd[24 * gate + yblk*3 + 1] |= (fetch & 0x0000FF00) >> 8;
-    bufferOdd[24 * gate + yblk*3 + 2] |= (fetch & 0x000000FF);
+    bufferOdd[24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
+    bufferOdd[24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
+    bufferOdd[24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
 
     // LOG << LOG.dec << "pixel: " << x << "," << y << " gate:" << gate << " pixl:" << pixl << " yblk:" << yblk << " yoff:" << yoff  ;
     // LOG <<" buf:" <<LOG.bin;
@@ -298,13 +283,18 @@ void MN12832L::displayRefresh()
 
     // LOG <<"draw buffer: " <<LOG.hex <<(uint32_t)ptr <<": " <<LOG.bin <<*ptr++ <<*ptr++ <<LOG.endl;
 
+    // if (_the->gate % 2 == 1)
+    //     return;
+
     // LOG <<_the->gate <<LOG.endl;
     // spi.transfer will read back into the buffer.. !!! So we use a temp..
     byte tempBuffer[24];
-    if(_the->gate && 0x1)
-        memcpy(tempBuffer, _the->bufferEven + 24 * _the->gate/2, 24); // + 24 * _the->gate;
+    if (_the->gate % 2 == 0)
+        memcpy(tempBuffer, _the->bufferEven + 24 * (_the->gate/2 + 0), 24); // + 24 * _the->gate;
     else
-        memset(tempBuffer, 0, 24);// memcpy(tempBuffer, _the->bufferEven + 24 * _the->gate/2, 24); // + 24 * _the->gate;
+        memcpy(tempBuffer, _the->bufferOdd + 24 * (_the->gate/2 + 1), 24); // + 24 * _the->gate;
+    // memset(tempBuffer, 0, 24);//
+
     uint8_t *ptr = tempBuffer;
 
     // copy columns from display buffer !
