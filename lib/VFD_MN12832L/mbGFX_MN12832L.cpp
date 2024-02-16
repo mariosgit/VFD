@@ -70,6 +70,8 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
     if ((x < 0) || (y < 0) || (x >= _width) || (y >= _height))
         return;
 
+    x+= 6;
+
     register uint8_t gate = x / 6;
     register uint8_t pixl = x % 6;
     register uint8_t yblk = y / 4;
@@ -92,15 +94,15 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
     } // c
     else if (pixl == 3)
     {
-        pixp = B000001;
+        pixp = 0;//B000001;
     } // d
     else if (pixl == 4)
     {
-        pixp = B000100;
+        pixp = 0;//B000100;
     } // e
     else if (pixl == 5)
     {
-        pixp = B010000;
+        pixp = 0;//B010000;
     } // f
 
     register uint32_t fetch = 0;
@@ -132,6 +134,7 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
     yblk = y / 4;
     yoff = y % 4;
 
+    // reverse order ???
     if (pixl == 0)
     {
         pixp = B000001;
@@ -146,15 +149,15 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
     } // c
     else if (pixl == 3)
     {
-        pixp = B100000;
+        pixp = 0;//B100000;
     } // d
     else if (pixl == 4)
     {
-        pixp = B001000;
+        pixp = 0;//B001000;
     } // e
     else if (pixl == 5)
     {
-        pixp = B000010;
+        pixp = 0;//B000010;
     } // f
 
     fetch = 0;
@@ -191,20 +194,20 @@ void MN12832L::fillScreen(uint8_t color)
 {
     memset(bufferEven /*+bufferOffset*/, color, bufferSize);
 
-    byte tempBuffer[24] = {
-        B10000010, B00001000, B00100000, // 4 rows | a
-        B00100000, B10000010, B00001000, // 4 rows | b
-        B00001000, B00100000, B10000010, // 4 rows | c
-        B00000100, B00010000, B01000001, // 4 rows | d
-        B00010000, B01000001, B00000100, // 4 rows | e
-        B01000001, B00000100, B00010000, // 4 rows | f
-        0, 0, 0,
-        0, 0, 0};
+    // byte tempBuffer[24] = {
+    //     B10000010, B00001000, B00100000, // 4 rows | a
+    //     B00100000, B10000010, B00001000, // 4 rows | b
+    //     B00001000, B00100000, B10000010, // 4 rows | c
+    //     B00000100, B00010000, B01000001, // 4 rows | d
+    //     B00010000, B01000001, B00000100, // 4 rows | e
+    //     B01000001, B00000100, B00010000, // 4 rows | f
+    //     0, 0, 0,
+    //     0, 0, 0};
 
     // copy to some gates...
-    memcpy(bufferEven + 24 * 0, tempBuffer, 24);
-    memcpy(bufferEven + 24 * 1, tempBuffer, 24);
-    memcpy(bufferEven + 24 * 2, tempBuffer, 24);
+    // memcpy(bufferEven + 24 * 0, tempBuffer, 24);
+    // memcpy(bufferEven + 24 * 1, tempBuffer, 24);
+    // memcpy(bufferEven + 24 * 2, tempBuffer, 24);
     // memcpy(buffer + 24 * 3, tempBuffer, 24);
     // memcpy(buffer + 24 * 4, tempBuffer, 24);
     // memcpy(buffer + 24 * 5, tempBuffer, 24);
@@ -256,8 +259,10 @@ void MN12832L::nextGate()
     // but shifter has 48 bits / 6 bytes, use upper 6 bytes of gateBuf / last 5 hex digits unuses !
     if (gate == 0)
         _the->gateBuf = 0x8000000000000000;
+    if (gate == 1)
+        _the->gateBuf = 0xC000000000000000;
     else if (gate == endstop)
-        _the->gateBuf = 0x0000000000100000;
+        _the->gateBuf = 0x8000000000100000;
     else
         _the->gateBuf = _the->gateBuf >> 1;
 
