@@ -24,8 +24,13 @@ class MN12832Ltest
         if(checker > 100)
         {
             checker = 0;
-
             uint32_t time = millis();
+
+            // display.drawLine(0,0,12,0,1);
+            // display.drawRect(1,1,4,4,1);
+            // display.drawRect(7,7,4,4,1);
+            // LOG <<"-----------" <<LOG.endl;
+
             // display.fillScreen(0);
             display.drawLine(0,10,127,10, 1);
             display.setCursor(20,0);
@@ -40,11 +45,10 @@ class MN12832Ltest
                 display.fillRect(x,32 - hi, 7, hi, 1);
             }
 
-            drawtime = millis() - time;
 
             // display.swapBuffers();
 
-            // gps = gates per second, fps ~ gps/44
+            drawtime = millis() - time;
         }
         if(logger > 1000)
         {

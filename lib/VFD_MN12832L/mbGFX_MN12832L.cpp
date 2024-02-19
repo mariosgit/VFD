@@ -65,12 +65,13 @@ void MN12832L::begin()
     myTimer.begin(displayRefresh, 1000000 / targetFps); // starting slowly
 }
 
-void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
+void MN12832L::drawPixel(int16_t px, int16_t py, uint16_t color)
 {
-    if ((x < 0) || (y < 0) || (x >= _width) || (y >= _height))
+    if ((px < 0) || (py < 0) || (px >= _width) || (py >= _height))
         return;
 
-    x+= 6;
+    int16_t x = px+ 6;
+    int16_t y = py;
 
     register uint8_t gate = x / 6;
     register uint8_t pixl = x % 6;
@@ -123,17 +124,19 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
         fetch = pixp;
     } // 4th             xxxxxxxx xxxxxxxx xx111111
 
+    // LOG <<LOG.dec <<"x:" <<px <<"x" <<py <<" X+6:\tG:" <<gate <<":" <<LOG.bin <<fetch <<LOG.endl;
+
     if(color)
     {
-        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
-        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
-        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
     }
     else
     {
-        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 0] &= ~((fetch & 0x00FF0000) >> 16);
-        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 1] &= ~((fetch & 0x0000FF00) >> 8);
-        bufferEven[bufferOffset + 24 * gate + yblk * 3 + 2] &= ~((fetch & 0x000000FF));
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 0] &= ~((fetch & 0x00FF0000) >> 16);
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 1] &= ~((fetch & 0x0000FF00) >> 8);
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 2] &= ~((fetch & 0x000000FF));
     }
 
     // same again for defabc pixel order...
@@ -187,17 +190,19 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
         fetch = pixp;
     } // 4th             xxxxxxxx xxxxxxxx xx111111
 
+    // LOG <<LOG.dec <<"x:" <<px <<"x" <<py  <<" X+3:\tG:" <<gate <<":" <<LOG.bin <<fetch <<LOG.endl;
+
     if(color)
     {
-        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
-        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
-        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 0] |= (fetch & 0x00FF0000) >> 16;
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 1] |= (fetch & 0x0000FF00) >> 8;
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 2] |= (fetch & 0x000000FF);
     }
     else
     {
-        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 0] &= ~((fetch & 0x00FF0000) >> 16);
-        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 1] &= ~((fetch & 0x0000FF00) >> 8);
-        bufferOdd[bufferOffset + 24 * gate + yblk * 3 + 2] &= ~((fetch & 0x000000FF));
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 0] &= ~((fetch & 0x00FF0000) >> 16);
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 1] &= ~((fetch & 0x0000FF00) >> 8);
+        buffer[bufferOffset + 24 * gate + yblk * 3 + 2] &= ~((fetch & 0x000000FF));
     }
 
     // LOG << LOG.dec << "pixel: " << x << "," << y << " gate:" << gate << " pixl:" << pixl << " yblk:" << yblk << " yoff:" << yoff  ;
@@ -210,8 +215,7 @@ void MN12832L::drawPixel(int16_t x, int16_t y, uint16_t color)
 
 void MN12832L::fillScreen(uint8_t color)
 {
-    memset(bufferEven+bufferOffset, color, bufferSize);
-    memset(bufferOdd+bufferOffset , color, bufferSize);
+    memset(buffer+bufferOffset, color, bufferSize);
 
     // byte tempBuffer[24] = {
     //     B10000010, B00001000, B00100000, // 4 rows | a
@@ -224,9 +228,9 @@ void MN12832L::fillScreen(uint8_t color)
     //     0, 0, 0};
 
     // copy to some gates...
-    // memcpy(bufferEven + 24 * 0, tempBuffer, 24);
-    // memcpy(bufferEven + 24 * 1, tempBuffer, 24);
-    // memcpy(bufferEven + 24 * 2, tempBuffer, 24);
+    // memcpy(buffer + 24 * 0, tempBuffer, 24);
+    // memcpy(buffer + 24 * 1, tempBuffer, 24);
+    // memcpy(buffer + 24 * 2, tempBuffer, 24);
     // memcpy(buffer + 24 * 3, tempBuffer, 24);
     // memcpy(buffer + 24 * 4, tempBuffer, 24);
     // memcpy(buffer + 24 * 5, tempBuffer, 24);
@@ -298,17 +302,14 @@ void MN12832L::displayRefresh()
 
     byte tempBuffer[24];
 
-    uint8_t *bufferEven = nullptr;
-    uint8_t *bufferOdd = nullptr;
+    uint8_t *buffer = nullptr;
     if(_the->bufferOffset)
     {
-        bufferEven = _the->bufferEven - bufferSize;
-        bufferOdd  = _the->bufferOdd  - bufferSize;
+        buffer = _the->buffer - bufferSize;
     }
     else
     {
-        bufferEven = _the->bufferEven + bufferSize;
-        bufferOdd  = _the->bufferOdd  + bufferSize;
+        buffer = _the->buffer + bufferSize;
     }
 
     // LOG <<"draw buffer: " <<LOG.hex <<(uint32_t)ptr <<": " <<LOG.bin <<*ptr++ <<*ptr++ <<LOG.endl;
@@ -317,18 +318,13 @@ void MN12832L::displayRefresh()
     //     return;
 
     // LOG <<_the->gate <<LOG.endl;
-    // spi.transfer will read back into the buffer.. !!! So we use a temp..
-    if (_the->gate % 2 == 1)
-    {
-        memcpy(tempBuffer, _the->bufferOdd + 24 * (_the->gate/2 + 0), 24); // + 24 * _the->gate;
-        // memset(tempBuffer, 0, 24);// skip
-    }
-    else
-    {
-        memcpy(tempBuffer, _the->bufferEven + 24 * (_the->gate/2 + 0), 24); // + 24 * _the->gate;
-        // memset(tempBuffer, 0, 24);// skip
-    }
 
+    int8_t mask = (_the->gate % 2 == 1) ? B01010101 : B10101010;  // mask off either abc or cde pixels
+
+    for(int i = 0; i< 24; i++)
+    {
+        tempBuffer[i] = (_the->buffer + 24 * (_the->gate/2 + 0))[i] & mask; // mask all cde pixels
+    }
 
     uint8_t *ptr = tempBuffer;
 
@@ -370,7 +366,6 @@ void MN12832L::displayRefresh()
     }
 
     nextGate();
-
 
     _the->displayTime = micros() - time;
 }

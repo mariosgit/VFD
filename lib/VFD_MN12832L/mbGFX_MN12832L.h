@@ -32,8 +32,7 @@ private:
     static void nextGate();
     static void displayRefresh();                   // timer isr
     static const int16_t bufferSize = 136 / 8 * 32; // black'n'white, + margin
-    uint8_t bufferOdd[bufferSize*2];
-    uint8_t bufferEven[bufferSize*2];
+    uint8_t buffer[bufferSize*2];
     uint16_t bufferOffset = 0;
 
     uint8_t  gate;
