@@ -99,15 +99,15 @@ void MN12832L::drawPixel(int16_t px, int16_t py, uint16_t color)
     uint8_t *dst = buffer + bufferOffset + 24 * gate + yblk * 3;
     if(color)
     {
-        buffer[bufferOffset + 24 * gate + yblk * 3 + 0] |= (pixp.u4[2]);
-        buffer[bufferOffset + 24 * gate + yblk * 3 + 1] |= (pixp.u4[1]);
-        buffer[bufferOffset + 24 * gate + yblk * 3 + 2] |= (pixp.u4[0]);
+        dst[0] |= (pixp.u4[2]);
+        dst[1] |= (pixp.u4[1]);
+        dst[2] |= (pixp.u4[0]);
     }
     else
     {
-        buffer[bufferOffset + 24 * gate + yblk * 3 + 0] &= ~(pixp.u4[2]);
-        buffer[bufferOffset + 24 * gate + yblk * 3 + 1] &= ~(pixp.u4[1]);
-        buffer[bufferOffset + 24 * gate + yblk * 3 + 2] &= ~(pixp.u4[0]);
+        dst[0] &= ~(pixp.u4[2]);
+        dst[1] &= ~(pixp.u4[1]);
+        dst[2] &= ~(pixp.u4[0]);
     }
 
     // LOG << LOG.dec << "pixel: " << x << "," << y << " gate:" << gate << " pixl:" << pixl << " yblk:" << yblk << " yoff:" << yoff  ;
@@ -223,7 +223,15 @@ void MN12832L::displayRefresh()
     {
         *dst++ = (*ptr++) & mask;
     }
-
+    // shift out gates   // bits 192-236 are the gates..
+    // LOG <<"gate:" <<LOG.dec <<_the->_gate <<LOG.hex <<" gb:\t" <<_the->gateBuf <<LOG.endl;
+    ptr = _the->gateBuf.u8 + 7;
+    // LOG <<LOG.hex <<"         :\t";
+    for (int i = 0; i < 6; i++)
+    {
+        *dst++ = *ptr;
+        ptr--;
+    }
 
     // copy columns from display buffer !
     for(int i = 0; i < 2; i++)
@@ -234,22 +242,8 @@ void MN12832L::displayRefresh()
 
         SPI.beginTransaction(settingsA);
         // shift out 24 bytes = 192 bits = 32rows * 3depth * 2colomns
-        SPI.transfer(ptr, 24);
+        SPI.transfer(ptr, 30);
 
-        // shift out gates
-        // bits 192-236 are the gates..
-
-        // LOG <<"gate:" <<LOG.dec <<_the->_gate <<LOG.hex <<" gb:\t" <<_the->gateBuf <<LOG.endl;
-        ptr = _the->gateBuf.u8;
-        ptr += 7;
-
-        // LOG <<LOG.hex <<"         :\t";
-        for (int i = 0; i < 6; i++)
-        {
-            SPI.transfer(*ptr);
-            // LOG <<*ptr;
-            ptr--;
-        }
         // LOG <<LOG.endl;
         SPI.endTransaction();
 

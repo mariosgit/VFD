@@ -32,9 +32,13 @@ private:
     static void nextGate();
     static void displayRefresh();                   // timer isr
     static const int16_t bufferSize = 136 / 8 * 32; // black'n'white, + margin
-    uint8_t buffer[bufferSize * 2];
+
+    // bufferlayout
+    ///   front | back
+    ///   0 | 1 | 0 | 1 //bitplanes
+    uint8_t buffer[bufferSize * 4];
     uint16_t bufferOffset = 0;
-    uint8_t tempBuffer[24];
+    uint8_t tempBuffer[30];
 
     union u32u4
     {
