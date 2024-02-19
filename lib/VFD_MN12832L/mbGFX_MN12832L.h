@@ -32,12 +32,23 @@ private:
     static void nextGate();
     static void displayRefresh();                   // timer isr
     static const int16_t bufferSize = 136 / 8 * 32; // black'n'white, + margin
-    uint8_t buffer[bufferSize*2];
+    uint8_t buffer[bufferSize * 2];
     uint16_t bufferOffset = 0;
     uint8_t tempBuffer[24];
 
-    uint8_t  gate;
-    uint64_t gateBuf;
+    union u32u4
+    {
+        uint64_t u32;
+        uint8_t u4[4];
+    };
+
+    union u64u8
+    {
+        uint64_t u64;
+        uint8_t u8[8];
+    };
+    u64u8 gateBuf;
+    uint8_t gate;
     uint32_t displayTime;
     uint32_t displayLast;
     uint32_t displayFps1;
@@ -50,6 +61,6 @@ private:
     const byte pinGCP;
     const byte MOSI_PIN;
     const byte SCK_PIN;
-    const byte pinPWM;    
+    const byte pinPWM;
     static MN12832L *_the;
 };
