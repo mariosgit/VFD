@@ -28,7 +28,7 @@ public:
     static uint32_t getDisplayTime(); // 24us
     static uint32_t getDisplayFps1(); // 24us
 
-private:
+protected:
     static void nextGate();
     static void displayRefresh();                   // timer isr
     static const int16_t bufferSize = 136 / 8 * 32; // black'n'white, + margin

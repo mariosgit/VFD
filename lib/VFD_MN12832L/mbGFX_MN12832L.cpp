@@ -96,18 +96,19 @@ void MN12832L::drawPixel(int16_t px, int16_t py, uint16_t color)
 
     // LOG <<LOG.dec <<"x:" <<px <<"x" <<py <<" X+6:\tG:" <<gate <<":" <<LOG.bin <<fetch <<LOG.endl;
 
-    uint8_t *dst = buffer + bufferOffset + 24 * gate + yblk * 3;
-    if(color)
+    if(color & 1) // bitplane 0
     {
+        uint8_t *dst = buffer + bufferOffset + 24 * gate + yblk * 3;
         dst[0] |= (pixp.u4[2]);
         dst[1] |= (pixp.u4[1]);
         dst[2] |= (pixp.u4[0]);
     }
-    else
+    if(color & 2) // bitplane 1
     {
-        dst[0] &= ~(pixp.u4[2]);
-        dst[1] &= ~(pixp.u4[1]);
-        dst[2] &= ~(pixp.u4[0]);
+        uint8_t *dst = buffer + bufferOffset + bufferSize + 24 * gate + yblk * 3;
+        dst[0] |= (pixp.u4[2]);
+        dst[1] |= (pixp.u4[1]);
+        dst[2] |= (pixp.u4[0]);
     }
 
     // LOG << LOG.dec << "pixel: " << x << "," << y << " gate:" << gate << " pixl:" << pixl << " yblk:" << yblk << " yoff:" << yoff  ;
@@ -120,7 +121,7 @@ void MN12832L::drawPixel(int16_t px, int16_t py, uint16_t color)
 
 void MN12832L::fillScreen(uint8_t color)
 {
-    memset(buffer+bufferOffset, color, bufferSize);
+    memset(buffer+bufferOffset, color, bufferSize*2);
 
     // byte tempBuffer[24] = {
     //     B10000010, B00001000, B00100000, // 4 rows | a
@@ -144,7 +145,7 @@ void MN12832L::swapBuffers()
     }
     else
     {
-        bufferOffset = bufferSize;
+        bufferOffset = bufferSize*2;
     }
     interrupts();
 }
@@ -205,7 +206,7 @@ void MN12832L::displayRefresh()
     }
     else
     {
-        buffer = _the->buffer + bufferSize;
+        buffer = _the->buffer + bufferSize*2;
     }
 
     // LOG <<"draw buffer: " <<LOG.hex <<(uint32_t)ptr <<": " <<LOG.bin <<*ptr++ <<*ptr++ <<LOG.endl;
@@ -217,28 +218,35 @@ void MN12832L::displayRefresh()
 
     int8_t mask = (_the->gate % 2 == 1) ? B01010101 : B10101010;  // mask off either abc or cde pixels
 
-    uint8_t *ptr = (buffer + 24 * (_the->gate/2 + 0));
-    uint8_t *dst = _the->tempBuffer;
-    for(int i = 0; i< 24; i++)
-    {
-        *dst++ = (*ptr++) & mask;
-    }
-    // shift out gates   // bits 192-236 are the gates..
-    // LOG <<"gate:" <<LOG.dec <<_the->_gate <<LOG.hex <<" gb:\t" <<_the->gateBuf <<LOG.endl;
-    ptr = _the->gateBuf.u8 + 7;
-    // LOG <<LOG.hex <<"         :\t";
-    for (int i = 0; i < 6; i++)
-    {
-        *dst++ = *ptr;
-        ptr--;
-    }
+    digitalWrite(_the->pinGCP, HIGH);
+    digitalWrite(_the->pinGCP, LOW);
 
-    // copy columns from display buffer !
     for(int i = 0; i < 2; i++)
     {
+        uint8_t *ptr = (buffer + bufferSize*i + 24 * (_the->gate/2 + 0));
+
+        uint8_t *dst = _the->tempBuffer;
+        for(int i = 0; i< 24; i++)
+        {
+            *dst++ = (*ptr++) & mask;
+        }
+        // shift out gates   // bits 192-236 are the gates..
+        // LOG <<"gate:" <<LOG.dec <<_the->_gate <<LOG.hex <<" gb:\t" <<_the->gateBuf <<LOG.endl;
+        ptr = _the->gateBuf.u8 + 7;
+        // LOG <<LOG.hex <<"         :\t";
+        for (int i = 0; i < 6; i++)
+        {
+            *dst++ = *ptr;
+            ptr--;
+        }
+
+        // copy columns from display buffer !
         ptr = _the->tempBuffer;
 
         // LOG <<"data[0]:" <<LOG.bin <<*ptr <<LOG.endl;
+
+        digitalWrite(_the->pinGCP, HIGH);
+        digitalWrite(_the->pinGCP, LOW);
 
         SPI.beginTransaction(settingsA);
         // shift out 24 bytes = 192 bits = 32rows * 3depth * 2colomns
