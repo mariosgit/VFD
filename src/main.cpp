@@ -2,12 +2,19 @@
 
 /// wrapping the different code examples into main...
 /// choose one !
+
+#define RUN_MN12864K_TEST
+
 // #define RUN_MN12832L_GREY_TEST
-#define RUN_MN12832L_MONO_TEST
+// #define RUN_MN12832L_MONO_TEST
 // #define RUN_FREEDSPCONTROLLER
 // #define RUN_PANELDEMO
 
 /// do not touch anything below :)
+
+#ifdef RUN_MN12864K_TEST
+#include <examples/VFD_MN12864K.ino>
+#endif
 
 #ifdef RUN_MN12832L_GREY_TEST
 #include <examples/MN12832grey.ino>
@@ -31,7 +38,7 @@ FreeDSPController fc;
 #define LOOP fc.loop();
 #endif
 
-#if !defined(RUN_MN12832L_MONO_TEST) && !defined(RUN_MN12832L_GREY_TEST)
+#if !defined(RUN_MN12832L_MONO_TEST) && !defined(RUN_MN12832L_GREY_TEST)&& !defined(RUN_MN12864K_TEST)
 void setup() { SETUP }
 void loop() { LOOP }
 #endif
