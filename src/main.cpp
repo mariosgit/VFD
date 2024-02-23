@@ -1,14 +1,21 @@
 #include <Arduino.h>
 
 /// wrapping the different code examples into main...
-/// choose one !
 
-#define RUN_MN12864K_TEST
+// !!! selection is in .env file, copy below to .env,
+// lines can be commented out with # as first char.
+// All lines will be added as build flags.
+/*
+# RUN_MN12864K_TEST
+# RUN_MN12832L_GREY_TEST
+RUN_MN12832L_MONO_TEST
+# RUN_FREEDSPCONTROLLER
+# RUN_PANELDEMO
+NAME=hanswurst
+*/
 
-// #define RUN_MN12832L_GREY_TEST
-// #define RUN_MN12832L_MONO_TEST
-// #define RUN_FREEDSPCONTROLLER
-// #define RUN_PANELDEMO
+// The example ino's all have setup and loop function, select just one.
+// The one is pulled in here and used as main.
 
 /// do not touch anything below :)
 
@@ -26,19 +33,14 @@
 
 #ifdef RUN_PANELDEMO
 #include "PanelDemo/PanelDemo.h"
-PanelDemo pd;
-#define SETUP pd.setup();
-#define LOOP pd.loop();
+PanelDemo main;
+void setup() { main.setup() }
+void loop() { main.loop() }
 #endif
 
 #ifdef RUN_FREEDSPCONTROLLER
 #include "FreeDSPController/FreeDSPController.h"
-FreeDSPController fc;
-#define SETUP fc.setup();
-#define LOOP fc.loop();
-#endif
-
-#if !defined(RUN_MN12832L_MONO_TEST) && !defined(RUN_MN12832L_GREY_TEST)&& !defined(RUN_MN12864K_TEST)
-void setup() { SETUP }
-void loop() { LOOP }
+FreeDSPController main;
+void setup() { main.setup() }
+void loop() { main.loop() }
 #endif
