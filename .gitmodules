@@ -7,6 +7,6 @@
 [submodule "lib/VFD_MN12864K"]
 	path = lib/VFD_MN12864K
 	url = https://github.com/mariosgit/VFD_MN12864K.git
-[submodule "lib/MN12832L"]
-	path = lib/MN12832L
+[submodule "lib/VFD_MN12832L"]
+	path = lib/VFD_MN12832L
 	url = https://github.com/mariosgit/VFD_MN12832L.git
