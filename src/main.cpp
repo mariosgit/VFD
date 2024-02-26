@@ -27,6 +27,10 @@ NAME=hanswurst
 #include <examples/MN12832grey.ino>
 #endif
 
+#ifdef RUN_MN12832L_BENCHI
+#include <examples/MN12832Lbenchi.ino>
+#endif
+
 #ifdef RUN_MN12832L_MONO_TEST
 #include <examples/MN12832mono.ino>
 #endif
