@@ -35,6 +35,10 @@ NAME=hanswurst
 #include <examples/MN12832mono.ino>
 #endif
 
+#ifdef RUN_MN12832L_MONOFONT_TEST
+#include <examples/MN12832monofont.ino>
+#endif
+
 #ifdef RUN_PANELDEMO
 #include "PanelDemo/PanelDemo.h"
 PanelDemo main;
