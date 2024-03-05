@@ -3,7 +3,7 @@
 #include <U8g2lib.h>
 #include <SPI.h>
 
-U8G2_GP1294AI_256X48_F_4W_HW_SPI u8g2(U8G2_R0, 10, U8X8_PIN_NONE, 9);
+U8G2_GP1294AI_256X48_1_4W_HW_SPI u8g2(U8G2_R0, 10, U8X8_PIN_NONE, 9);
 
 void setup()
 {
