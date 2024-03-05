@@ -4,7 +4,7 @@ A collection of upcycling projects for Vakuum Fluorescent Displays (VFD). These 
 
 ## Project Structure...
 
-This is a playground for testing VFDs and there are the PCBs in PCB-KiCAD.
+This is a playground for testing VFDs and there are the PCBs in PCB-KiCAD. See below..
 
 If you only want the display drivers, check out the external repos which are submoduled in the ```./lib``` folder.
 
@@ -30,10 +30,16 @@ You can also switch between demo programms by commenting in/out the defines.. on
 
 ## PCBs
 
-PCB-Kicad contains one for the MN12832JC + all the power supply.
+There are some sub-schematics like VFD-Power which are included in the other schematics.
 
-They all use a similar net naming
-- +5V
-- VPP for the 50V anode voltage
-- F1 and F2 for the fillament AC voltage
+### MN12832JC-TeensyLC
 
+This is a VFD + 2 Encoders + 2 Switches. (For the FreeDSPController)
+
+Status: Works somewhat, It would have been better with Level shifters. During power up it can show some random noise, due to level issues.
+
+### GP1294AI
+
+This is a board with the VFD + 2 encoders + 10 switches.
+
+Status: Experimental, PCB is in development. 
