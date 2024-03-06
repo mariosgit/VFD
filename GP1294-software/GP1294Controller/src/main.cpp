@@ -26,7 +26,7 @@ uint8_t levelLmax = 0;
 
 void loop()
 {
-    if(redraw > 20)
+    if(redraw > 1000/20)
     {
         redraw = 0;
 
@@ -46,7 +46,7 @@ void loop()
         u8g2.drawBox(194, 4, 56, 20);
         u8g2.setDrawColor(1);
         u8g2.setFont(u8g2_font_unifont_t_symbols);
-        u8g2.drawGlyph(textPos, 22, 0x2603);	/* dec 9731/hex 2603 Snowman */
+        u8g2.drawGlyph(textPos, 22, 0x23f0);	/* dec 9731/hex 2603 Snowman */
 
         u8g2.drawRFrame(0, 0, 255,47, 2);
         u8g2.drawRBox(150, 30, 255-150-4 ,10, 2);
@@ -79,12 +79,17 @@ void loop()
         }
 
         u8g2.setDrawColor(0);
-        u8g2.drawBox(4, 28, 120, 20);
+        u8g2.drawBox(4, 28, 124, 20);
         u8g2.setDrawColor(1);
-        u8g2.drawBox(levelLmax, 28+0, 3, 6);
-        u8g2.drawBox(levelRmax, 28+8, 3, 6);
-        u8g2.drawBox(8, 28+0, levelLavr/4, 6);
-        u8g2.drawBox(8, 28+8, levelRavr/4, 6);
+        u8g2.drawBox(levelLmax&0xfc, 28+0, 4, 6);
+        u8g2.drawBox(levelRmax&0xfc, 28+8, 4, 6);
+        u8g2.drawBox(8, 28+0, (levelLavr/4)&0xfc, 6);
+        u8g2.drawBox(8, 28+8, (levelRavr/4)&0xfc, 6);
+        u8g2.setDrawColor(0);
+        for(int i = 12; i < 128; i+=4)
+        {
+            u8g2.drawVLine(i, 28, 15);
+        }
 
         levelPos = (levelPos + 1) % 4;
 
