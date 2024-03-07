@@ -1139,6 +1139,35 @@
     )
   )
 
+<<<<<<< HEAD
+=======
+  (symbol (lib_id "VFD-Power:C-EUC1206") (at 182.88 99.06 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 9a6eff71-e791-4447-af80-61fe9caa498d)
+    (property "Reference" "C15" (at 187.96 100.33 90)
+      (effects (font (size 1.778 1.5113)))
+    )
+    (property "Value" "1u/100v" (at 191.77 105.41 90)
+      (effects (font (size 1.778 1.5113)) (justify left bottom))
+    )
+    (property "Footprint" "VFD-Power:C1206" (at 182.88 99.06 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 182.88 99.06 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 95af774c-dd6e-4950-be82-9c32db0c7611))
+    (pin "2" (uuid d7431d83-6205-4638-8b0f-d17736b507b8))
+    (instances
+      (project "GP1294-Teens4"
+        (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/ff3fb23b-9a88-4c38-8306-aefc5a8bdc1c"
+          (reference "C15") (unit 1)
+        )
+      )
+    )
+  )
+
+>>>>>>> refs/remotes/origin/master
   (symbol (lib_id "VFD-Power-eagle-import:GND") (at 149.86 83.82 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ac1effab-9fe3-4e31-89c5-8a24d8adb808)
@@ -1204,8 +1233,8 @@
     (property "Datasheet" "" (at 127 59.69 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid d0f95530-7da8-490e-9905-2e6fe3b4d901))
     (pin "1" (uuid 1945455d-7f62-4be0-bba7-403076dd648e))
+    (pin "2" (uuid d0f95530-7da8-490e-9905-2e6fe3b4d901))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/ff3fb23b-9a88-4c38-8306-aefc5a8bdc1c"
@@ -1364,8 +1393,8 @@
     (property "Datasheet" "" (at 106.68 59.69 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 669046c7-7bf6-43fc-acd9-4ccac51af6a6))
     (pin "1" (uuid 892930d2-f720-451f-94cf-64711dba9d20))
+    (pin "2" (uuid 669046c7-7bf6-43fc-acd9-4ccac51af6a6))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/ff3fb23b-9a88-4c38-8306-aefc5a8bdc1c"
@@ -1438,10 +1467,21 @@
     (property "Footprint" "" (at 182.118 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+<<<<<<< HEAD
     (property "Datasheet" "" (at 182.118 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid c6c1a3af-ba7e-477f-bec0-a87367afbd52))
+=======
+    (pin "1" (uuid 5eac8fb8-eeeb-4ee6-b4ff-9e08491f2641))
+    (pin "2" (uuid a5808d9f-9987-4272-ba74-d125a78a7a0a))
+    (pin "3" (uuid ae9d7c80-1554-4c7b-ab23-5fd8d66fd8df))
+    (pin "4" (uuid d5e43577-6661-4906-9eb3-8f269f962230))
+    (pin "5" (uuid c8614b88-0802-41c0-ac70-9b56a7c39e76))
+    (pin "6" (uuid 73c56955-f3a9-4f13-bede-c77d6b5ed114))
+    (pin "7" (uuid 8279ebdd-51d6-414f-9da1-41345afe8c1c))
+    (pin "8" (uuid 63b35668-8384-474e-8b0b-ac3c2af597d7))
+>>>>>>> refs/remotes/origin/master
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/ff3fb23b-9a88-4c38-8306-aefc5a8bdc1c"
