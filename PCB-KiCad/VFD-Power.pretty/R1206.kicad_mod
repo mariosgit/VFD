@@ -1,6 +1,7 @@
 (footprint "R1206" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
   (descr "<b>RESISTOR</b>")
+  (attr smd)
   (fp_text reference "REF**" (at -1.27 -1.27) (layer "F.SilkS")
       (effects (font (size 1.1684 1.1684) (thickness 0.1016)) (justify left bottom))
     (tstamp c2dcf402-153f-495a-858a-4444f00a3c17)
@@ -52,4 +53,9 @@
     (solder_mask_margin 0.0508) (thermal_bridge_angle 0) (tstamp eaea2225-eb83-4031-b764-ee81dbe4f198))
   (pad "2" smd rect (at 1.422 0) (size 1.6 1.803) (layers "F.Cu" "F.Paste" "F.Mask")
     (solder_mask_margin 0.0508) (thermal_bridge_angle 0) (tstamp 74a35607-352a-4259-8901-f88c0b290cbd))
+  (model "/Users/mario/DevelSelf/kicad-packages3D/Resistor_SMD.3dshapes/R_1206_3216Metric.wrl"
+    (offset (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
 )

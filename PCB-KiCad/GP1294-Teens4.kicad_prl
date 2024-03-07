@@ -63,7 +63,7 @@
       36,
       40
     ],
-    "visible_layers": "ffffeff_ffffffff",
+    "visible_layers": "ffffef3_ffffffff",
     "zone_display_mode": 0
   },
   "meta": {
@@ -78,9 +78,9 @@
         "window": {
           "display": 1,
           "maximized": false,
-          "pos_x": -2732,
-          "pos_y": -172,
-          "size_x": 2732,
+          "pos_x": -2649,
+          "pos_y": -216,
+          "size_x": 2567,
           "size_y": 1496
         }
       },
@@ -90,10 +90,10 @@
         "window": {
           "display": 1,
           "maximized": false,
-          "pos_x": -2712,
-          "pos_y": -265,
-          "size_x": 2109,
-          "size_y": 1340
+          "pos_x": -2774,
+          "pos_y": -87,
+          "size_x": 2420,
+          "size_y": 1345
         }
       }
     ]
