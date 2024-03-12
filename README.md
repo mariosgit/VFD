@@ -42,4 +42,19 @@ Status: Works somewhat, It would have been better with Level shifters. During po
 
 This is a board with the VFD + 2 encoders + 10 switches.
 
-Status: Experimental, PCB is in development. 
+#### Status: Experimental, PCB is in development. 
+
+#### Todo:
+
+* I2C from ATTiny !!! Also breakout other pins.
+* Add Headphone with detection. HP Amp? Could use analog out from FDAiO.
+* Connect the sync from the disp !? some interrupt input ? Greyscales ? Be clever :)
+* Enable for Heater and Fillament ?
+* Test Serial input via 74165 shifters
+* Adopt ClickEncoder to work with serial input.
+* Test with ADAU1701, make a simple headphone DSP ?
+
+
+#### Crazy stuff:
+
+* ESP32 webradio
