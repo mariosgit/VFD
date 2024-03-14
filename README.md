@@ -46,7 +46,6 @@ This is a board with the VFD + 2 encoders + 10 switches.
 
 #### Todo:
 
-* I2C from ATTiny !!! Also breakout other pins.
 * Add Headphone with detection. HP Amp? Could use analog out from FDAiO.
 * Connect the sync from the disp !? some interrupt input ? Greyscales ? Be clever :)
 * Enable for Heater and Fillament ?
