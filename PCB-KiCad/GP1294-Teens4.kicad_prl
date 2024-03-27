@@ -1,6 +1,6 @@
 {
   "board": {
-    "active_layer": 31,
+    "active_layer": 37,
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_netclasses": [],
@@ -78,10 +78,10 @@
         "window": {
           "display": 1,
           "maximized": false,
-          "pos_x": -2649,
-          "pos_y": -216,
-          "size_x": 2567,
-          "size_y": 1496
+          "pos_x": -2676,
+          "pos_y": -229,
+          "size_x": 2297,
+          "size_y": 1448
         }
       },
       {
@@ -90,10 +90,10 @@
         "window": {
           "display": 1,
           "maximized": false,
-          "pos_x": -2774,
-          "pos_y": -87,
-          "size_x": 2420,
-          "size_y": 1345
+          "pos_x": -2789,
+          "pos_y": 35,
+          "size_x": 1800,
+          "size_y": 1125
         }
       }
     ]
