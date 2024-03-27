@@ -95,6 +95,7 @@ void loop()
         digitalWrite(pinSCLK, HIGH);
     }
     ptr = &data[3];
+    *ptr = 0;
     for(int bitt = 0; bitt < 4; bitt++)
     {
         // I get /Q as input !
