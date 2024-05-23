@@ -1981,8 +1981,8 @@
     (property "Datasheet" "http://www.vishay.com/docs/82669/tsop32s40f.pdf" (at 167.894 96.266 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 7ef0b8ae-7aa7-460d-b595-9344c3c48083))
     (pin "1" (uuid 1902babe-7d06-4e80-bc93-259470871b54))
+    (pin "2" (uuid 7ef0b8ae-7aa7-460d-b595-9344c3c48083))
     (pin "3" (uuid b10cbf3c-b1da-41ec-a73f-aeb5636cd6cc))
     (instances
       (project "GP1294-Teens4"
@@ -2160,7 +2160,7 @@
     (property "Datasheet" "" (at 144.78 194.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 174b36bb-ca4d-40f1-9596-2e8254480301))
+    (pin "1" (uuid 174b36bb-ca4d-40f1-9596-2e8254480302))
     (pin "1" (uuid 174b36bb-ca4d-40f1-9596-2e8254480302))
     (pin "10" (uuid cbdc940a-1d3d-4e8f-8bc8-7b89c5d60edd))
     (pin "11" (uuid 9cd23936-bb85-48d6-bbb8-a82308c60b86))
@@ -2485,12 +2485,12 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid ebf7ed1f-1487-4540-96d4-9a22a590e91a))
-    (pin "4" (uuid 39c2fae0-b3b1-4eae-87f0-6449aee80ada))
-    (pin "5" (uuid 7d33548b-c386-4b0d-ad2f-b078b397f381))
-    (pin "7" (uuid 170142cf-3928-43eb-8aeb-a4927778adc9))
-    (pin "6" (uuid 31b97676-c0f6-4c38-acd3-9d12a7cba461))
     (pin "2" (uuid ef438371-c804-4c25-b0c3-9802940c9d7a))
     (pin "3" (uuid 52cb4bab-b391-4cb2-bcf1-183fbe7aaad3))
+    (pin "4" (uuid 39c2fae0-b3b1-4eae-87f0-6449aee80ada))
+    (pin "5" (uuid 7d33548b-c386-4b0d-ad2f-b078b397f381))
+    (pin "6" (uuid 31b97676-c0f6-4c38-acd3-9d12a7cba461))
+    (pin "7" (uuid 170142cf-3928-43eb-8aeb-a4927778adc9))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa"
@@ -2947,8 +2947,8 @@
     (property "Datasheet" "" (at 141.732 82.296 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid e108a299-56e8-4482-84ea-cff0e9d02c25))
     (pin "1" (uuid 4ee48a57-1151-4c81-8962-ec3396dcd220))
+    (pin "2" (uuid e108a299-56e8-4482-84ea-cff0e9d02c25))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa"
@@ -3279,17 +3279,17 @@
     (property "Datasheet" "" (at 132.08 36.068 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "9" (uuid 4161f06e-89bd-4a01-a0bd-7bf49c48dc08))
+    (pin "1" (uuid 740e6748-3fa9-4e13-b068-89e5902c00fe))
+    (pin "10" (uuid 14007b9b-6d12-4e6d-9c94-98a0508272c3))
+    (pin "11" (uuid 39095866-d274-43e9-957b-4d607a54e50f))
     (pin "2" (uuid c2354470-8130-4fc0-8e2b-d965884b40d2))
     (pin "3" (uuid 57243d57-63ad-417f-912f-9d69d18783a7))
     (pin "4" (uuid 76e1d4e0-f65e-413a-a9e7-6816121e97da))
-    (pin "11" (uuid 39095866-d274-43e9-957b-4d607a54e50f))
-    (pin "8" (uuid 8bb35eda-0213-4ca7-a2f0-3ef6193de8c1))
     (pin "5" (uuid 84b382d2-087c-4394-bfcb-b0bf02ffdbbb))
     (pin "6" (uuid 2cf45462-0e16-4f34-8393-7c11b726c7fe))
-    (pin "10" (uuid 14007b9b-6d12-4e6d-9c94-98a0508272c3))
-    (pin "1" (uuid 740e6748-3fa9-4e13-b068-89e5902c00fe))
     (pin "7" (uuid 67025dbc-bab4-4df2-bfc9-1b0df3789ca5))
+    (pin "8" (uuid 8bb35eda-0213-4ca7-a2f0-3ef6193de8c1))
+    (pin "9" (uuid 4161f06e-89bd-4a01-a0bd-7bf49c48dc08))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa"

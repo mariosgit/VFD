@@ -4,16 +4,29 @@
 #define DECODE_NEC
 #define USE_NO_SEND_PWM
 #include <IRremote.h>
-#define IR_RECEIVE_PIN 21
 
 #include <U8g2lib.h>
 #include <SPI.h>
+#include <Wire.h>
 
+const byte pinCS = 10;
+const byte pinReset = 9;
+const byte pinFFBlank = 23; //=A9;
+const byte pinAmbi = 22;    // ambient light, analog value
+const byte pinRemote = 21;  // LIRC input pin, sensor=4838
 
-U8G2_GP1294AI_256X48_F_4W_HW_SPI u8g2(U8G2_R0, 10, U8X8_PIN_NONE, 9);
+const byte pinSDA = 17; // A3
+const byte pinSCL = 16; // A2
+
+const byte pinSLat = 3;
+const byte pinSCLK = 4;
+const byte pinSIN  = 5;
+
+// (const u8g2_cb_t *rotation, uint8_t cs, uint8_t dc, uint8_t reset = (uint8_t)255U)
+U8G2_GP1294AI_256X48_F_4W_HW_SPI u8g2(U8G2_R0, pinCS, U8X8_PIN_NONE, pinReset);
 // F version has 1536 buf size ! Correct, was machen die anderen ???
 
-elapsedMillis redraw = 0;
+elapsedMillis elapsedRedraw = 0;
 
 int textPos = 200;
 int textAdd = 1;
@@ -29,16 +42,34 @@ char textbuffer[100] = "Hello World!";
 
 void setup()
 {
+    Serial.begin(115200);
+
+    Wire1.begin();
+    Wire1.setSDA(pinSDA);
+    Wire1.setSCL(pinSCL);
+
     u8g2.begin();
     u8g2.setContrast(5);
-    IrReceiver.begin(IR_RECEIVE_PIN, false, 0); // Start the receiver
+    IrReceiver.begin(pinRemote, false, 0); // Start the receiver
+
+    pinMode(pinFFBlank, OUTPUT);
+    digitalWrite(pinFFBlank, true); // required to get fillament going, can be dimmed with PWM.
+    // analogWrite(pinFFBlank, 128); // makes noise with 4500Hz
 }
 
 void loop()
 {
-    if (redraw > 1000 / 20)
+    if (elapsedRedraw > 1000 / 20)
     {
-        redraw = 0;
+        elapsedRedraw = 0;
+
+        Serial.print(".");
+        i2cscan();
+
+        // just some output to check the port.
+        Wire1.beginTransmission(0xa7);
+        Wire1.write("subermajo");
+        Wire1.endTransmission();
 
         u8g2.clearBuffer();
         u8g2.setDrawColor(1);
@@ -119,18 +150,82 @@ void loop()
         decode_type_t pro = IrReceiver.lastDecodedProtocol;
         uint32_t adr = IrReceiver.lastDecodedAddress;
         uint32_t com = IrReceiver.lastDecodedCommand;
-        if(pro == APPLE)
+        if (pro == APPLE)
         {
-            Serial.print("ir: "); Serial.print(adr);Serial.print(" ");Serial.print(com);
+            Serial.print("ir: ");
+            Serial.print(adr);
+            Serial.print(" ");
+            Serial.print(com);
             Serial.println();
 
-            if(com == 4)  { snprintf(textbuffer, 100, "> Play/Pause"); } // play/pause
-            if(com == 2)  { snprintf(textbuffer, 100, "MENU"); } // menu
-            if(com == 11) { snprintf(textbuffer, 100, "UP ^^^"); } // up
-            if(com == 13) { snprintf(textbuffer, 100, "DOWN :("); } // down
-            if(com == 8)  { snprintf(textbuffer, 100, "<<<"); } // left
-            if(com == 7)  { snprintf(textbuffer, 100, ">>>"); } // right
+            if (com == 4)
+            {
+                snprintf(textbuffer, 100, "> Play/Pause");
+            } // play/pause
+            if (com == 2)
+            {
+                snprintf(textbuffer, 100, "MENU");
+            } // menu
+            if (com == 11)
+            {
+                snprintf(textbuffer, 100, "UP ^^^");
+            } // up
+            if (com == 13)
+            {
+                snprintf(textbuffer, 100, "DOWN :(");
+            } // down
+            if (com == 8)
+            {
+                snprintf(textbuffer, 100, "<<<");
+            } // left
+            if (com == 7)
+            {
+                snprintf(textbuffer, 100, ">>>");
+            } // right
         }
-        IrReceiver.resume();                                      // Enable receiving of the next value
+        IrReceiver.resume(); // Enable receiving of the next value
     }
+}
+
+byte i2cScanAdr = 1;
+void i2cscan()
+{
+    byte error;
+    int nDevices;
+
+    Serial.println("Scanning...");
+
+    nDevices = 0;
+    // for (i2cScanAdr = 1; i2cScanAdr < 127; i2cScanAdr++)
+    {
+        // The i2c_scanner uses the return value of
+        // the Write.endTransmisstion to see if
+        // a device did acknowledge to the address.
+        Wire1.beginTransmission(i2cScanAdr);
+        error = Wire1.endTransmission();
+
+        if (error == 0)
+        {
+            Serial.print("I2C device found at address 0x");
+            if (i2cScanAdr < 16)
+                Serial.print("0");
+            Serial.print(i2cScanAdr, HEX);
+            Serial.println("  !");
+
+            nDevices++;
+        }
+        else if (error == 4)
+        {
+            // Serial.print("Unknown error at address 0x");
+            if (i2cScanAdr < 16)
+                Serial.print("0");
+            Serial.println(i2cScanAdr, HEX);
+        }
+    }
+    // if (nDevices == 0)
+    //     Serial.println("No I2C devices found\n");
+    // else
+    //     Serial.println("done\n");
+
+    i2cScanAdr = (i2cScanAdr + 1) % 128;
 }

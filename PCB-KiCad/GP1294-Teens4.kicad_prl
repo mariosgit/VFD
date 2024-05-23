@@ -66,36 +66,17 @@
     "visible_layers": "ffffef3_ffffffff",
     "zone_display_mode": 0
   },
+  "git": {
+    "repo_password": "",
+    "repo_type": "",
+    "repo_username": "",
+    "ssh_key": ""
+  },
   "meta": {
     "filename": "GP1294-Teens4.kicad_prl",
     "version": 3
   },
   "project": {
-    "files": [
-      {
-        "name": "GP1294-Teens4.kicad_pcb",
-        "open": false,
-        "window": {
-          "display": 1,
-          "maximized": false,
-          "pos_x": -2676,
-          "pos_y": -229,
-          "size_x": 2297,
-          "size_y": 1448
-        }
-      },
-      {
-        "name": "GP1294-Teens4.kicad_sch",
-        "open": false,
-        "window": {
-          "display": 1,
-          "maximized": false,
-          "pos_x": -2789,
-          "pos_y": 35,
-          "size_x": 1800,
-          "size_y": 1125
-        }
-      }
-    ]
+    "files": []
   }
 }

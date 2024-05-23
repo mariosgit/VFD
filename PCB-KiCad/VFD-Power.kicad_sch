@@ -1627,8 +1627,8 @@
     (property "Datasheet" "http://www.vishay.com/docs/88525/1n5817.pdf" (at 170.18 53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 1b747be0-e290-406f-884c-3376f9858f92))
     (pin "1" (uuid 7e9f2827-cf44-47f6-9af5-7bcf88c2e259))
+    (pin "2" (uuid 1b747be0-e290-406f-884c-3376f9858f92))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/9e049bd2-8c7e-4a7a-b856-b0fbd11ae8df"
