@@ -44,16 +44,5 @@ This is a board with the VFD + 2 encoders + 10 switches.
 
 #### Status: Experimental, PCB is in development. 
 
-#### Todo:
+Has some bugs, I2C and I2S on wrong pins... etc.
 
-* Add Headphone with detection. HP Amp? Could use analog out from FDAiO.
-* Connect the sync from the disp !? some interrupt input ? Greyscales ? Be clever :)
-* Enable for Heater and Fillament ?
-* Test Serial input via 74165 shifters
-* Adopt ClickEncoder to work with serial input.
-* Test with ADAU1701, make a simple headphone DSP ?
-
-
-#### Crazy stuff:
-
-* ESP32 webradio

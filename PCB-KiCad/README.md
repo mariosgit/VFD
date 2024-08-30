@@ -22,13 +22,13 @@ Contains
 
 ### Status
 
-not tested
+Tested, has bugs... Can be patched to work somewhat.
 
 ### Bugs
 
 * 5V reg wrong footprint (from a kicad lib)
 * VFD pin 9 (TEST) must have 100k pullup to 3.3V and small buffer C.
-* SDA/SCL are twisted !
+* SDA/SCL are twisted ! ✅
 * PL(atch) is not connected to ATTiny !
 * ATTiny fliegt raus, zu umstaendlich.
 
