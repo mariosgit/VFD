@@ -26,20 +26,19 @@ Tested, has bugs... Can be patched to work somewhat.
 
 ### Bugs
 
-* 5V reg wrong footprint (from a kicad lib)
-* VFD pin 9 (TEST) must have 100k pullup to 3.3V and small buffer C.
+* VFD pin 9 (TEST) must have 100k pullup to 3.3V and small buffer C.✅
 * SDA/SCL are twisted ! ✅
-* PL(atch) is not connected to ATTiny !
-* ATTiny fliegt raus, zu umstaendlich.
+* PL(atch) is not connected to ATTiny ! Removed ATTiny ✅
+* ATTiny fliegt raus, zu umstaendlich.✅
+* I2S pins wrong, fixed + SRCs ✅
+* 5V reg wrong footprint (from a kicad lib)
+* Add revision info
+* Crosscheck wiring with proto
 
 ### Todo
 
-* Connect ATtiny I2C which pins ? Test !
-* Test VFD
-* Test Serial Buttons 74165
-  * Breadboard not working, Q outputs sometimes have 3V ??? LS chip strange ??? ! Me too doof. Measure on Shruthi !
 * Test audio connection to/from teensy I2S slave ! Can it do USB playback ? T3.2 or T4.0 ?
-* Generate DSP C interface files. Test ! (It worked with the FreeDSP controller project)
+
 * FreeDSP-AIO flaws ✅
   * speaker mute before shutdown...
     * it has a startup unmute circuit but no shutdown...
