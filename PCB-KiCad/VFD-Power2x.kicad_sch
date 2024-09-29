@@ -1015,12 +1015,12 @@
     (property "Datasheet" "" (at 77.724 112.268 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (pin "1" (uuid dc7c83d7-3305-4fc0-9f00-15ea794e48d2))
+    (pin "2" (uuid 6fe61929-e1ec-4815-9327-778ad636a144))
     (pin "3" (uuid eb3dfd86-e329-4775-843a-f5f756bd0b4d))
     (pin "4" (uuid 40a26aad-f507-43ca-8a42-f50c6a0566bd))
-    (pin "2" (uuid 6fe61929-e1ec-4815-9327-778ad636a144))
     (pin "5" (uuid a7085226-6324-4250-a7b1-3ec7d65a0239))
     (pin "6" (uuid 103b6497-3b99-4fde-9250-12940c3a186e))
-    (pin "1" (uuid dc7c83d7-3305-4fc0-9f00-15ea794e48d2))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/ff3fb23b-9a88-4c38-8306-aefc5a8bdc1c"
@@ -1204,8 +1204,8 @@
     (property "Datasheet" "" (at 127 59.69 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid d0f95530-7da8-490e-9905-2e6fe3b4d901))
     (pin "1" (uuid 1945455d-7f62-4be0-bba7-403076dd648e))
+    (pin "2" (uuid d0f95530-7da8-490e-9905-2e6fe3b4d901))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/ff3fb23b-9a88-4c38-8306-aefc5a8bdc1c"
@@ -1364,8 +1364,8 @@
     (property "Datasheet" "" (at 106.68 59.69 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 669046c7-7bf6-43fc-acd9-4ccac51af6a6))
     (pin "1" (uuid 892930d2-f720-451f-94cf-64711dba9d20))
+    (pin "2" (uuid 669046c7-7bf6-43fc-acd9-4ccac51af6a6))
     (instances
       (project "GP1294-Teens4"
         (path "/3de011e3-f89b-42a8-8637-1f4c3f0867fa/ff3fb23b-9a88-4c38-8306-aefc5a8bdc1c"

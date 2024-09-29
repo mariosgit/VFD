@@ -24,6 +24,11 @@ Contains
 
 not tested
 
+### Bugs
+
+* RECOM 5V reg wrong footprint (from a kicad lib)
+* VFD pin 9 (TEST) must have 100k pullup to 3.3V and small buffer C.
+
 ### Todo
 
 * Connect ATtiny I2C which pins ? Test !
