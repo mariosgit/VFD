@@ -21,6 +21,10 @@ const byte pinLatch = 3;
 const byte pinSCLK = 10;
 const byte pinMISO = 9;
 
+// HW SETUP
+// ATtiny84A Pin PA6 (SW SDA) pin 7
+// ATtiny84A Pin PA4 (SW SCL) pin 9
+
 void timerIsr()
 {
     encoder.service();

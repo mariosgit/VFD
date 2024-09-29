@@ -1,0 +1,147 @@
+(footprint "FreeDSP_CLASSIC"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "8c1e5936-d1dd-4094-ad89-35222591547c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "FreeDSP_CLASSIC"
+		(at 0 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "b82e6f1a-6955-49d5-8087-087a1b03798c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "7782616b-66f2-4d54-be1c-372b8fd41b11")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8de3f407-49ab-4e1e-814c-3b586cbdd8c6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "801ce7ec-df40-4e1b-91a9-b710e1edca16")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_rect
+		(start 0 -80)
+		(end 100 0)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "e7cdf48a-5dc5-4e6a-995f-14b964c9bb96")
+	)
+	(fp_circle
+		(center 2.5 -77.5)
+		(end 4.1 -77.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "f0bfd9aa-df26-4649-a2d3-d41ae71d644d")
+	)
+	(fp_circle
+		(center 2.5 -2.5)
+		(end 4.1 -2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "bb77e28d-bf5a-4669-8d70-7532d5c86667")
+	)
+	(fp_circle
+		(center 97.5 -77.5)
+		(end 99.1 -77.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "e15893c8-9201-4e30-af94-707d158f2b18")
+	)
+	(fp_circle
+		(center 97.5 -2.5)
+		(end 99.1 -2.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "9eea4680-594d-4bdd-ae70-0a08bb9c3354")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 2.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "87581d89-e583-4e44-903b-014752ea8ff0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(model "${KIPRJMOD}/3D-Models/freeDSP.wrl"
+		(offset
+			(xyz 51.5 45 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
