@@ -38,6 +38,11 @@ Tested, has bugs... Can be patched to work somewhat.
 * Add revision info
 * Crosscheck wiring with proto
 
+### Bugs
+
+* RECOM 5V reg wrong footprint (from a kicad lib)
+* VFD pin 9 (TEST) must have 100k pullup to 3.3V and small buffer C.
+
 ### Todo
 
 * Test audio connection to/from teensy I2S slave ! Can it do USB playback ? T3.2 or T4.0 ?
