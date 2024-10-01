@@ -48,7 +48,14 @@ void loop() { main.loop() }
 
 #ifdef RUN_FREEDSPCONTROLLER
 #include "FreeDSPController/FreeDSPController.h"
-FreeDSPController main;
-void setup() { main.setup() }
-void loop() { main.loop() }
+FreeDSPController ding;
+void setup() { ding.setup(); }
+void loop() { ding.loop(); }
+#endif
+
+#ifdef RUN_FREEDSPCONTROLLER_MN12832L
+#include "FreeDSPControllerMN12832L/FDController.h"
+FDController dings;
+void setup() { dings.setup(); }
+void loop()  { dings.loop(); }
 #endif
