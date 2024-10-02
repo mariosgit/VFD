@@ -10,3 +10,6 @@
 [submodule "lib/VFD_MN12832L"]
 	path = lib/VFD_MN12832L
 	url = https://github.com/mariosgit/VFD_MN12832L.git
+[submodule "lib/encoder-bits"]
+	path = lib/encoder-bits
+	url = https://github.com/mariosgit/encoder-bits.git

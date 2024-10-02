@@ -15998,6 +15998,178 @@
 		(layer "Edge.Cuts")
 		(uuid "5446be7b-d0d8-4ead-a2f3-cd0ee42a9bcf")
 	)
+	(gr_line
+		(start 148 68)
+		(end 149 68)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "16719ae0-d1da-44bf-826c-0f6279640b39")
+	)
+	(gr_line
+		(start 100.038858 104.840681)
+		(end 99.9 104.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "1c425d20-3747-4266-a3fa-6788bc2be620")
+	)
+	(gr_line
+		(start 100.038858 104.840681)
+		(end 101 104.8)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "29ef6dbb-e1c5-4d70-920e-7a7da162f4e5")
+	)
+	(gr_line
+		(start 140 141)
+		(end 140 143.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "52b1cae6-f6a0-4bce-96ff-a524edfbeefb")
+	)
+	(gr_line
+		(start 148.5 68)
+		(end 148.5 68.4)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "5953eb1a-0962-491c-b392-4fd17c4b60ea")
+	)
+	(gr_line
+		(start 51.470064 67.970064)
+		(end 52.820699 67.883425)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "6032ccbc-04d0-4da7-aa29-08fa1786093f")
+	)
+	(gr_line
+		(start 51.470064 67.970064)
+		(end 51.5 68.8)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "652280b1-d9f7-47f8-93a5-b2c93de6840e")
+	)
+	(gr_rect
+		(start 70.8 60.8)
+		(end 128.6 75.2)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "User.3")
+		(uuid "7b684b85-791e-42ab-a3fd-ca6d2c344a7e")
+	)
+	(gr_line
+		(start 58.1 142)
+		(end 61.5 142)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "8c25be22-c444-4a4f-b838-166dd0200dc9")
+	)
+	(gr_line
+		(start 51.470064 67.970064)
+		(end 51.4 67.2)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "8ce93982-b4c1-450c-a6da-7f3b35d45e5d")
+	)
+	(gr_line
+		(start 148.5 68)
+		(end 148.5 67.6)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "98d644a3-7e18-4359-859d-1c6944495357")
+	)
+	(gr_line
+		(start 51.470064 67.970064)
+		(end 50.6 68)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "a54aec45-6c4f-4800-b8a0-dcdca2d144f1")
+	)
+	(gr_line
+		(start 139 142)
+		(end 141 142)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "c0a5fe4a-045b-442d-ad64-50ffcb7c13f4")
+	)
+	(gr_line
+		(start 60 140.8)
+		(end 60 143.2)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "c2460191-bd4d-457e-aac7-3e62b22f3670")
+	)
+	(gr_line
+		(start 100.038858 104.840681)
+		(end 100.2 105.8)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "d1ff53b4-d9b8-44b7-932f-7d4776d1112d")
+	)
+	(gr_rect
+		(start 41 50)
+		(end 159 150)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "User.3")
+		(uuid "db7be5d4-4097-41f8-b7f2-dc34cc4733e6")
+	)
+	(gr_line
+		(start 100.038858 104.840681)
+		(end 99.3 104.9)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "User.3")
+		(uuid "ffe01f97-e666-4cbb-b5bc-eb5e3bcde90f")
+	)
 	(gr_text "VFD rocks"
 		(at 127.254 72.136 0)
 		(layer "B.SilkS")
