@@ -11,6 +11,9 @@ const uint8_t pinSCLK = 4;
 const uint8_t pinSIN  = 5;
 const uint8_t pinFFblank = 6;
 
+const uint8_t pinSCL = 16;
+const uint8_t pinSDA = 17;
+
 FDController::FDController() : display( 
         /* pinBLK = */ 0,
         /* pinLAT = */ 1,
@@ -62,7 +65,7 @@ void FDController::setup()
         enc3.service();
         enc4.service();
         enc5.service();
-        }, 1000000 / display.targetFps);
+        }, 1000); //000 / display.targetFps); // period in usec
 }
 
 /// @brief Read encoders via shift registers
@@ -112,25 +115,25 @@ void FDController::loop()
             if (dspReadCycle % 4 == 0) // as long as we use only these 2, setup only once
             {
                 // setup DC to read LevelMeters
-                Wire1.beginTransmission(_addr);
-                Wire1.write(DC1 >> 8);          // address high byte
-                Wire1.write(DC1 & 0xff);        // address low byte
-                Wire1.write(trapLevel1 >> 8);   // address high byte
-                Wire1.write(trapLevel1 & 0xff); // address low byte
-                Wire1.write(trapLevel2 >> 8);   // address high byte
-                Wire1.write(trapLevel2 & 0xff); // address low byte
+                Wire.beginTransmission(_addr);
+                Wire.write(DC1 >> 8);          // address high byte
+                Wire.write(DC1 & 0xff);        // address low byte
+                Wire.write(trapLevel1 >> 8);   // address high byte
+                Wire.write(trapLevel1 & 0xff); // address low byte
+                Wire.write(trapLevel2 >> 8);   // address high byte
+                Wire.write(trapLevel2 & 0xff); // address low byte
                 WireEndTransmission();
             }
             else
             {
                 // setup DC to read Secondary LevelMeters
-                Wire1.beginTransmission(_addr);
-                Wire1.write(DC1 >> 8);          // address high byte
-                Wire1.write(DC1 & 0xff);        // address low byte
-                Wire1.write(trapLevel3 >> 8);   // address high byte
-                Wire1.write(trapLevel3 & 0xff); // address low byte
-                Wire1.write(trapLevel4 >> 8);   // address high byte
-                Wire1.write(trapLevel4 & 0xff); // address low byte
+                Wire.beginTransmission(_addr);
+                Wire.write(DC1 >> 8);          // address high byte
+                Wire.write(DC1 & 0xff);        // address low byte
+                Wire.write(trapLevel3 >> 8);   // address high byte
+                Wire.write(trapLevel3 & 0xff); // address low byte
+                Wire.write(trapLevel4 >> 8);   // address high byte
+                Wire.write(trapLevel4 & 0xff); // address low byte
                 WireEndTransmission();
 
                 // select the index of the postEQ filter 0-8 / flat,100,200,400,800,1600,3200,6400,12800
@@ -142,19 +145,19 @@ void FDController::loop()
             }
 
             // send addr to read, no stop condition... then read...
-            Wire1.beginTransmission(_addr);
-            Wire1.write(DC1 >> 8);                 // address high byte
-            Wire1.write(DC1 & 0xff);               // address low byte
+            Wire.beginTransmission(_addr);
+            Wire.write(DC1 >> 8);                 // address high byte
+            Wire.write(DC1 & 0xff);               // address low byte
             WireEndTransmission(false); // no stop before reading !
             // LOG << "r2: " <<result << LOG.endl;
 
             // read...
             byte readlen = 6; // 2x3
-            Wire1.requestFrom(_addr, readlen);
+            Wire.requestFrom(_addr, readlen);
             int idx = 0;
-            while (Wire1.available()) // slave may send less than requested
+            while (Wire.available()) // slave may send less than requested
             {
-                data[idx++] = Wire1.read(); // receive a byte as character
+                data[idx++] = Wire.read(); // receive a byte as character
                 if (idx > readlen)
                     break;
             }
@@ -415,9 +418,15 @@ void FDController::loop()
 
         // LOG <<"Input: " <<LOG.hex <<input <<LOG.dec <<LOG.endl;
         
-        if(!dspEnabled) { LOG << "DSP connection ON" <<LOG.endl; }
+        if(!dspEnabled)
+        {
+            Wire.setSCL(pinSCL);
+            Wire.setSDA(pinSDA);
+            Wire.begin();
+            LOG << "DSP connection ON" <<LOG.endl;
+        }
         dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
-        Wire1.begin();
+
     }
 }
 
@@ -457,55 +466,55 @@ void FDController::saveloadWrite(uint16_t address, uint32_t value)
     // return;
 
     uint8_t result = 0;
-    Wire1.beginTransmission(_addr);
-    Wire1.write(0x08);          // address high byte
-    Wire1.write(0x10);        // address low byte
-    Wire1.write(0);   // bits 39-32 ???
-    Wire1.write(value >> 24);   // address high byte
-    Wire1.write(value >> 16); // address low byte
-    Wire1.write(value >> 8);   // address high byte
-    Wire1.write(value & 0xff); // address low byte
+    Wire.beginTransmission(_addr);
+    Wire.write(0x08);          // address high byte
+    Wire.write(0x10);        // address low byte
+    Wire.write(0);   // bits 39-32 ???
+    Wire.write(value >> 24);   // address high byte
+    Wire.write(value >> 16); // address low byte
+    Wire.write(value >> 8);   // address high byte
+    Wire.write(value & 0xff); // address low byte
     WireEndTransmission();
 
-    Wire1.beginTransmission(_addr);
-    Wire1.write(0x08);          // address high byte
-    Wire1.write(0x15);        // address low byte
-    Wire1.write(address >> 8);   // address high byte
-    Wire1.write(address); // address low byte
+    Wire.beginTransmission(_addr);
+    Wire.write(0x08);          // address high byte
+    Wire.write(0x15);        // address low byte
+    Wire.write(address >> 8);   // address high byte
+    Wire.write(address); // address low byte
     WireEndTransmission();
 
     // // also write "step" for slew volumes ??? neee brauch mer nich
     // value = 0x00000800;
-    // Wire1.beginTransmission(_addr);
-    // Wire1.write(0x08);          // address high byte
-    // Wire1.write(0x11);        // address low byte
-    // Wire1.write(0);   // bits 39-32 ???
-    // Wire1.write(value >> 24);   // address high byte
-    // Wire1.write(value >> 16); // address low byte
-    // Wire1.write(value >> 8);   // address high byte
-    // Wire1.write(value & 0xff); // address low byte
+    // Wire.beginTransmission(_addr);
+    // Wire.write(0x08);          // address high byte
+    // Wire.write(0x11);        // address low byte
+    // Wire.write(0);   // bits 39-32 ???
+    // Wire.write(value >> 24);   // address high byte
+    // Wire.write(value >> 16); // address low byte
+    // Wire.write(value >> 8);   // address high byte
+    // Wire.write(value & 0xff); // address low byte
     //  WireEndTransmission();
     // 
-    // Wire1.beginTransmission(_addr);
-    // Wire1.write(0x08);          // address high byte
-    // Wire1.write(0x16);        // address low byte
-    // Wire1.write(MOD_VOLUME_ALG0_STEP_ADDR >> 8);   // address high byte
-    // Wire1.write(MOD_VOLUME_ALG0_STEP_ADDR); // address low byte
+    // Wire.beginTransmission(_addr);
+    // Wire.write(0x08);          // address high byte
+    // Wire.write(0x16);        // address low byte
+    // Wire.write(MOD_VOLUME_ALG0_STEP_ADDR >> 8);   // address high byte
+    // Wire.write(MOD_VOLUME_ALG0_STEP_ADDR); // address low byte
     // WireEndTransmission();
     // 
 
-    Wire1.beginTransmission(_addr);
-    Wire1.write(REG_COREREGISTER_IC_1_ADDR >> 8);          // address high byte
-    Wire1.write(REG_COREREGISTER_IC_1_ADDR);        // address low byte
-    Wire1.write(coreregval >> 8);   // address high byte
-    Wire1.write(coreregval); // address low byte
+    Wire.beginTransmission(_addr);
+    Wire.write(REG_COREREGISTER_IC_1_ADDR >> 8);          // address high byte
+    Wire.write(REG_COREREGISTER_IC_1_ADDR);        // address low byte
+    Wire.write(coreregval >> 8);   // address high byte
+    Wire.write(coreregval); // address low byte
     WireEndTransmission();
 }
 
 /// @brief Finish transmission, check result, stops DSP activity on error
 void FDController::WireEndTransmission(boolean sendStop)
 {
-    uint8_t result = Wire1.endTransmission(sendStop);
+    uint8_t result = Wire.endTransmission(sendStop);
     if (result != 0)
     {
         LOG << "saveloadWrite:i2c error " << result << LOG.endl;
