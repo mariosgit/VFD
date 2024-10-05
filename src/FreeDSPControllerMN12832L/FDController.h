@@ -37,7 +37,8 @@ public:
     int16_t textPos = 128;
 
     // Create an IntervalTimer object
-    IntervalTimerEx myTimer;
+    IntervalTimerEx refreshTimer;
+    IntervalTimerEx inputTimer;
 
     struct Levels
     {
@@ -45,7 +46,7 @@ public:
         float inR;
         float distortion;
         float postEQ[10];
-    } _levels;
+    } _levels = {-99,-99,-99,{-99,-99,-99,-99,-99,-99,-99,-99,-99,-99}};
 
     int16_t _volumeDB = -40;
     uint8_t _mute = 1; // DSP starts with speaker muted

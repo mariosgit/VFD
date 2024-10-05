@@ -1,4 +1,4 @@
-#ifdef RUN_FREEDSPCONTROLLER_MN12832L
+//#ifdef RUN_FREEDSPCONTROLLER_MN12832L
 
 #include "FDController.h"
 
@@ -19,8 +19,7 @@ FDController::FDController() : display(
         /* pinLAT = */ 1,
         /* pinGCP = */ 2,
         /* MOSI_PIN = */ 11,
-        /* SCK_PIN = */ 13,
-        /* pinPWM = */ 6),
+        /* SCK_PIN = */ 13),
         enc1(&input, 0x2000, 0x1000, 0x0800, 4, HIGH, HIGH),
         enc2(&input, 0x0080, 0x0040, 0x0020, 4, HIGH, HIGH),
         enc3(&input, 0x4000, 0x8000, 0x0008, 4, HIGH, HIGH),
@@ -48,6 +47,8 @@ FDController::FDController() : display(
 
     pinMode(pinFFblank, OUTPUT);
     digitalWrite(pinFFblank, HIGH);
+    analogWriteFrequency(pinFFblank, 22000);
+    analogWrite(pinFFblank, 168); // 50% duty, 488Hz flicker !!!
 }
 
 void FDController::setup()
@@ -57,15 +58,17 @@ void FDController::setup()
 
     // You need to trigger the refresh function regularly !
     // myTimer.begin(display.refresh, 1000000 / display.targetFps);
-    myTimer.begin([this]{
+    refreshTimer.begin([this]{
         display.refresh();
+        }, 1000000/ display.targetFps); // period in usec
+    inputTimer.begin([this]{
         inputService();
         enc1.service();
         enc2.service();
         enc3.service();
         enc4.service();
         enc5.service();
-        }, 1000); //000 / display.targetFps); // period in usec
+        }, 2000);
 }
 
 /// @brief Read encoders via shift registers
@@ -365,40 +368,6 @@ void FDController::loop()
         display.swapBuffers();
 
         drawtime = micros() - time;
-
-        // Encoder Debug...
-        {
-            auto enc1val = enc1.getValue();
-            auto enc1btn = enc1.getButton();
-            if(enc1val || enc1btn == ClickEncoder::Clicked)
-            {
-                LOG <<"enc1 val:" <<enc1val <<" btn:" <<enc1btn <<LOG.endl;
-            }
-        }
-        {
-            auto enc2val = enc2.getValue();
-            auto enc2btn = enc2.getButton();
-            if(enc2val || enc2btn == ClickEncoder::Clicked)
-            {
-                LOG <<"enc2 val:" <<enc2val <<" btn:" <<enc2btn <<LOG.endl;
-            }
-        }
-        {
-            auto enc4val = enc4.getValue();
-            auto enc4btn = enc4.getButton();
-            if(enc4val || enc4btn)
-            {
-                LOG <<"enc4 val:" <<enc4val <<" btn:" <<enc4btn <<LOG.endl;
-            }
-        }
-        {
-            auto enc5val = enc5.getValue();
-            auto enc5btn = enc5.getButton();
-            if(enc5val || enc5btn)
-            {
-                LOG <<"enc5 val:" <<enc5val <<" btn:" <<enc5btn <<LOG.endl;
-            }
-        }
     }
     if (emLogger > 5000)
     {
@@ -511,6 +480,7 @@ void FDController::saveloadWrite(uint16_t address, uint32_t value)
     WireEndTransmission();
 }
 
+
 /// @brief Finish transmission, check result, stops DSP activity on error
 void FDController::WireEndTransmission(boolean sendStop)
 {
@@ -522,4 +492,4 @@ void FDController::WireEndTransmission(boolean sendStop)
     }
 }
 
-#endif
+// #endif
