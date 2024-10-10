@@ -67,3 +67,80 @@ The emChecker loop sets these filters one after another and reads the levelmeter
 ## References
 
 ![DSPplan](../../images/Screenshot%202024-10-01%20153901.png)
+
+
+### SigmaStudio logs
+
+#### SoftClip
+
+Link [SigmaWiki SoftClip:](https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/nonlinearprocessors/standardcubic)
+
+
+```
+Block Write
+Time:  17:31:17 - 173ms
+IC:  IC 1
+Cell Name:  SoftClip1
+Param Name:  SoftClipAlgG21alpha
+Param Address:  0x0062
+Param Value:  10
+Bytes:  4
+Param Data:
+0x05, 	0x00, 	0x00, 	0x00
+```
+
+
+Change to "9" which is off. Range is 0.1 - 10. You always write the value and it's reciproke, so 1/9. SigStud does a block write here. Values 3,4 are static.
+
+```
+Cell Name:  SoftClip1
+Param Name:  SoftClipAlgG21alpha
+Param Address:  0x0062
+Param Value:  9
+Bytes:  4
+Param Data: 0x04, 	0x80, 	0x00, 	0x00
+
+Cell Name:  SoftClip1
+Param Name:  SoftClipAlgG21alpham1
+Param Address:  0x0063
+Param Value:  0.111111164093018
+Bytes:  4
+Param Data:
+0x00, 	0x0E, 	0x38, 	0xE4
+
+// constant.. ?
+
+Cell Name:  SoftClip1
+Param Name:  SoftClipAlgG21onethird
+Param Address:  0x0064
+Param Value:  0.333333373069763
+Bytes:  4
+Param Data: 0x00, 	0x2A, 	0xAA, 	0xAB
+
+Cell Name:  SoftClip1
+Param Name:  SoftClipAlgG21twothird
+Param Address:  0x0065
+Param Value:  0.666666626930237
+Bytes:  4
+Param Data: 0x00, 	0x55, 	0x55, 	0x55
+```
+
+turn to bypass
+```
+Cell Name:  Nx2-1
+Param Name:  StMuxSwSlew1coeffname
+Param Address:  0x0097
+Param Value:  0
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x00, 	0x00
+```
+
+turn switch on
+```
+Cell Name:  Nx2-1
+Param Name:  StMuxSwSlew1coeffname
+Param Address:  0x0097
+Param Value:  1
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x00, 	0x01
+```

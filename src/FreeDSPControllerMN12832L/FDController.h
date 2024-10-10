@@ -7,6 +7,8 @@
 #include <IntervalTimerEx.h>
 #include <ClickEncoder.h>
 
+#include "DSPCtrl.h"
+
 class FDController
 {
 public:
@@ -16,16 +18,9 @@ public:
     void loop();
 
     void inputService();
-    void saveloadWrite(uint16_t address, uint32_t value);
-    void WireEndTransmission(boolean sendStop=true);
 
+    DSPCtrl dspctrl;
     MN12832Lgrey display;
-
-    /// @brief DSP I2C address
-    uint8_t _addr = 0;
-    /// @brief If disabled, I2C comm stops, can connect sigmastudio then.
-    boolean dspEnabled = false;
-    uint16_t dspReadCycle = 0;
 
     elapsedMillis emChecker = 0;
     elapsedMillis emInput = 0;
@@ -40,15 +35,8 @@ public:
     IntervalTimerEx refreshTimer;
     IntervalTimerEx inputTimer;
 
-    struct Levels
-    {
-        float inL;
-        float inR;
-        float distortion;
-        float postEQ[10];
-    } _levels = {-99,-99,-99,{-99,-99,-99,-99,-99,-99,-99,-99,-99,-99}};
-
     int16_t _volumeDB = -40;
+    float _distortion = 10.0; // 10 = none
     uint8_t _mute = 1; // DSP starts with speaker muted
     const uint8_t MUTE_SPK_MASK = 1;
     const uint8_t MUTE_HP_MASK = 2;

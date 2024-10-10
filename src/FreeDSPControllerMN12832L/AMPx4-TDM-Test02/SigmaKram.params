@@ -55,9 +55,9 @@ Parameter Data :
 Cell Name         = Volume
 Parameter Name    = SWGain1940DBAlg1target
 Parameter Address = 214
-Parameter Value   = 0.0275422334671021
+Parameter Value   = 0.0229086875915527
 Parameter Data :
-0x00 ,	0x03 ,	0x86 ,	0x81 ,	
+0x00 ,	0x02 ,	0xEE ,	0xAC ,	
 
 
 
@@ -190,18 +190,18 @@ Parameter Data :
 Cell Name         = Tone1
 Parameter Name    = sin_lookupAlg19401increment
 Parameter Address = 4
-Parameter Value   = 0.00179207324981689
+Parameter Value   = 0.0220004320144653
 Parameter Data :
-0x00, 0x00, 0x3A, 0xB9, 
+0x00, 0x02, 0xD0, 0xE9, 
 
 
 
 Cell Name         = Tone1
 Parameter Name    = sin_lookupAlg19401ison
 Parameter Address = 5
-Parameter Value   = 1
+Parameter Value   = 0
 Parameter Data :
-0x00, 0x80, 0x00, 0x00, 
+0x00, 0x00, 0x00, 0x00, 
 
 
 
@@ -661,7 +661,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_5
 Parameter Name    = EQ1940DualS50B1
-Parameter Address = 228
+Parameter Address = 220
 Parameter Value   = 0.983587265014648
 Parameter Data :
 0x00 ,	0x7D ,	0xE6 ,	0x30 ,	
@@ -670,7 +670,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_5
 Parameter Name    = EQ1940DualS51B1
-Parameter Address = 229
+Parameter Address = 221
 Parameter Value   = -1.91150093078613
 Parameter Data :
 0x0F ,	0x0B ,	0x53 ,	0xF0 ,	
@@ -679,7 +679,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_5
 Parameter Name    = EQ1940DualS52B1
-Parameter Address = 230
+Parameter Address = 222
 Parameter Value   = 0.929446458816528
 Parameter Data :
 0x00 ,	0x76 ,	0xF8 ,	0x1A ,	
@@ -688,7 +688,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_5
 Parameter Name    = EQ1940DualS51A1
-Parameter Address = 231
+Parameter Address = 223
 Parameter Value   = 1.9103422164917
 Parameter Data :
 0x00 ,	0xF4 ,	0x86 ,	0x18 ,	
@@ -697,7 +697,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_5
 Parameter Name    = EQ1940DualS52A1
-Parameter Address = 232
+Parameter Address = 224
 Parameter Value   = -0.9141925573349
 Parameter Data :
 0x0F ,	0x8A ,	0xFB ,	0xBD ,	
@@ -706,7 +706,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_6
 Parameter Name    = EQ1940DualS60B1
-Parameter Address = 239
+Parameter Address = 231
 Parameter Value   = 0.819623947143555
 Parameter Data :
 0x00 ,	0x68 ,	0xE9 ,	0x70 ,	
@@ -715,7 +715,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_6
 Parameter Name    = EQ1940DualS61B1
-Parameter Address = 240
+Parameter Address = 232
 Parameter Value   = -1.16816711425781
 Parameter Data :
 0x0F ,	0x6A ,	0x79 ,	0x80 ,	
@@ -724,7 +724,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_6
 Parameter Name    = EQ1940DualS62B1
-Parameter Address = 241
+Parameter Address = 233
 Parameter Value   = 0.456460118293762
 Parameter Data :
 0x00 ,	0x3A ,	0x6D ,	0x49 ,	
@@ -733,7 +733,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_6
 Parameter Name    = EQ1940DualS61A1
-Parameter Address = 242
+Parameter Address = 234
 Parameter Value   = 1.48460650444031
 Parameter Data :
 0x00 ,	0xBE ,	0x07 ,	0x96 ,	
@@ -742,7 +742,7 @@ Parameter Data :
 
 Cell Name         = Gen Filter1_6
 Parameter Name    = EQ1940DualS62A1
-Parameter Address = 243
+Parameter Address = 235
 Parameter Value   = -0.592523336410522
 Parameter Data :
 0x0F ,	0xB4 ,	0x28 ,	0x32 ,	
@@ -778,7 +778,7 @@ Parameter Data :
 
 Cell Name         = Mute01
 Parameter Name    = MuteSWSlewAlg1mute
-Parameter Address = 233
+Parameter Address = 225
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -787,7 +787,7 @@ Parameter Data :
 
 Cell Name         = Mute01
 Parameter Name    = MuteSWSlewAlg1step
-Parameter Address = 234
+Parameter Address = 226
 Parameter Value   = 0.0009765625
 Parameter Data :
 0x00, 0x00, 0x20, 0x00, 
@@ -796,7 +796,7 @@ Parameter Data :
 
 Cell Name         = Mute23
 Parameter Name    = MuteSWSlewAlg2mute
-Parameter Address = 237
+Parameter Address = 229
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -805,7 +805,7 @@ Parameter Data :
 
 Cell Name         = Mute23
 Parameter Name    = MuteSWSlewAlg2step
-Parameter Address = 238
+Parameter Address = 230
 Parameter Value   = 0.0009765625
 Parameter Data :
 0x00, 0x00, 0x20, 0x00, 
@@ -814,7 +814,7 @@ Parameter Data :
 
 Cell Name         = Mute45
 Parameter Name    = MuteSWSlewAlg3mute
-Parameter Address = 244
+Parameter Address = 236
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -823,7 +823,7 @@ Parameter Data :
 
 Cell Name         = Mute45
 Parameter Name    = MuteSWSlewAlg3step
-Parameter Address = 245
+Parameter Address = 237
 Parameter Value   = 0.0009765625
 Parameter Data :
 0x00, 0x00, 0x20, 0x00, 
@@ -832,7 +832,7 @@ Parameter Data :
 
 Cell Name         = Mute67
 Parameter Name    = MuteSWSlewAlg4mute
-Parameter Address = 235
+Parameter Address = 227
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -841,7 +841,7 @@ Parameter Data :
 
 Cell Name         = Mute67
 Parameter Name    = MuteSWSlewAlg4step
-Parameter Address = 236
+Parameter Address = 228
 Parameter Value   = 0.0009765625
 Parameter Data :
 0x00, 0x00, 0x20, 0x00, 
@@ -866,48 +866,9 @@ Parameter Data :
 
 
 
-Cell Name         = Interpolator1
-Parameter Name    = LinearIntGrowableS100Alg1
-Parameter Address = 216
-Parameter Data :
-0x02, 0x80, 0x00, 0x00, 
-0x01, 0x80, 0x00, 0x00, 
-0x00, 0x00, 0x00, 0x00, 
-0x01, 0x80, 0x00, 0x00, 
-0x02, 0x80, 0x00, 0x00, 
-
-
-
-Cell Name         = Interpolator1
-Parameter Name    = LinearIntGrowableS100Alg1Q
-Parameter Address = 222
-Parameter Value   = 0.100000023841858
-Parameter Data :
-0x00 ,	0x0C ,	0xCC ,	0xCD ,	
-
-
-
-Cell Name         = Interpolator1
-Parameter Name    = LinearIntGrowableS100Alg1Min
-Parameter Address = 221
-Parameter Value   = -0.5
-Parameter Data :
-0x0F ,	0xC0 ,	0x00 ,	0x00 ,	
-
-
-
-Cell Name         = Interpolator1
-Parameter Name    = LinearIntGrowableS100Alg1Number
-Parameter Address = 223
-Parameter Value   = 4.76837158203125E-07
-Parameter Data :
-0x00 ,	0x00 ,	0x00 ,	0x04 ,	
-
-
-
 Cell Name         = MuteSPK
 Parameter Name    = MuteSWSlewAlg5mute
-Parameter Address = 226
+Parameter Address = 218
 Parameter Value   = 0
 Parameter Data :
 0x00, 0x00, 0x00, 0x00, 
@@ -916,7 +877,7 @@ Parameter Data :
 
 Cell Name         = MuteSPK
 Parameter Name    = MuteSWSlewAlg5step
-Parameter Address = 227
+Parameter Address = 219
 Parameter Value   = 0.0009765625
 Parameter Data :
 0x00, 0x00, 0x20, 0x00, 
@@ -925,7 +886,7 @@ Parameter Data :
 
 Cell Name         = MuteHP
 Parameter Name    = MuteSWSlewAlg6mute
-Parameter Address = 224
+Parameter Address = 216
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -934,7 +895,7 @@ Parameter Data :
 
 Cell Name         = MuteHP
 Parameter Name    = MuteSWSlewAlg6step
-Parameter Address = 225
+Parameter Address = 217
 Parameter Value   = 0.0009765625
 Parameter Data :
 0x00, 0x00, 0x20, 0x00, 
@@ -1136,8 +1097,8 @@ See also SigmaKram.hex file
 0x00 , 	0x01 , 	0x29 , 	0xA6 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0xFF , 	
-0x00 , 	0x00 , 	0x3A , 	0xB9 , 	
-0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x02 , 	0xD0 , 	0xE9 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x22 , 	0xD3 , 	
 0x00 , 	0x2C , 	0x35 , 	0x52 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
@@ -1346,16 +1307,8 @@ See also SigmaKram.hex file
 0x00 , 	0x00 , 	0x55 , 	0x32 , 	
 0x00 , 	0x80 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x03 , 	0x86 , 	0x81 , 	
+0x00 , 	0x02 , 	0xEE , 	0xAC , 	
 0x00 , 	0x00 , 	0x08 , 	0x00 , 	
-0x02 , 	0x80 , 	0x00 , 	0x00 , 	
-0x01 , 	0x80 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x01 , 	0x80 , 	0x00 , 	0x00 , 	
-0x02 , 	0x80 , 	0x00 , 	0x00 , 	
-0x0F , 	0xC0 , 	0x00 , 	0x00 , 	
-0x00 , 	0x0C , 	0xCC , 	0xCD , 	
-0x00 , 	0x00 , 	0x00 , 	0x04 , 	
 0x00 , 	0x80 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x20 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
@@ -2156,14 +2109,22 @@ See also SigmaKram.hex file
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 
 Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	00000000	00000000	00000000	
 00000000	00000001	00101001	10100110	
 00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	11111111	
-00000000	00000000	00111010	10111001	
-00000000	10000000	00000000	00000000	
+00000000	00000010	11010000	11101001	
+00000000	00000000	00000000	00000000	
 00000000	00000000	00100010	11010011	
 00000000	00101100	00110101	01010010	
 00000000	00000000	00000000	00000000	
@@ -2372,16 +2333,8 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	00000000	01010101	00110010	
 00000000	10000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
-00000000	00000011	10000110	10000001	
+00000000	00000010	11101110	10101100	
 00000000	00000000	00001000	00000000	
-00000010	10000000	00000000	00000000	
-00000001	10000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000001	10000000	00000000	00000000	
-00000010	10000000	00000000	00000000	
-00001111	11000000	00000000	00000000	
-00000000	00001100	11001100	11001101	
-00000000	00000000	00000000	00000100	
 00000000	10000000	00000000	00000000	
 00000000	00000000	00100000	00000000	
 00000000	00000000	00000000	00000000	
@@ -2404,6 +2357,14 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00001111	10110100	00101000	00110010	
 00000000	10000000	00000000	00000000	
 00000000	00000000	00100000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
