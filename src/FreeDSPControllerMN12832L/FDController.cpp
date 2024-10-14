@@ -135,9 +135,9 @@ void FDController::loop()
                 // toggle muteSPK / muteHP / BOTH on
                 _mute = (_mute + 1) % 3;
                 // mute speaker
-                dspctrl.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
+                dspctrl.dsp.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
                 // mute headphone
-                dspctrl.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
+                dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
             }
         }
         {   // Encoder Left Bottom -> Distortion Level ?
@@ -149,11 +149,11 @@ void FDController::loop()
                 if(_distortion > 10.0) _distortion = 10.0;
                 if(_distortion < 0.1)  _distortion = 0.1;
 
-                LOG <<"dist:" <<_distortion <<" dspval:" <<LOG.hex <<dspctrl.floatTo523(_distortion) <<LOG.dec <<LOG.endl;
+                LOG <<"dist:" <<_distortion <<" dspval:" <<LOG.hex <<dspctrl.dsp.floatTo523(_distortion) <<LOG.dec <<LOG.endl;
 
-                dspctrl.saveloadWrite(
-                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHA_ADDR, dspctrl.floatTo523( _distortion ),
-                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHAM1_ADDR, dspctrl.floatTo523( 1.0f / _distortion ) );
+                dspctrl.dsp.saveloadWrite(
+                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHA_ADDR, dspctrl.dsp.floatTo523( _distortion ),
+                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHAM1_ADDR, dspctrl.dsp.floatTo523( 1.0f / _distortion ) );
 
             }
         }
@@ -195,7 +195,7 @@ void FDController::loop()
                 float fraction = pow10f((float)_volumeDB/20.0);
                 uint32_t dspval = (uint32_t)(fraction * (float)0x0800000);
                 LOG <<"Volume:" <<LOG.dec <<_volumeDB <<" fract:" <<fraction <<" dsp:" <<LOG.hex <<dspval <<LOG.endl;
-                dspctrl.saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
+                dspctrl.dsp.saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
             }
             if(incomingByte == 's' || incomingByte == 'S')
             {
@@ -291,7 +291,7 @@ void FDController::loop()
 
         drawtime = micros() - time;
     }
-    if (emLogger > 15000)
+    if (emLogger > 5000)
     {
         emLogger = 0;
 

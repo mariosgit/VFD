@@ -13,3 +13,6 @@
 [submodule "lib/encoder-bits"]
 	path = lib/encoder-bits
 	url = https://github.com/mariosgit/encoder-bits.git
+[submodule "lib/SigmaDSP-Ctrl"]
+	path = lib/SigmaDSP-Ctrl
+	url = https://github.com/mariosgit/SigmaDSP-Ctrl.git

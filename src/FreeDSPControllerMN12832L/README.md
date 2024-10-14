@@ -68,6 +68,15 @@ The emChecker loop sets these filters one after another and reads the levelmeter
 
 ![DSPplan](../../images/Screenshot%202024-10-01%20153901.png)
 
+#### The strangly vintage universe of SigmaDSP
+
+Dear analog devices, you web resources did'nt age so well.
+
+Documentation of the DSP blocks... best to search with Ggl
+https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/leveldetectorslookuptables/singlebandleveldetector
+
+Reading Levels and other tutorials ... https://ez.analog.com/dsp/sigmadsp/w/documents/14313/monitoring-average-and-instantaneous-signal-levels
+
 
 ### SigmaStudio logs
 
