@@ -2,6 +2,8 @@
 
 #include "FDController.h"
 
+#include "biquad.h" // copy from teensy audio, including from lib_deps draws other stuff in :(
+
 // move to dspctrl..
 #define SIGMASTUDIOTYPE_SPECIAL static_cast<int16_t> // ??? just an hex uint16_t, for the 12bit ProgCounter where the readback happens ?
 #include "AMPx4-TDM-Test02/SigmaKram_IC_1_PARAM.h"
@@ -316,6 +318,13 @@ void FDController::loop()
         }
         dspctrl.dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
 
+
+        // experimental... bandpass, looks useable.
+        float coeffs[5];
+        getCoefficients<float>(coeffs, BiquadType::BAND_PASS, 0, 100, 48000, 2, true);
+        LOG <<"bandpass: ";
+        for(int i = 0; i < 6; i++) { LOG <<coeffs[i] <<", "; }
+        LOG <<LOG.endl;
     }
 }
 

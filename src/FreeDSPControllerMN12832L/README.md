@@ -144,3 +144,20 @@ Param Value:  1
 Bytes:  4
 Param Data: 0x00, 	0x00, 	0x00, 	0x01
 ```
+
+
+
+### Comparing Biquad calculators...
+
+SigmaStudio Bandpass produces this 100Hz BW:2
+
+* b0 = 0.00972211360931396
+* b1 = 0
+* b2 = -0.00972211360931396
+* a1 = 1.98038613796234
+* a2 = -0.980555891990662
+
+**exactly what teensy audio biquad.h produces :)**
+
+[earlevel eng..](https://www.earlevel.com/main/2021/09/02/biquad-calculator-v3/) 
+a und b are swaped, use a results as b ```bi[0,1,2]``` , use b results **inverted** as a ```bi[3,4]```
