@@ -113,7 +113,7 @@ void DSPCtrl::setVolume(int16_t volumeDB)
 // from teensy audio filter_biquad, the one in biquad.h does not work
 void setLowShelf(float frequency, float gain, float slope, float *coef)
 {
-    float A = powf(10.0, gain/40.0f);
+    float a = powf(10.0, gain/40.0f);
     float w0 = frequency * (2.0f * 3.141592654f / 48000.0f);
     float sinW0 = sinf(w0);
     float cosW0 = cosf(w0);
@@ -122,9 +122,9 @@ void setLowShelf(float frequency, float gain, float slope, float *coef)
     float aMinus = (a-1.0)*cosW0;
     float aPlus = (a+1.0)*cosW0;
     float scale = 1.0 / ( (a+1.0) + aMinus + sinsq);
-    /* b0 */ coef[0] =		A *	( (a+1.0) - aMinus + sinsq	) * scale;
-    /* b1 */ coef[1] =  2.0*A * ( (a-1.0) - aPlus  			) * scale;
-    /* b2 */ coef[2] =		A * ( (a+1.0) - aMinus - sinsq 	) * scale;
+    /* b0 */ coef[0] =		a *	( (a+1.0) - aMinus + sinsq	) * scale;
+    /* b1 */ coef[1] =  2.0*a * ( (a-1.0) - aPlus  			) * scale;
+    /* b2 */ coef[2] =		a * ( (a+1.0) - aMinus - sinsq 	) * scale;
     /* a1 */ coef[3] = -2.0*	( (a-1.0) + aPlus			) * scale;
     /* a2 */ coef[4] =  		( (a+1.0) + aMinus - sinsq	) * scale;
 }
