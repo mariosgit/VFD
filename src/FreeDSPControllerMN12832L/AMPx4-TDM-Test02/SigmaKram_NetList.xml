@@ -50,25 +50,25 @@
                 <Link pin="O_C173_A0_P1_out" dir="out" link="Link39" />
                 <Link pin="O_C173_A0_P4_out" dir="out" link="Link11" />
             </Algorithm>
-            <Algorithm name="EQ1940DualS1" friendlyname="2 Channel - Single Precision " cell="Gen Filter1 " location="{X=494, Y=352} " Growth="1 " GrowthB="0">
+            <Algorithm name="EQ1940DualS1" friendlyname="2 Channel - Single Precision " cell="All EQ1 " location="{X=494, Y=352} " Growth="1 " GrowthB="0">
                 <Link pin="I_C284_A0_P1_in" dir="in" link="Link39" />
                 <Link pin="I_C284_A0_P2_in" dir="in" link="Link11" />
                 <Link pin="O_C284_A0_P3_out" dir="out" link="Link12" />
                 <Link pin="O_C284_A0_P4_out" dir="out" link="Link13" />
             </Algorithm>
-            <Algorithm name="EQ1940DualS2" friendlyname="2 Channel - Single Precision " cell="Gen Filter1_2 " location="{X=587, Y=352} " Growth="1 " GrowthB="0">
+            <Algorithm name="EQ1940DualS2" friendlyname="2 Channel - Single Precision " cell="All EQ2 " location="{X=587, Y=352} " Growth="1 " GrowthB="0">
                 <Link pin="I_C289_A0_P1_in" dir="in" link="Link12" />
                 <Link pin="I_C289_A0_P2_in" dir="in" link="Link13" />
                 <Link pin="O_C289_A0_P3_out" dir="out" link="Link14" />
                 <Link pin="O_C289_A0_P4_out" dir="out" link="Link15" />
             </Algorithm>
-            <Algorithm name="EQ1940DualS3" friendlyname="2 Channel - Single Precision " cell="Gen Filter1_3 " location="{X=684, Y=351} " Growth="1 " GrowthB="0">
+            <Algorithm name="EQ1940DualS3" friendlyname="2 Channel - Single Precision " cell="All EQ3 " location="{X=684, Y=351} " Growth="1 " GrowthB="0">
                 <Link pin="I_C294_A0_P1_in" dir="in" link="Link14" />
                 <Link pin="I_C294_A0_P2_in" dir="in" link="Link15" />
                 <Link pin="O_C294_A0_P3_out" dir="out" link="Link16" />
                 <Link pin="O_C294_A0_P4_out" dir="out" link="Link17" />
             </Algorithm>
-            <Algorithm name="EQ1940DualS4" friendlyname="2 Channel - Single Precision " cell="Gen Filter1_4 " location="{X=783, Y=351} " Growth="1 " GrowthB="0">
+            <Algorithm name="EQ1940DualS4" friendlyname="2 Channel - Single Precision " cell="All EQ4 " location="{X=783, Y=351} " Growth="1 " GrowthB="0">
                 <Link pin="I_C299_A0_P1_in" dir="in" link="Link16" />
                 <Link pin="I_C299_A0_P2_in" dir="in" link="Link17" />
                 <Link pin="O_C299_A0_P3_out" dir="out" link="Link42" />
@@ -158,7 +158,7 @@
                 <Link pin="O_C16_A0_P2_out" dir="out" link="Link34" />
                 <Link pin="O_C16_A0_P4_out" dir="out" link="Link38" />
             </Algorithm>
-            <Algorithm name="EQ1940DualS5" friendlyname="2 Channel - Single Precision " cell="Gen Filter1_5 " location="{X=1604, Y=356} " Growth="1 " GrowthB="0">
+            <Algorithm name="EQ1940DualS5" friendlyname="2 Channel - Single Precision " cell="HP EQ1 " location="{X=1604, Y=356} " Growth="1 " GrowthB="0">
                 <Link pin="I_C2_A0_P1_in" dir="in" link="Link24" />
                 <Link pin="I_C2_A0_P2_in" dir="in" link="Link25" />
                 <Link pin="O_C2_A0_P3_out" dir="out" link="Link21" />
@@ -184,7 +184,7 @@
                 <Link pin="O_C94_A0_P2_out" dir="out" link="Link2" />
                 <Link pin="O_C94_A0_P4_out" dir="out" link="Link4" />
             </Algorithm>
-            <Algorithm name="EQ1940DualS6" friendlyname="2 Channel - Single Precision " cell="Gen Filter1_6 " location="{X=1741, Y=357} " Growth="1 " GrowthB="0">
+            <Algorithm name="EQ1940DualS6" friendlyname="2 Channel - Single Precision " cell="HP EQ2 " location="{X=1741, Y=357} " Growth="1 " GrowthB="0">
                 <Link pin="I_C7_A0_P1_in" dir="in" link="Link21" />
                 <Link pin="I_C7_A0_P2_in" dir="in" link="Link22" />
                 <Link pin="O_C7_A0_P3_out" dir="out" link="Link28" />

@@ -1,5 +1,6 @@
 #include <mbLog.h>
 #include "DSPCtrl.h"
+#include "biquad.h"
 
 #define SIGMASTUDIOTYPE_SPECIAL static_cast<int16_t> // ??? just an hex uint16_t, for the 12bit ProgCounter where the readback happens ?
 #include "AMPx4-TDM-Test02/SigmaKram_IC_1_PARAM.h"
@@ -71,11 +72,11 @@ void DSPCtrl::readLevels()
                 levels.inR = realval2;
 
                 // try clean conversion !? Still strange value range !
-                if(random(50) == 10)
+                if(random(100) == 10)
                 {
                     float from519 = dsp.from519(value1);
-                    float logval1 = -100*(1.0f-from519); //20 * logf(from519); // nee is schon log ?
-                    LOG <<"levels int:" <<LOG.dec <<value1 <<", db(old)" <<realval1 <<" float:" <<from519 <<" db(new):"<<logval1 <<LOG.dec <<LOG.endl;
+                    float logval1 = -100*(1.0f-from519); //20 * logf(from519); // nee is schon log ? Why times 100 ? SigmaSecrets??
+                    // LOG <<"levels int:" <<LOG.dec <<value1 <<", db(old)" <<realval1 <<" float:" <<from519 <<" db(new):"<<logval1 <<LOG.dec <<LOG.endl;
                 }
             }
             else
@@ -107,4 +108,55 @@ void DSPCtrl::setVolume(int16_t volumeDB)
     uint32_t dspval = (uint32_t)(fraction * (float)0x0800000);
     LOG <<"Volume:" <<LOG.dec <<volumeDB <<" fract:" <<fraction <<" dsp:" <<LOG.hex <<dspval <<LOG.endl;
     dspEnabled &= dsp.saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
+}
+
+// from teensy audio filter_biquad, the one in biquad.h does not work
+void setLowShelf(float frequency, float gain, float slope, float *coef)
+{
+    float A = powf(10.0, gain/40.0f);
+    float w0 = frequency * (2.0f * 3.141592654f / 48000.0f);
+    float sinW0 = sinf(w0);
+    float cosW0 = cosf(w0);
+    //generate three helper-values (intermediate results):
+    float sinsq = sinW0 * sqrtf( (pow(a,2.0)+1.0)*(1.0/(double)slope-1.0)+2.0*a );
+    float aMinus = (a-1.0)*cosW0;
+    float aPlus = (a+1.0)*cosW0;
+    float scale = 1.0 / ( (a+1.0) + aMinus + sinsq);
+    /* b0 */ coef[0] =		A *	( (a+1.0) - aMinus + sinsq	) * scale;
+    /* b1 */ coef[1] =  2.0*A * ( (a-1.0) - aPlus  			) * scale;
+    /* b2 */ coef[2] =		A * ( (a+1.0) - aMinus - sinsq 	) * scale;
+    /* a1 */ coef[3] = -2.0*	( (a-1.0) + aPlus			) * scale;
+    /* a2 */ coef[4] =  		( (a+1.0) + aMinus - sinsq	) * scale;
+}
+
+void DSPCtrl::eqVal(int diff)
+{
+    int8_t current = eqValues[eqBand];
+    current += diff;
+    // LOG <<"current:" <<current <<LOG.endl;
+    if(current < -16) current = -16;
+    if(current > 16) current = 16;
+    // LOG <<"current:" <<current <<LOG.endl;
+    eqValues[eqBand] = current;
+
+    const uint32_t adrs[4] = {
+        MOD_ALLEQ1_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ2_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ3_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ4_ALG0_STAGE0_B0_ADDR};
+
+    float coeffs[5];
+    auto algo = BiquadType::PEAKING;// (eqBand == 1 || eqBand == 2) ? BiquadType::PEAKING : (eqBand == 0) ? BiquadType::LOW_SHELF : BiquadType::HIGH_SHELF;
+    getCoefficients<float>(coeffs, algo, (float)current, eqFreq[eqBand], 48000, .25f, (algo==BiquadType::PEAKING)?false:true);
+
+    // if(eqBand == 0)    setLowShelf(eqFreq[eqBand], current, 1.0f, coeffs);
+
+    LOG <<"algo:" <<(int)algo <<" [" <<eqBand <<"] " <<eqFreq[eqBand] <<"Hz g:" <<current <<" wq:" <<0.5f <<" bqs:";
+    for(int i = 0; i < 6; i++) { LOG <<coeffs[i] <<", "; }
+    LOG <<LOG.endl;
+    if(dspEnabled)
+    {
+        dspEnabled &= dsp.saveloadWrite5(adrs[eqBand], coeffs);
+    }
+
 }

@@ -24,9 +24,12 @@ public:
 
     elapsedMillis emChecker = 0;
     elapsedMillis emInput = 0;
+    elapsedMillis emSerial = 0;
     elapsedMillis emDraw = 0;
     elapsedMillis emLogger = 0;
 
+    uint32_t inputSlot = 0;
+    uint32_t dspOffCounter = 0;
     uint32_t frameCounter = 0;
     uint32_t drawtime = 0;
     int16_t textPos = 128;
@@ -34,6 +37,7 @@ public:
     // Create an IntervalTimer object
     IntervalTimerEx refreshTimer;
     IntervalTimerEx inputTimer;
+    bool inputStuffEnabled = true; // it's a interrupt disable kind off
 
     int16_t _volumeDB = -40;
     float _distortion = 10.0; // 10 = none
@@ -54,4 +58,11 @@ public:
     ClickEncoder enc3;
     ClickEncoder enc4;
     ClickEncoder enc5;
+
+private:
+    void taskChecker();
+    void taskInput();
+    void taskSerial();
+    void taskDisplay();
+    void taskLogger();
 };

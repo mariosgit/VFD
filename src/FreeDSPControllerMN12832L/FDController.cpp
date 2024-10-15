@@ -35,6 +35,10 @@ FDController::FDController() : display(
     // enc3 cc           c000 0008
     // enc4 ru           0300 0400
     // enc5 rd           0003 0004 
+    enc1.setAccelerationEnabled(false);
+    // enc2.setAccelerationEnabled(false); // dist
+    enc4.setAccelerationEnabled(false);
+    enc5.setAccelerationEnabled(false);
 
     // 74165 shift register with buttons/encoder inputs
     pinMode(pinSLat, OUTPUT);
@@ -56,19 +60,21 @@ void FDController::setup()
     display.begin();
     randomSeed(analogRead(0));
 
+    // Interrupt functions...
     // You need to trigger the refresh function regularly !
     // myTimer.begin(display.refresh, 1000000 / display.targetFps);
     refreshTimer.begin([this]{
         display.refresh();
-        }, 1000000/ display.targetFps); // period in usec
+        }, 400 ); // 1000000/ display.targetFps); // period in usec ~ 150, flicker stops around 500us that's 45fps
     inputTimer.begin([this]{
+        if(!inputStuffEnabled) return; // sort off interrupt disable
         inputService();
         enc1.service();
         enc2.service();
         enc3.service();
         enc4.service();
         enc5.service();
-        }, 2000);
+        }, 1000);
 }
 
 /// @brief Read encoders via shift registers
@@ -94,6 +100,15 @@ void FDController::inputService() {
 
 void FDController::loop()
 {
+    taskChecker();
+    taskInput();
+    taskSerial();
+    taskDisplay();
+    taskLogger();
+}
+
+void FDController::taskChecker()
+{
     if (emChecker > 1)
     {
         emChecker = 0;
@@ -101,48 +116,56 @@ void FDController::loop()
         // eq reads once per 32
 
         dspctrl.readLevels();
-
     }
+}
+
+void FDController::taskInput()
+{
+    inputSlot = (inputSlot + 1) % 5; // 0-4 // Why ? Teensy sometimes crashes here, no idea ???
+
+    // uuuhhh hangs some times ??? encoder readout disables interrupts !!! would be better to just disable the intervaltimer for it !? 
     if(emInput > 20)
     {
         emInput = 0;
 
-        {   // Encoder Center -> Volume
-            auto enc3val = enc3.getValue();
-            auto enc3btn = enc3.getButton();
-            if(enc3val)
-            {
-                _volumeDB += enc3val;
-                if(_volumeDB > 12) _volumeDB = 12;
-                if(_volumeDB < -90) _volumeDB = -90;
+        int16_t encval = 0;
+        ClickEncoder::Button encbtn = ClickEncoder::Open;
 
-                dspctrl.setVolume(_volumeDB);
-            }
+        // encoder service runs within interrupt, this will stop it for a moment
+        // read encoders
+        //   1     4
+        //      3 
+        //   2     5
+        inputStuffEnabled = false;
+        if(inputSlot+1 == 1)
+        {
+            encval = enc1.getValue();
+            encbtn = enc1.getButton();
         }
-        {   // Encoder Right Bottom -> Volume, Muting
-            auto enc5val = enc5.getValue();
-            auto enc5btn = enc5.getButton();
-            if(enc5val)
-            {
-                _volumeDB += enc5val;
-                if(_volumeDB > 12) _volumeDB = 12;
-                if(_volumeDB < -90) _volumeDB = -90;
+        if(inputSlot+1 == 2)
+        {
+            encval = enc2.getValue();
+            encbtn = enc2.getButton();
+        }
+        if(inputSlot+1 == 3)
+        {
+            encval = enc3.getValue();
+            encbtn = enc3.getButton();
+        }
+        if(inputSlot+1 == 4)
+        {
+            encval = enc4.getValue();
+            encbtn = enc4.getButton();
+        }
+        if(inputSlot+1 == 5)
+        {
+            encval = enc5.getValue();
+            encbtn = enc5.getButton();
+        }
+        inputStuffEnabled = true;
 
-                dspctrl.setVolume(_volumeDB);
-            }
-            if(enc5btn == ClickEncoder::Clicked)
-            {
-                // toggle muteSPK / muteHP / BOTH on
-                _mute = (_mute + 1) % 3;
-                // mute speaker
-                dspctrl.dsp.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
-                // mute headphone
-                dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
-            }
-        }
+        if(inputSlot+1 == 2)
         {   // Encoder Left Bottom -> Distortion Level ?
-            auto encval = enc2.getValue();
-            auto encbtn = enc2.getButton();
             if(encval)
             {
                 _distortion -= 0.1f * encval;
@@ -157,11 +180,69 @@ void FDController::loop()
 
             }
         }
-        {   // Encoder Left Top -> Pages / PlaceParams like the knobs, let each knob control one param ?
+        if(inputSlot+1 == 1)
+        {
+            // Encoder Left Top -> select EQ
+            if(encbtn == ClickEncoder::Clicked)
+            {
+            }
+            if(encval)
+            {
+                if(encval > 0) dspctrl.eqBandNext();
+                else dspctrl.eqBandPrev();
+            }
         }
-        {   // Encoder Right Top -> Param Values
+        if(inputSlot+1 == 4)
+        {
+            // Encoder Left Right -> change Gain
+            if(encval)
+            {
+                dspctrl.eqVal(encval);
+            }
         }
 
+        if(inputSlot+1 == 3)
+        {   // Encoder Center -> Volume
+            if(encval)
+            {
+                _volumeDB += encval;
+                if(_volumeDB > 12) _volumeDB = 12;
+                if(_volumeDB < -90) _volumeDB = -90;
+
+                dspctrl.setVolume(_volumeDB);
+            }
+        }
+
+        if(inputSlot+1 == 5)
+        {   // Encoder Right Bottom -> Volume, Muting
+            if(encval)
+            {
+                _volumeDB += encval;
+                if(_volumeDB > 12) _volumeDB = 12;
+                if(_volumeDB < -90) _volumeDB = -90;
+
+                dspctrl.setVolume(_volumeDB);
+            }
+            if(encbtn == ClickEncoder::Clicked)
+            {
+                // toggle muteSPK / muteHP / BOTH on
+                _mute = (_mute + 1) % 3;
+                // mute speaker
+                dspctrl.dsp.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
+                // mute headphone
+                dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
+            }
+        }
+
+
+    }
+}
+
+void FDController::taskSerial()
+{
+    if(emSerial > 100)
+    {
+        emSerial = 0;
         if(Serial.available() > 0)
         {
             // read the incoming byte:
@@ -177,11 +258,13 @@ void FDController::loop()
                     <<"  + =\tVolume up 1 dB" <<LOG.endl
                     <<"  - /\tVolume down 1 dB" <<LOG.endl
                     <<"  SPACE\tturn on/off DSP communication - when off SigmaStudio can connect." <<LOG.endl
-                    <<"  s/S\tmute speakers" <<LOG.endl
+                    <<"  m/M\tmute speakers" <<LOG.endl
+                    <<"  qa ws ed rf - EQ settings up down"
                     <<"--------------------------------------------------------------------------" <<LOG.endl;
             }
             if(incomingByte == ' ')
             {
+                dspOffCounter = 2*6*3; // one cycle is 5 sec
                 dspctrl.dspEnabled = !dspctrl.dspEnabled;
                 LOG <<"DSP connection " <<((dspctrl.dspEnabled)?"enabled":"disabled") <<LOG.endl;
             }
@@ -197,7 +280,17 @@ void FDController::loop()
                 LOG <<"Volume:" <<LOG.dec <<_volumeDB <<" fract:" <<fraction <<" dsp:" <<LOG.hex <<dspval <<LOG.endl;
                 dspctrl.dsp.saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
             }
-            if(incomingByte == 's' || incomingByte == 'S')
+            if(incomingByte == 'q' || incomingByte == 'a')
+            {
+                dspctrl.eqBand = 0;
+                dspctrl.eqVal( (incomingByte=='q') ? 1 : -1 );
+            }
+            if(incomingByte == 'w' || incomingByte == 's')
+            {
+                dspctrl.eqBand = 1;
+                dspctrl.eqVal( (incomingByte=='w') ? 1 : -1 );
+            }
+            if(incomingByte == 'm' || incomingByte == 'M')
             {
                 // _muteSPK = !_muteSPK;
                 // // mute speaker
@@ -206,6 +299,10 @@ void FDController::loop()
             }
         }
     }
+}
+
+void FDController::taskDisplay()
+{
     if (emDraw > 100)
     {
         emDraw = 0;
@@ -255,7 +352,7 @@ void FDController::loop()
             int16_t valD = max(dspctrl.levels.distortion, -32.0*2)  / -2; // should be within 0 - 32 ?
             display.fillRect(24, valD, 3, 32 - valD, 3);
 
-            //EQ
+            // Speki
             for(int i = 1; i < 8; i++)
             {
                 // min -64, scaled down by -2 -> 32 pixel
@@ -263,6 +360,12 @@ void FDController::loop()
                 // min -48, scaled down by -1.5 -> 32 pixel
                 int16_t valE = max(dspctrl.levels.postEQ[i], -48.0)  / -1.5; // should be within 0 - 32 ?
                 display.fillRect(30 + 6*i, 8+ valE, 5, 2 /*32 - valE*/, 3);
+            }
+
+            // EQ Settings
+            for(int i = 0; i < 4; i++)
+            {
+                display.fillRect(36 + 12*i, 15-dspctrl.eqValues[i], 10, 2, (dspctrl.eqBand==i)?3:1);
             }
         }
         else
@@ -291,6 +394,10 @@ void FDController::loop()
 
         drawtime = micros() - time;
     }
+}
+
+void FDController::taskLogger()
+{
     if (emLogger > 5000)
     {
         emLogger = 0;
@@ -309,22 +416,34 @@ void FDController::loop()
 
         // LOG <<"Input: " <<LOG.hex <<input <<LOG.dec <<LOG.endl;
         
-        if(!dspctrl.dspEnabled)
+        if(!dspctrl.dspEnabled && dspOffCounter == 0)
         {
             Wire.setSCL(pinSCL);
             Wire.setSDA(pinSDA);
             Wire.begin();
+            dspctrl.dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
             LOG << "DSP connection ON" <<LOG.endl;
         }
-        dspctrl.dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
+        else if (dspOffCounter > 0)
+        {
+            dspOffCounter--;
+            LOG << "DSP OFF until..." <<dspOffCounter  <<LOG.endl;
+        }
 
 
-        // experimental... bandpass, looks useable.
-        float coeffs[5];
-        getCoefficients<float>(coeffs, BiquadType::BAND_PASS, 0, 100, 48000, 2, true);
-        LOG <<"bandpass: ";
-        for(int i = 0; i < 6; i++) { LOG <<coeffs[i] <<", "; }
-        LOG <<LOG.endl;
+        // // experimental... bandpass, looks useable.
+        // float freq = random(100,15000);
+        // float widthQ = float(random(20,500))/100.0f;
+        // float coeffs[5];
+        // getCoefficients<float>(coeffs, BiquadType::BAND_PASS, 0, freq, 48000, widthQ, true);
+        // LOG <<"bandpass: " <<freq <<"Hz wq:" <<widthQ <<" bqs:";
+        // for(int i = 0; i < 6; i++) { LOG <<coeffs[i] <<", "; }
+        // LOG <<LOG.endl;
+        // if(dspctrl.dspEnabled)
+        // {
+        //     dspctrl.dsp.saveloadWrite5(MOD_HPEQ1_ALG0_STAGE0_B0_ADDR, coeffs);
+        // }
+
     }
 }
 

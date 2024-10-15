@@ -55,9 +55,9 @@ Parameter Data :
 Cell Name         = Volume
 Parameter Name    = SWGain1940DBAlg1target
 Parameter Address = 214
-Parameter Value   = 0.0229086875915527
+Parameter Value   = 0.0173779726028442
 Parameter Data :
-0x00 ,	0x02 ,	0xEE ,	0xAC ,	
+0x00 ,	0x02 ,	0x39 ,	0x71 ,	
 
 
 
@@ -241,7 +241,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1
+Cell Name         = All EQ1
 Parameter Name    = EQ1940DualS10B1
 Parameter Address = 27
 Parameter Value   = 1.02369439601898
@@ -250,7 +250,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1
+Cell Name         = All EQ1
 Parameter Name    = EQ1940DualS11B1
 Parameter Address = 28
 Parameter Value   = -1.93815159797668
@@ -259,7 +259,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1
+Cell Name         = All EQ1
 Parameter Name    = EQ1940DualS12B1
 Parameter Address = 29
 Parameter Value   = 0.918840765953064
@@ -268,7 +268,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1
+Cell Name         = All EQ1
 Parameter Name    = EQ1940DualS11A1
 Parameter Address = 30
 Parameter Value   = 1.93965029716492
@@ -277,7 +277,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1
+Cell Name         = All EQ1
 Parameter Name    = EQ1940DualS12A1
 Parameter Address = 31
 Parameter Value   = -0.941036462783813
@@ -286,7 +286,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_2
+Cell Name         = All EQ2
 Parameter Name    = EQ1940DualS20B1
 Parameter Address = 32
 Parameter Value   = 0.999023914337158
@@ -295,7 +295,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_2
+Cell Name         = All EQ2
 Parameter Name    = EQ1940DualS21B1
 Parameter Address = 33
 Parameter Value   = -1.99554228782654
@@ -304,7 +304,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_2
+Cell Name         = All EQ2
 Parameter Name    = EQ1940DualS22B1
 Parameter Address = 34
 Parameter Value   = 0.996525883674622
@@ -313,7 +313,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_2
+Cell Name         = All EQ2
 Parameter Name    = EQ1940DualS21A1
 Parameter Address = 35
 Parameter Value   = 1.99553406238556
@@ -322,7 +322,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_2
+Cell Name         = All EQ2
 Parameter Name    = EQ1940DualS22A1
 Parameter Address = 36
 Parameter Value   = -0.995557904243469
@@ -331,52 +331,52 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_3
+Cell Name         = All EQ3
 Parameter Name    = EQ1940DualS30B1
 Parameter Address = 37
-Parameter Value   = 0.974221587181091
+Parameter Value   = 0.982776641845703
 Parameter Data :
-0x00 ,	0x7C ,	0xB3 ,	0x4B ,	
+0x00 ,	0x7D ,	0xCB ,	0xA0 ,	
 
 
 
-Cell Name         = Gen Filter1_3
+Cell Name         = All EQ3
 Parameter Name    = EQ1940DualS31B1
 Parameter Address = 38
-Parameter Value   = -1.70003437995911
+Parameter Value   = -1.70846998691559
 Parameter Data :
-0x0F ,	0x26 ,	0x65 ,	0x46 ,	
+0x0F ,	0x25 ,	0x50 ,	0xDB ,	
 
 
 
-Cell Name         = Gen Filter1_3
+Cell Name         = All EQ3
 Parameter Name    = EQ1940DualS32B1
 Parameter Address = 39
-Parameter Value   = 0.849246978759766
+Parameter Value   = 0.849739909172058
 Parameter Data :
-0x00 ,	0x6C ,	0xB4 ,	0x20 ,	
+0x00 ,	0x6C ,	0xC4 ,	0x47 ,	
 
 
 
-Cell Name         = Gen Filter1_3
+Cell Name         = All EQ3
 Parameter Name    = EQ1940DualS31A1
 Parameter Address = 40
-Parameter Value   = 1.70003437995911
+Parameter Value   = 1.70846998691559
 Parameter Data :
-0x00 ,	0xD9 ,	0x9A ,	0xBA ,	
+0x00 ,	0xDA ,	0xAF ,	0x25 ,	
 
 
 
-Cell Name         = Gen Filter1_3
+Cell Name         = All EQ3
 Parameter Name    = EQ1940DualS32A1
 Parameter Address = 41
-Parameter Value   = -0.823468565940857
+Parameter Value   = -0.832516670227051
 Parameter Data :
-0x0F ,	0x96 ,	0x98 ,	0x95 ,	
+0x0F ,	0x95 ,	0x70 ,	0x18 ,	
 
 
 
-Cell Name         = Gen Filter1_4
+Cell Name         = All EQ4
 Parameter Name    = EQ1940DualS40B1
 Parameter Address = 42
 Parameter Value   = 1.64393067359924
@@ -385,7 +385,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_4
+Cell Name         = All EQ4
 Parameter Name    = EQ1940DualS41B1
 Parameter Address = 43
 Parameter Value   = -2.50765347480774
@@ -394,7 +394,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_4
+Cell Name         = All EQ4
 Parameter Name    = EQ1940DualS42B1
 Parameter Address = 44
 Parameter Value   = 1.01621568202972
@@ -403,7 +403,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_4
+Cell Name         = All EQ4
 Parameter Name    = EQ1940DualS41A1
 Parameter Address = 45
 Parameter Value   = 1.37678730487823
@@ -412,7 +412,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_4
+Cell Name         = All EQ4
 Parameter Name    = EQ1940DualS42A1
 Parameter Address = 46
 Parameter Value   = -0.529280066490173
@@ -442,18 +442,18 @@ Parameter Data :
 Cell Name         = SoftClip1
 Parameter Name    = SoftClipAlgG21alpha
 Parameter Address = 98
-Parameter Value   = 1
+Parameter Value   = 10
 Parameter Data :
-0x00, 0x80, 0x00, 0x00, 
+0x05, 0x00, 0x00, 0x00, 
 
 
 
 Cell Name         = SoftClip1
 Parameter Name    = SoftClipAlgG21alpham1
 Parameter Address = 99
-Parameter Value   = 1
+Parameter Value   = 0.100000023841858
 Parameter Data :
-0x00, 0x80, 0x00, 0x00, 
+0x00, 0x0C, 0xCC, 0xCD, 
 
 
 
@@ -635,9 +635,9 @@ Parameter Data :
 Cell Name         = Nx2-1
 Parameter Name    = StMuxSwSlew1coeffname
 Parameter Address = 151
-Parameter Value   = 0
+Parameter Value   = 1
 Parameter Data :
-0x00, 0x00, 0x00, 0x00, 
+0x00, 0x00, 0x00, 0x01, 
 
 
 
@@ -659,7 +659,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_5
+Cell Name         = HP EQ1
 Parameter Name    = EQ1940DualS50B1
 Parameter Address = 220
 Parameter Value   = 0.983587265014648
@@ -668,7 +668,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_5
+Cell Name         = HP EQ1
 Parameter Name    = EQ1940DualS51B1
 Parameter Address = 221
 Parameter Value   = -1.91150093078613
@@ -677,7 +677,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_5
+Cell Name         = HP EQ1
 Parameter Name    = EQ1940DualS52B1
 Parameter Address = 222
 Parameter Value   = 0.929446458816528
@@ -686,7 +686,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_5
+Cell Name         = HP EQ1
 Parameter Name    = EQ1940DualS51A1
 Parameter Address = 223
 Parameter Value   = 1.9103422164917
@@ -695,7 +695,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_5
+Cell Name         = HP EQ1
 Parameter Name    = EQ1940DualS52A1
 Parameter Address = 224
 Parameter Value   = -0.9141925573349
@@ -704,7 +704,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_6
+Cell Name         = HP EQ2
 Parameter Name    = EQ1940DualS60B1
 Parameter Address = 231
 Parameter Value   = 0.819623947143555
@@ -713,7 +713,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_6
+Cell Name         = HP EQ2
 Parameter Name    = EQ1940DualS61B1
 Parameter Address = 232
 Parameter Value   = -1.16816711425781
@@ -722,7 +722,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_6
+Cell Name         = HP EQ2
 Parameter Name    = EQ1940DualS62B1
 Parameter Address = 233
 Parameter Value   = 0.456460118293762
@@ -731,7 +731,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_6
+Cell Name         = HP EQ2
 Parameter Name    = EQ1940DualS61A1
 Parameter Address = 234
 Parameter Value   = 1.48460650444031
@@ -740,7 +740,7 @@ Parameter Data :
 
 
 
-Cell Name         = Gen Filter1_6
+Cell Name         = HP EQ2
 Parameter Name    = EQ1940DualS62A1
 Parameter Address = 235
 Parameter Value   = -0.592523336410522
@@ -1130,11 +1130,11 @@ See also SigmaKram.hex file
 0x00 , 	0x7F , 	0x8E , 	0x29 , 	
 0x00 , 	0xFF , 	0x6D , 	0xA9 , 	
 0x0F , 	0x80 , 	0x91 , 	0x8F , 	
-0x00 , 	0x7C , 	0xB3 , 	0x4B , 	
-0x0F , 	0x26 , 	0x65 , 	0x46 , 	
-0x00 , 	0x6C , 	0xB4 , 	0x20 , 	
-0x00 , 	0xD9 , 	0x9A , 	0xBA , 	
-0x0F , 	0x96 , 	0x98 , 	0x95 , 	
+0x00 , 	0x7D , 	0xCB , 	0xA0 , 	
+0x0F , 	0x25 , 	0x50 , 	0xDB , 	
+0x00 , 	0x6C , 	0xC4 , 	0x47 , 	
+0x00 , 	0xDA , 	0xAF , 	0x25 , 	
+0x0F , 	0x95 , 	0x70 , 	0x18 , 	
 0x00 , 	0xD2 , 	0x6C , 	0x52 , 	
 0x0E , 	0xBF , 	0x05 , 	0x36 , 	
 0x00 , 	0x82 , 	0x13 , 	0x5B , 	
@@ -1191,8 +1191,8 @@ See also SigmaKram.hex file
 0x00 , 	0x80 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x01 , 	
-0x00 , 	0x80 , 	0x00 , 	0x00 , 	
-0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x05 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x0C , 	0xCC , 	0xCD , 	
 0x00 , 	0x2A , 	0xAA , 	0xAB , 	
 0x00 , 	0x55 , 	0x55 , 	0x55 , 	
 0x02 , 	0x80 , 	0x00 , 	0x00 , 	
@@ -1244,7 +1244,7 @@ See also SigmaKram.hex file
 0x00 , 	0x80 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x01 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x01 , 	
 0x00 , 	0x00 , 	0x4E , 	0xB0 , 	
 0x00 , 	0x00 , 	0x01 , 	0xE0 , 	
 0x00 , 	0x00 , 	0x07 , 	0x1C , 	
@@ -1307,7 +1307,7 @@ See also SigmaKram.hex file
 0x00 , 	0x00 , 	0x55 , 	0x32 , 	
 0x00 , 	0x80 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x02 , 	0xEE , 	0xAC , 	
+0x00 , 	0x02 , 	0x39 , 	0x71 , 	
 0x00 , 	0x00 , 	0x08 , 	0x00 , 	
 0x00 , 	0x80 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x20 , 	0x00 , 	
@@ -2156,11 +2156,11 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	01111111	10001110	00101001	
 00000000	11111111	01101101	10101001	
 00001111	10000000	10010001	10001111	
-00000000	01111100	10110011	01001011	
-00001111	00100110	01100101	01000110	
-00000000	01101100	10110100	00100000	
-00000000	11011001	10011010	10111010	
-00001111	10010110	10011000	10010101	
+00000000	01111101	11001011	10100000	
+00001111	00100101	01010000	11011011	
+00000000	01101100	11000100	01000111	
+00000000	11011010	10101111	00100101	
+00001111	10010101	01110000	00011000	
 00000000	11010010	01101100	01010010	
 00001110	10111111	00000101	00110110	
 00000000	10000010	00010011	01011011	
@@ -2217,8 +2217,8 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	10000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	00000001	
-00000000	10000000	00000000	00000000	
-00000000	10000000	00000000	00000000	
+00000101	00000000	00000000	00000000	
+00000000	00001100	11001100	11001101	
 00000000	00101010	10101010	10101011	
 00000000	01010101	01010101	01010101	
 00000010	10000000	00000000	00000000	
@@ -2270,7 +2270,7 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	10000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	00000001	
-00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00000001	
 00000000	00000000	01001110	10110000	
 00000000	00000000	00000001	11100000	
 00000000	00000000	00000111	00011100	
@@ -2333,7 +2333,7 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	00000000	01010101	00110010	
 00000000	10000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
-00000000	00000010	11101110	10101100	
+00000000	00000010	00111001	01110001	
 00000000	00000000	00001000	00000000	
 00000000	10000000	00000000	00000000	
 00000000	00000000	00100000	00000000	

@@ -54,7 +54,7 @@ void getCoefficients(T *coeffs, BiquadType type, double dbGain, double freq, dou
     const double cs = cos(omega);
     double alpha(0.);
 
-    if (!isBandwidthOrS) // Q
+    if (!isBandwidthOrS) // false = Q
         alpha = sn / (2 * bandwidthOrQOrS);
     else if (type == BiquadType::LOW_SHELF || type == BiquadType::HIGH_SHELF) // S
         alpha = sn / 2 * sqrt((A + 1 / A) * (1 / bandwidthOrQOrS - 1) + 2);
