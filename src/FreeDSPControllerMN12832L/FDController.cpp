@@ -269,7 +269,7 @@ void FDController::taskSerial()
             }
             if(incomingByte == ' ')
             {
-                dspOffCounter = 2*6*3; // one cycle is 5 sec
+                dspOffCounter = 2*6; // one cycle is 5 sec
                 dspctrl.dspEnabled = !dspctrl.dspEnabled;
                 LOG <<"DSP connection " <<((dspctrl.dspEnabled)?"enabled":"disabled") <<LOG.endl;
             }
@@ -436,11 +436,9 @@ void FDController::taskLogger()
         else if (dspOffCounter > 0)
         {
             dspOffCounter--;
-            LOG << "DSP OFF until..." <<dspOffCounter  <<LOG.endl;
+            LOG << "DSP OFF until ... " <<dspOffCounter*5 <<" sec"  <<LOG.endl;
         }
-
     }
 }
-
 
 // #endif
