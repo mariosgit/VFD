@@ -80,6 +80,9 @@ The emChecker loop sets these filters one after another and reads the levelmeter
 
 ![DSPplanW3fast](../../images/Screenshot%202024-10-17%20134303.png)
 
+[SigmaStudio docs, recipes for filters](https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/filters/general2ndorder)
+
+
 #### The strangly vintage universe of SigmaDSP
 
 Dear analog devices, you web resources did'nt age so well.
@@ -166,6 +169,116 @@ Bytes:  4
 Param Data: 0x00, 	0x00, 	0x00, 	0x01
 ```
 
+##### Turning the Crossover to 110Hz
+
+It writes B0,B1,A1 only ? Yes, first order lowpass and highpass only change these, the others are 0 or 1... 
+
+ah and the low side is inverted due to phase...
+
+lowpass 110
+| bs | as |
+|---|---|
+|0.007148143726676948 | (1.0) |
+|0.007148143726676948 | -0.9857037125466461*-1 |
+|0 | 0 |
+
+highpass 110
+| bs | as |
+|---|---|
+| 0.9928518562733231   | (1.0) |
+| -0.992851856273323   | -0.9857037125466461*-1 |
+| 0                    | 0 |
+
+ok, SP1 are the lowpasses
+SP2 the highpasses ??? do not see this !
+and the postfix _0 _1 is the channel, puh
+
+Arrrg :-O , in the header it's named clearly as ```MOD_CROSSOVER1_ALG1_LOW_FILT1_PARAMB0_ADDR```
+
+```
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP1B0_0
+Param Address:  0x00FA
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP1B1_0
+Param Address:  0x00FB
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP1A1_0
+Param Address:  0x00FC
+Param Value:  0.985703706741333
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP1B0_1
+Param Address:  0x00FD
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP1B1_1
+Param Address:  0x00FE
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP1A1_1
+Param Address:  0x00FF
+Param Value:  0.985703706741333
+
+------SP2
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP2B0_0
+Param Address:  0x0107
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP2B1_0
+Param Address:  0x0108
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP2A1_0
+Param Address:  0x0109
+Param Value:  0.985703706741333
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP2B0_1
+Param Address:  0x010A
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP2B1_1
+Param Address:  0x010B
+Param Value:  0.0071481466293335
+
+Cell Name:  Crossover1
+Param Name:  CrossoverFilter2WayAlgSP2A1_1
+Param Address:  0x010C
+Param Value:  0.985703706741333
+```
+
+invert an/aus, mhm ok it's another param, does not effect the biquads
+```
+// on
+Param Name:  CrossoverFilter2WayAlgSP1LowInvert
+Param Address:  0x00F9
+Param Value:  -1
+
+Param Name:  CrossoverFilter2WayAlgSP2LowInvert
+Param Address:  0x0106
+Param Value:  -1
+
+//off
+Param Name:  CrossoverFilter2WayAlgSP1LowInvert
+Param Address:  0x00F9
+Param Value:  1
+
+Param Name:  CrossoverFilter2WayAlgSP2LowInvert
+Param Address:  0x0106
+Param Value:  1
+```
 
 
 ### Comparing Biquad calculators...
