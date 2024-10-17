@@ -39,8 +39,9 @@ public:
     IntervalTimerEx inputTimer;
     bool inputStuffEnabled = true; // it's a interrupt disable kind off
 
+    uint8_t drawHelpers = 0; // helpers are drawn when interaction is done.
     int16_t _volumeDB = -40;
-    float _distortion = 10.0; // 10 = none
+    float _distortion = 1.0; // 1 = none [-1;1] max;min
     uint8_t _mute = 1; // DSP starts with speaker muted
     const uint8_t MUTE_SPK_MASK = 1;
     const uint8_t MUTE_HP_MASK = 2;

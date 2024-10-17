@@ -1,10 +1,22 @@
 # FreeDSP Controller with MN12832L
 
-![panel](../../images/MN12932L-Teensy4.png)
+| | |
+|---|---|
+| ![panel](../../images/MN12932L-Teensy4.png) | ![bild2](../../images/IMG_1364.jpg) |
+| | |
+
 
 ## Usage
 
-Top Left Encoder switches display pages. All other encoders change params on the page.
+Top left encoder - Select EQ chanel
+
+Top right encoder - turn EQ channel up/down
+
+Center - Volume
+
+Bottom Left - Crunchines
+
+Bottom Right - Volumem press to toggle Mute states.
 
 #### Main page
 
@@ -66,7 +78,7 @@ The emChecker loop sets these filters one after another and reads the levelmeter
 
 ## References
 
-![DSPplan](../../images/Screenshot%202024-10-01%20153901.png)
+![DSPplanW3fast](../../images/Screenshot%202024-10-17%20134303.png)
 
 #### The strangly vintage universe of SigmaDSP
 

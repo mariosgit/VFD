@@ -168,15 +168,18 @@ void FDController::taskInput()
         {   // Encoder Left Bottom -> Distortion Level ?
             if(encval)
             {
-                _distortion -= 0.1f * encval;
-                if(_distortion > 10.0) _distortion = 10.0;
-                if(_distortion < 0.1)  _distortion = 0.1;
+                drawHelpers = 100;
 
-                LOG <<"dist:" <<_distortion <<" dspval:" <<LOG.hex <<dspctrl.dsp.floatTo523(_distortion) <<LOG.dec <<LOG.endl;
+                // new mapping -1..1    dsp kricht den log10 davon .1(max) .. 10(min)
+                _distortion -= 0.1f * encval;
+                if(_distortion > 1.0) _distortion = 1.0;
+                if(_distortion < -1.0)  _distortion = -1.0;
+
+                LOG <<"dist:" <<_distortion <<" pow10:" <<pow10f(_distortion) <<" dspval:" <<LOG.hex <<dspctrl.dsp.floatTo523(_distortion) <<LOG.dec <<LOG.endl;
 
                 dspctrl.dsp.saveloadWrite(
-                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHA_ADDR, dspctrl.dsp.floatTo523( _distortion ),
-                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHAM1_ADDR, dspctrl.dsp.floatTo523( 1.0f / _distortion ) );
+                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHA_ADDR, dspctrl.dsp.floatTo523( pow10f(_distortion) ),
+                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHAM1_ADDR, dspctrl.dsp.floatTo523( 1.0f / pow10f(_distortion) ) );
 
             }
         }
@@ -188,6 +191,7 @@ void FDController::taskInput()
             }
             if(encval)
             {
+                drawHelpers = 100;
                 if(encval > 0) dspctrl.eqBandNext();
                 else dspctrl.eqBandPrev();
             }
@@ -197,6 +201,7 @@ void FDController::taskInput()
             // Encoder Left Right -> change Gain
             if(encval)
             {
+                drawHelpers = 100;
                 dspctrl.eqVal(encval);
             }
         }
@@ -340,11 +345,14 @@ void FDController::taskDisplay()
 
         if(dspctrl.dspEnabled)
         {
+            // Dist settings (dit 1..-1)
+            display.fillRect(20, _distortion*16+15, 8, 2, drawHelpers?3:1);
+
             // levels from 0? to -100
-            int16_t valL = max(dspctrl.levels.inL, -32.0*2)  / -2; // should be within 0 - 32 ?
+            int16_t valL = max(dspctrl.levels.inL*2, -32.0*2)  / -2; // should be within 0 - 32 ?
             display.fillRect(0, valL, 6, 32 - valL, 3);
             // LOG <<"draw l1 " <<_levels.inL <<" mapped vaL:" <<valL <<LOG.endl;
-            int16_t valR = max(dspctrl.levels.inR, -32.0*2)  / -2; // should be within 0 - 32 ?
+            int16_t valR = max(dspctrl.levels.inR*2, -32.0*2)  / -2; // should be within 0 - 32 ?
             display.fillRect(8, valR, 6, 32 - valR, 3);
             // levels - distortion - todo rms it or read more often
             // int16_t valE = max(_levels.postEQ[1], -32.0*2)  / -2; // should be within 0 - 32 ?
@@ -352,6 +360,11 @@ void FDController::taskDisplay()
             int16_t valD = max(dspctrl.levels.distortion, -32.0*2)  / -2; // should be within 0 - 32 ?
             display.fillRect(24, valD, 3, 32 - valD, 3);
 
+            // EQ Settings
+            for(int i = 0; i < 4; i++)
+            {
+                display.fillRect(36 + 12*i, 15-dspctrl.eqValues[i], 10, 2, (drawHelpers && dspctrl.eqBand==i)?3:1);
+            }
             // Speki
             for(int i = 1; i < 8; i++)
             {
@@ -362,11 +375,6 @@ void FDController::taskDisplay()
                 display.fillRect(30 + 6*i, 8+ valE, 5, 2 /*32 - valE*/, 3);
             }
 
-            // EQ Settings
-            for(int i = 0; i < 4; i++)
-            {
-                display.fillRect(36 + 12*i, 15-dspctrl.eqValues[i], 10, 2, (dspctrl.eqBand==i)?3:1);
-            }
         }
         else
         {
@@ -393,6 +401,7 @@ void FDController::taskDisplay()
         display.swapBuffers();
 
         drawtime = micros() - time;
+        if(drawHelpers > 0) drawHelpers--;
     }
 }
 
@@ -429,20 +438,6 @@ void FDController::taskLogger()
             dspOffCounter--;
             LOG << "DSP OFF until..." <<dspOffCounter  <<LOG.endl;
         }
-
-
-        // // experimental... bandpass, looks useable.
-        // float freq = random(100,15000);
-        // float widthQ = float(random(20,500))/100.0f;
-        // float coeffs[5];
-        // getCoefficients<float>(coeffs, BiquadType::BAND_PASS, 0, freq, 48000, widthQ, true);
-        // LOG <<"bandpass: " <<freq <<"Hz wq:" <<widthQ <<" bqs:";
-        // for(int i = 0; i < 6; i++) { LOG <<coeffs[i] <<", "; }
-        // LOG <<LOG.endl;
-        // if(dspctrl.dspEnabled)
-        // {
-        //     dspctrl.dsp.saveloadWrite5(MOD_HPEQ1_ALG0_STAGE0_B0_ADDR, coeffs);
-        // }
 
     }
 }

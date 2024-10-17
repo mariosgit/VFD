@@ -1,8 +1,8 @@
 /*
  * File:           C:\Users\mario\DevelSelf\VFD\src\FreeDSPControllerMN12832L\AMPx4-TDM-Test02\SigmaKram_IC_2_PARAM.h
  *
- * Created:        Monday, October 14, 2024 6:16:36 PM
- * Description:    AMPx4-TDM-Test02:IC 2 parameter RAM definitions.
+ * Created:        Thursday, October 17, 2024 1:31:27 PM
+ * Description:    AMPx4-TDM-W3fast:IC 2 parameter RAM definitions.
  *
  * This software is distributed in the hope that it will be useful,
  * but is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR

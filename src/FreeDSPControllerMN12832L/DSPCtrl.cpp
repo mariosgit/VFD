@@ -110,25 +110,6 @@ void DSPCtrl::setVolume(int16_t volumeDB)
     dspEnabled &= dsp.saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
 }
 
-// from teensy audio filter_biquad, the one in biquad.h does not work
-void setLowShelf(float frequency, float gain, float slope, float *coef)
-{
-    float a = powf(10.0, gain/40.0f);
-    float w0 = frequency * (2.0f * 3.141592654f / 48000.0f);
-    float sinW0 = sinf(w0);
-    float cosW0 = cosf(w0);
-    //generate three helper-values (intermediate results):
-    float sinsq = sinW0 * sqrtf( (pow(a,2.0)+1.0)*(1.0/(double)slope-1.0)+2.0*a );
-    float aMinus = (a-1.0)*cosW0;
-    float aPlus = (a+1.0)*cosW0;
-    float scale = 1.0 / ( (a+1.0) + aMinus + sinsq);
-    /* b0 */ coef[0] =		a *	( (a+1.0) - aMinus + sinsq	) * scale;
-    /* b1 */ coef[1] =  2.0*a * ( (a-1.0) - aPlus  			) * scale;
-    /* b2 */ coef[2] =		a * ( (a+1.0) - aMinus - sinsq 	) * scale;
-    /* a1 */ coef[3] = -2.0*	( (a-1.0) + aPlus			) * scale;
-    /* a2 */ coef[4] =  		( (a+1.0) + aMinus - sinsq	) * scale;
-}
-
 void DSPCtrl::eqVal(int diff)
 {
     int8_t current = eqValues[eqBand];
@@ -146,17 +127,63 @@ void DSPCtrl::eqVal(int diff)
         MOD_ALLEQ4_ALG0_STAGE0_B0_ADDR};
 
     float coeffs[5];
-    auto algo = BiquadType::PEAKING;// (eqBand == 1 || eqBand == 2) ? BiquadType::PEAKING : (eqBand == 0) ? BiquadType::LOW_SHELF : BiquadType::HIGH_SHELF;
-    getCoefficients<float>(coeffs, algo, (float)current, eqFreq[eqBand], 48000, .25f, (algo==BiquadType::PEAKING)?false:true);
 
-    // if(eqBand == 0)    setLowShelf(eqFreq[eqBand], current, 1.0f, coeffs);
+    switch(eqBand)
+    {
+        // case 0:
+        //     setLowShelf(coeffs, eqFreq[eqBand], eqValues[eqBand], 1.0f);
+        //     break;
+        // case 3:
+        //     setHighShelf(coeffs, eqFreq[eqBand], eqValues[eqBand], 1.0f);
+        //     break;
+        default:
+            getCoefficients<float>(coeffs, BiquadType::PEAKING, eqValues[eqBand], eqFreq[eqBand], AUDIO_SAMPLE_RATE_EXACT, .25f, false);
+            break;
+    }
 
-    LOG <<"algo:" <<(int)algo <<" [" <<eqBand <<"] " <<eqFreq[eqBand] <<"Hz g:" <<current <<" wq:" <<0.5f <<" bqs:";
+    LOG <<"algo:" <<" [" <<eqBand <<"] " <<eqFreq[eqBand] <<"Hz g:" <<current <<" wq:" <<0.5f <<" bqs:";
     for(int i = 0; i < 6; i++) { LOG <<coeffs[i] <<", "; }
     LOG <<LOG.endl;
     if(dspEnabled)
     {
         dspEnabled &= dsp.saveloadWrite5(adrs[eqBand], coeffs);
     }
+}
 
+// from teensy audio filter_biquad, the one in biquad.h does not work
+void DSPCtrl::setLowShelf(float *coef, float frequency, float gain, float slope)
+{
+    double a = powf(10.0, gain/40.0f);
+    double w0 = frequency * (2.0f * 3.141592654f / AUDIO_SAMPLE_RATE_EXACT);
+    double sinW0 = sinf(w0);
+    double cosW0 = cosf(w0);
+    //generate three helper-values (intermediate results):
+    double sinsq = sinW0 * sqrtf( (powf(a,2.0)+1.0)*(1.0/(double)slope-1.0)+2.0*a );
+    double aMinus = (a-1.0)*cosW0;
+    double aPlus = (a+1.0)*cosW0;
+    double scale = 1.0 / ( (a+1.0) + aMinus + sinsq);
+    /* b0 */ coef[0] =		a *	( (a+1.0) - aMinus + sinsq	) * scale;
+    /* b1 */ coef[1] =  2.0*a * ( (a-1.0) - aPlus  			) * scale;
+    /* b2 */ coef[2] =		a * ( (a+1.0) - aMinus - sinsq 	) * scale;
+    /* a1 */ coef[3] = -2.0*	( (a-1.0) + aPlus			) * scale;
+    /* a2 */ coef[4] =  		( (a+1.0) + aMinus - sinsq	) * scale;
+}
+
+void DSPCtrl::setHighShelf(float *coef, float frequency, float gain, float slope = 1.0f)
+{
+    double a = powf(10.0, gain/40.0f);
+    double w0 = frequency * (2.0f * 3.141592654f / AUDIO_SAMPLE_RATE_EXACT);
+    double sinW0 = sinf(w0);
+    //double alpha = (sinW0 * sqrt((a+1/a)*(1/slope-1)+2) ) / 2.0;
+    double cosW0 = cosf(w0);
+    //generate three helper-values (intermediate results):
+    double sinsq = sinW0 * sqrtf( (powf(a,2.0)+1.0)*(1.0/(double)slope-1.0)+2.0*a );
+    double aMinus = (a-1.0)*cosW0;
+    double aPlus = (a+1.0)*cosW0;
+    double scale = 1.0 / ( (a+1.0) - aMinus + sinsq);
+    /* b0 */ coef[0] =		a *	( (a+1.0) + aMinus + sinsq	) * scale;
+    /* b1 */ coef[1] = -2.0*a * ( (a-1.0) + aPlus  			) * scale;
+    /* b2 */ coef[2] =		a * ( (a+1.0) + aMinus - sinsq 	) * scale;
+    /* a1 */ coef[3] =  2.0*	( (a-1.0) - aPlus			) * scale;
+    /* a2 */ coef[4] =  		( (a+1.0) - aMinus - sinsq	) * scale;
 }

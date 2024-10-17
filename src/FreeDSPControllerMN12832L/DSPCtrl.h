@@ -5,7 +5,7 @@
 #include <SigmaDSP.h>
 
 class DSPCtrl {
-  public:
+public:
     DSPCtrl();
 
     void readLevels();
@@ -14,6 +14,9 @@ class DSPCtrl {
     void eqBandNext() { eqBand = (eqBand + 1) % 4; };
     void eqBandPrev() { eqBand = (eqBand - 1) % 4; if(eqBand < 0) eqBand += 4; };
     void eqVal(int diff);
+
+    void setLowShelf(float *coef, float frequency, float gain, float slope);
+    void setHighShelf(float *coef, float frequency, float gain, float slope);
 
     /// @brief If disabled, I2C comm stops, can connect sigmastudio then.
     boolean dspEnabled = false;
@@ -31,5 +34,6 @@ class DSPCtrl {
         float postEQ[10];
     } levels = {-99,-99,-99,{-99,-99,-99,-99,-99,-99,-99,-99,-99,-99}};
 
+    const float AUDIO_SAMPLE_RATE_EXACT = 48000.0f;
     SigmaDSP dsp;
 };
