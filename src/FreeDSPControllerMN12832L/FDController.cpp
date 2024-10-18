@@ -123,6 +123,12 @@ void FDController::taskInput()
 {
     inputSlot = (inputSlot + 1) % 5; // 0-4 // Why ? Teensy sometimes crashes here, no idea ???
 
+    // if(inputSlot == 0) return; // debuging !
+    // if(inputSlot == 1) return; // debuging !
+    // if(inputSlot == 2) return; // debuging ! oohh der dicke volume spackt !?!?
+    // if(inputSlot == 3) return; // debuging !
+    // if(inputSlot == 4) return; // debuging !
+
     // uuuhhh hangs some times ??? encoder readout disables interrupts !!! would be better to just disable the intervaltimer for it !? 
     if(emInput > 20)
     {
@@ -177,9 +183,12 @@ void FDController::taskInput()
 
                 LOG <<"dist:" <<_distortion <<" pow10:" <<pow10f(_distortion) <<" dspval:" <<LOG.hex <<dspctrl.dsp.floatTo523(_distortion) <<LOG.dec <<LOG.endl;
 
-                dspctrl.dsp.saveloadWrite(
-                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHA_ADDR, dspctrl.dsp.floatTo523( pow10f(_distortion) ),
-                    MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHAM1_ADDR, dspctrl.dsp.floatTo523( 1.0f / pow10f(_distortion) ) );
+                if(dspctrl.dspEnabled)
+                {
+                    dspctrl.dsp.saveloadWrite(
+                        MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHA_ADDR, dspctrl.dsp.floatTo523( pow10f(_distortion) ),
+                        MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHAM1_ADDR, dspctrl.dsp.floatTo523( 1.0f / pow10f(_distortion) ) );
+                }
 
             }
         }
@@ -214,7 +223,10 @@ void FDController::taskInput()
                 if(_volumeDB > 12) _volumeDB = 12;
                 if(_volumeDB < -90) _volumeDB = -90;
 
-                dspctrl.setVolume(_volumeDB);
+                if(dspctrl.dspEnabled)
+                {
+                    dspctrl.setVolume(_volumeDB);
+                }
             }
         }
 
@@ -226,16 +238,23 @@ void FDController::taskInput()
                 if(_volumeDB > 12) _volumeDB = 12;
                 if(_volumeDB < -90) _volumeDB = -90;
 
-                dspctrl.setVolume(_volumeDB);
+                if(dspctrl.dspEnabled)
+                {
+                    dspctrl.setVolume(_volumeDB);
+                }
             }
             if(encbtn == ClickEncoder::Clicked)
             {
                 // toggle muteSPK / muteHP / BOTH on
                 _mute = (_mute + 1) % 3;
-                // mute speaker
-                dspctrl.dsp.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
-                // mute headphone
-                dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
+
+                if(dspctrl.dspEnabled)
+                {
+                    // mute speaker
+                    dspctrl.dsp.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
+                    // mute headphone
+                    dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
+                }
             }
         }
 
