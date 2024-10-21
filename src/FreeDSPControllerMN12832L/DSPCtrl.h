@@ -24,7 +24,7 @@ public:
 
     int8_t eqBand = 0;   // 4 bands
     int8_t eqValues[4] = {0,0,0,0};  // gain value for each band, +-16
-    const float eqFreq[4] = {300., 600., 2400., 9600.};    // between analyser freqs 100,200, 400,800, 1600,3200, 6400,12800
+    const float eqFreq[4] = {100., 800., 5000.,10600.};    // between analyser freqs 100,200, 400,800, 1600,3200, 6400,12800
 
     struct Levels
     {

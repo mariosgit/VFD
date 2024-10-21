@@ -281,6 +281,35 @@ Param Value:  1
 ```
 
 
+
+##### InputMixer
+
+turn up chanel 0/1
+
+```
+Safeload Write
+Time:  23:09:22 - 120ms
+IC:  IC 1
+Cell Name:  NxM Mixer1
+Param Name:  NxNMixer1940Alg1_01_01
+Param Address:  0x0017
+Param Value:  1.99526226520538
+Bytes:  4
+Param Data:
+0x00, 	0xFF, 	0x64, 	0xC1
+
+Safeload Write
+Time:  23:09:39 - 664ms
+IC:  IC 1
+Cell Name:  NxM Mixer1
+Param Name:  NxNMixer1940Alg1_00_00
+Param Address:  0x0011
+Param Value:  1.99526226520538
+Bytes:  4
+Param Data:
+0x00, 	0xFF, 	0x64, 	0xC1
+```
+
 ### Comparing Biquad calculators...
 
 SigmaStudio Bandpass produces this 100Hz BW:2

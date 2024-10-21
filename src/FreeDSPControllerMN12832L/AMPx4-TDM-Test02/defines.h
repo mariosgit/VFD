@@ -1,7 +1,7 @@
 /*
  * File:           defines.h
  *
- * Created:        Thursday, October 17, 2024 1:31:27 PM
+ * Created:        Monday, October 21, 2024 11:15:55 PM
  * Description:    AMPx4-TDM-W3fast IC default download data definitions.
  *
  * This software is distributed in the hope that it will be useful,
