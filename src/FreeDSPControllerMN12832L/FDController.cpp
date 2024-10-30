@@ -14,6 +14,11 @@ const uint8_t pinFFblank = 6;
 const uint8_t pinSCL = 16;
 const uint8_t pinSDA = 17;
 
+// 9,10,12 are free
+const uint8_t pinDBG9 = 9;
+const uint8_t pinDBG10 = 10;
+const uint8_t pinDBG12 = 12;
+
 FDController::FDController() : display( 
         /* pinBLK = */ 0,
         /* pinLAT = */ 1,
@@ -49,6 +54,8 @@ FDController::FDController() : display(
     digitalWrite(pinFFblank, HIGH);
     analogWriteFrequency(pinFFblank, 22000);
     analogWrite(pinFFblank, 168); // 50% duty, 488Hz flicker !!!
+
+    pinMode(pinDBG12, OUTPUT);
 }
 
 void FDController::setup()
@@ -61,6 +68,7 @@ void FDController::setup()
     refreshTimer.begin([this]{
         display.refresh();
         }, 1000000/ display.targetFps); // period in usec
+        
     inputTimer.begin([this]{
         inputService();
         enc1.service();
