@@ -20,7 +20,7 @@ const uint8_t pinSDA = 17;
 // 9,10,12 are free
 const uint8_t pinDBG9 = 9;
 const uint8_t pinDBG10 = 10;
-const uint8_t pinDBG12 = 12;
+const uint8_t pinDBG12 = 12; // MISO ?
 
 FDController::FDController() : display( 
         /* pinBLK = */ 0,
@@ -59,7 +59,8 @@ FDController::FDController() : display(
     analogWriteFrequency(pinFFblank, 22000);
     analogWrite(pinFFblank, 200); // 50% duty, 488Hz flicker !!!
 
-    pinMode(pinDBG12, OUTPUT);
+    pinMode(pinDBG9, OUTPUT);
+    pinMode(pinDBG10, OUTPUT);
 }
 
 void FDController::setup()
@@ -68,20 +69,23 @@ void FDController::setup()
     randomSeed(analogRead(0));
 
     // Interrupt functions...
+
     // You need to trigger the refresh function regularly !
-    // myTimer.begin(display.refresh, 1000000 / display.targetFps);
     refreshTimer.begin([this]{
         display.refresh();
         }, 1000000/ display.targetFps); // period in usec
         
     inputTimer.begin([this]{
         if(!inputStuffEnabled) return; // sort off interrupt disable
-        inputService();
-        enc1.service();
+        // digitalWrite(pinDBG9, 1); // check how long this takes
+        digitalWriteFast(pinDBG9, 1);
+        inputService(); // 40us
+        enc1.service(); // 10us all the rest
         enc2.service();
         enc3.service();
         enc4.service();
         enc5.service();
+        digitalWriteFast(pinDBG9, 0);
         }, 1000);
 }
 
@@ -89,15 +93,15 @@ void FDController::setup()
 void FDController::inputService() {
     // digitalWrite(pinDBG0, HIGH);
     uint32_t result = 0;
-    digitalWrite(pinSLat, LOW);
-    digitalWrite(pinSLat, HIGH);
+    digitalWriteFast(pinSLat, LOW);
+    digitalWriteFast(pinSLat, HIGH);
     // only get 16 bit (2 shift registers)
     for (int bitt = 0; bitt < 16; bitt++)
     {
         // I get /Q as input !
-        result |= ((digitalRead(pinSIN)) ? 0 : 1) << bitt;
-        digitalWrite(pinSCLK, LOW);
-        digitalWrite(pinSCLK, HIGH);
+        result |= ((digitalReadFast(pinSIN)) ? 0 : 1) << bitt;
+        digitalWriteFast(pinSCLK, LOW);
+        digitalWriteFast(pinSCLK, HIGH);
     }
     input = result;
     // digitalWrite(pinDBG0, LOW);
@@ -123,7 +127,9 @@ void FDController::taskChecker()
         // levels read every 4th
         // eq reads once per 32
 
+        digitalWriteFast(pinDBG10, 1);
         dspctrl.readLevels();
+        digitalWriteFast(pinDBG10, 0);
     }
 }
 
@@ -150,36 +156,13 @@ void FDController::taskInput()
         //   1     4
         //      3 
         //   2     5
-        inputStuffEnabled = false;
-        if(inputSlot+1 == 1)
-        {
-            encval = enc1.getValue();
-            encbtn = enc1.getButton();
-        }
-        if(inputSlot+1 == 2)
-        {
+
+        if(1)//inputSlot+1 == 2)
+        {   // Encoder Left Bottom -> Distortion Level ?
+            inputStuffEnabled = false;
             encval = enc2.getValue();
             encbtn = enc2.getButton();
-        }
-        if(inputSlot+1 == 3)
-        {
-            encval = enc3.getValue();
-            encbtn = enc3.getButton();
-        }
-        if(inputSlot+1 == 4)
-        {
-            encval = enc4.getValue();
-            encbtn = enc4.getButton();
-        }
-        if(inputSlot+1 == 5)
-        {
-            encval = enc5.getValue();
-            encbtn = enc5.getButton();
-        }
-        inputStuffEnabled = true;
-
-        if(inputSlot+1 == 2)
-        {   // Encoder Left Bottom -> Distortion Level ?
+            inputStuffEnabled = true;
             if(encval)
             {
                 drawHelpers = 100;
@@ -200,8 +183,12 @@ void FDController::taskInput()
 
             }
         }
-        if(inputSlot+1 == 1)
+        if(1)//inputSlot+1 == 1)
         {
+            inputStuffEnabled = false;
+            encval = enc1.getValue();
+            encbtn = enc1.getButton();
+            inputStuffEnabled = true;
             // Encoder Left Top -> select EQ
             if(encbtn == ClickEncoder::Clicked)
             {
@@ -213,8 +200,12 @@ void FDController::taskInput()
                 else dspctrl.eqBandPrev();
             }
         }
-        if(inputSlot+1 == 4)
+        if(1)//inputSlot+1 == 4)
         {
+            inputStuffEnabled = false;
+            encval = enc4.getValue();
+            encbtn = enc4.getButton();
+            inputStuffEnabled = true;
             // Encoder Left Right -> change Gain
             if(encval)
             {
@@ -223,8 +214,12 @@ void FDController::taskInput()
             }
         }
 
-        if(inputSlot+1 == 3)
+        if(1)//inputSlot+1 == 3)
         {   // Encoder Center -> Volume
+            inputStuffEnabled = false;
+            encval = enc3.getValue();
+            encbtn = enc3.getButton();
+            inputStuffEnabled = true;
             if(encval)
             {
                 _volumeDB += encval;
@@ -238,8 +233,12 @@ void FDController::taskInput()
             }
         }
 
-        if(inputSlot+1 == 5)
+        if(1)//inputSlot+1 == 5)
         {   // Encoder Right Bottom -> Volume, Muting
+            inputStuffEnabled = false;
+            encval = enc5.getValue();
+            encbtn = enc5.getButton();
+            inputStuffEnabled = true;
             if(encval)
             {
                 _volumeDB += encval;
@@ -457,6 +456,7 @@ void FDController::taskLogger()
             Wire.setSCL(pinSCL);
             Wire.setSDA(pinSDA);
             Wire.begin();
+            Wire.setClock(400000);
             dspctrl.dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
             LOG << "DSP connection ON" <<LOG.endl;
         }
