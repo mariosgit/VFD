@@ -2,6 +2,9 @@
 
 #include "FDController.h"
 
+#include "biquad.h" // copy from teensy audio, including from lib_deps draws other stuff in :(
+
+// move to dspctrl..
 #define SIGMASTUDIOTYPE_SPECIAL static_cast<int16_t> // ??? just an hex uint16_t, for the 12bit ProgCounter where the readback happens ?
 #include "AMPx4-TDM-Test02/SigmaKram_IC_1_PARAM.h"
 #include "AMPx4-TDM-Test02/SigmaKram_IC_1_REG.h"
@@ -37,9 +40,10 @@ FDController::FDController() : display(
     // enc3 cc           c000 0008
     // enc4 ru           0300 0400
     // enc5 rd           0003 0004 
-
-    // DSP default adr
-    _addr = 0x68 >> 1;
+    enc1.setAccelerationEnabled(false);
+    // enc2.setAccelerationEnabled(false); // dist
+    enc4.setAccelerationEnabled(false);
+    enc5.setAccelerationEnabled(false);
 
     // 74165 shift register with buttons/encoder inputs
     pinMode(pinSLat, OUTPUT);
@@ -53,7 +57,7 @@ FDController::FDController() : display(
     pinMode(pinFFblank, OUTPUT);
     digitalWrite(pinFFblank, HIGH);
     analogWriteFrequency(pinFFblank, 22000);
-    analogWrite(pinFFblank, 168); // 50% duty, 488Hz flicker !!!
+    analogWrite(pinFFblank, 200); // 50% duty, 488Hz flicker !!!
 
     pinMode(pinDBG12, OUTPUT);
 }
@@ -63,6 +67,7 @@ void FDController::setup()
     display.begin();
     randomSeed(analogRead(0));
 
+    // Interrupt functions...
     // You need to trigger the refresh function regularly !
     // myTimer.begin(display.refresh, 1000000 / display.targetFps);
     refreshTimer.begin([this]{
@@ -70,13 +75,14 @@ void FDController::setup()
         }, 1000000/ display.targetFps); // period in usec
         
     inputTimer.begin([this]{
+        if(!inputStuffEnabled) return; // sort off interrupt disable
         inputService();
         enc1.service();
         enc2.service();
         enc3.service();
         enc4.service();
         enc5.service();
-        }, 2000);
+        }, 1000);
 }
 
 /// @brief Read encoders via shift registers
@@ -102,168 +108,173 @@ void FDController::inputService() {
 
 void FDController::loop()
 {
+    taskChecker();
+    taskInput();
+    taskSerial();
+    taskDisplay();
+    taskLogger();
+}
+
+void FDController::taskChecker()
+{
     if (emChecker > 1)
     {
         emChecker = 0;
         // levels read every 4th
         // eq reads once per 32
 
-        if(dspEnabled)
-        {
-
-            // input things...
-            const int16_t trapLevel1 = MOD_LVIN1_ALG0_SINGLEBANDLEVELDET3_VALUES;
-            const int16_t trapLevel2 = MOD_LVIN2_ALG0_SINGLEBANDLEVELDET5_VALUES;
-            // post-eq, distortion
-            const int16_t trapLevel3 = MOD_LVPOSTEQ_ALG0_SINGLEBANDLEVELDET2_VALUES;
-            const int16_t trapLevel4 = MOD_LVDISTORTION_ALG0_SINGLEBANDLEVELDET1_VALUES;
-
-            uint8_t data[6 * 4];
-            // Write to data capture reg 2074 and 2075
-            const int16_t DC1 = 2074;
-            // const int16_t DC2 = 2075;
-
-            if (dspReadCycle % 4 == 0) // as long as we use only these 2, setup only once
-            {
-                // setup DC to read LevelMeters
-                Wire.beginTransmission(_addr);
-                Wire.write(DC1 >> 8);          // address high byte
-                Wire.write(DC1 & 0xff);        // address low byte
-                Wire.write(trapLevel1 >> 8);   // address high byte
-                Wire.write(trapLevel1 & 0xff); // address low byte
-                Wire.write(trapLevel2 >> 8);   // address high byte
-                Wire.write(trapLevel2 & 0xff); // address low byte
-                WireEndTransmission();
-            }
-            else
-            {
-                // setup DC to read Secondary LevelMeters
-                Wire.beginTransmission(_addr);
-                Wire.write(DC1 >> 8);          // address high byte
-                Wire.write(DC1 & 0xff);        // address low byte
-                Wire.write(trapLevel3 >> 8);   // address high byte
-                Wire.write(trapLevel3 & 0xff); // address low byte
-                Wire.write(trapLevel4 >> 8);   // address high byte
-                Wire.write(trapLevel4 & 0xff); // address low byte
-                WireEndTransmission();
-
-                // select the index of the postEQ filter 0-8 / flat,100,200,400,800,1600,3200,6400,12800
-                // kein block write, es knackt !!!
-                if(dspReadCycle % 4 == 1)
-                {
-                    saveloadWrite(MOD_EQFILTERIDX_DCINPALG1_ADDR, dspReadCycle/4);
-                }
-            }
-
-            // send addr to read, no stop condition... then read...
-            Wire.beginTransmission(_addr);
-            Wire.write(DC1 >> 8);                 // address high byte
-            Wire.write(DC1 & 0xff);               // address low byte
-            WireEndTransmission(false); // no stop before reading !
-            // LOG << "r2: " <<result << LOG.endl;
-
-            // read...
-            byte readlen = 6; // 2x3
-            Wire.requestFrom(_addr, readlen);
-            int idx = 0;
-            while (Wire.available()) // slave may send less than requested
-            {
-                data[idx++] = Wire.read(); // receive a byte as character
-                if (idx > readlen)
-                    break;
-            }
-
-            if (idx == 6)
-            {
-                // dcdone = true;
-                // 24bit 5.19 fixpoint value. The overall shift is needed for negative values.
-                int32_t value1 = (((int32_t)data[2] << 8) | ((int32_t)data[1] << 16) | ((int32_t)data[0] << 24)) >> 8;
-                int32_t value2 = (((int32_t)data[5] << 8) | ((int32_t)data[4] << 16) | ((int32_t)data[3] << 24)) >> 8;
-
-                // 5.19 fixpoint to float.
-                float realval1 = -1.0f * (100.0f - (float)value1 / 5242.880f); // x / (1 << 19)
-                float realval2 = -1.0f * (100.0f - (float)value2 / 5242.880f); // x / (1 << 19)
-
-                if(dspReadCycle % 4 == 0)
-                {
-                    _levels.inL = realval1;
-                    _levels.inR = realval2;
-                }
-                else
-                {
-                    if(dspReadCycle % 4 == 3)
-                    {
-                        _levels.postEQ[dspReadCycle/4] = realval1;
-                    } 
-                    _levels.distortion = realval2;
-                }
-            }
-            else
-            {
-                // LOG << "ac: ??? idx:" << idx << LOG.endl;
-            }
-
-            dspReadCycle++; // next time read the others...
-
-            if(dspReadCycle > 8*4)
-            {
-                dspReadCycle = 0;
-            }
-
-        } // dspEnabled
-
+        dspctrl.readLevels();
     }
+}
+
+void FDController::taskInput()
+{
+    inputSlot = (inputSlot + 1) % 5; // 0-4 // Why ? Teensy sometimes crashes here, no idea ???
+
+    // if(inputSlot == 0) return; // debuging !
+    // if(inputSlot == 1) return; // debuging !
+    // if(inputSlot == 2) return; // debuging ! oohh der dicke volume spackt !?!?
+    // if(inputSlot == 3) return; // debuging !
+    // if(inputSlot == 4) return; // debuging !
+
+    // uuuhhh hangs some times ??? encoder readout disables interrupts !!! would be better to just disable the intervaltimer for it !? 
     if(emInput > 20)
     {
         emInput = 0;
 
-        {   // Encoder Center -> Volume
-            auto enc3val = enc3.getValue();
-            auto enc3btn = enc3.getButton();
-            if(enc3val)
+        int16_t encval = 0;
+        ClickEncoder::Button encbtn = ClickEncoder::Open;
+
+        // encoder service runs within interrupt, this will stop it for a moment
+        // read encoders
+        //   1     4
+        //      3 
+        //   2     5
+        inputStuffEnabled = false;
+        if(inputSlot+1 == 1)
+        {
+            encval = enc1.getValue();
+            encbtn = enc1.getButton();
+        }
+        if(inputSlot+1 == 2)
+        {
+            encval = enc2.getValue();
+            encbtn = enc2.getButton();
+        }
+        if(inputSlot+1 == 3)
+        {
+            encval = enc3.getValue();
+            encbtn = enc3.getButton();
+        }
+        if(inputSlot+1 == 4)
+        {
+            encval = enc4.getValue();
+            encbtn = enc4.getButton();
+        }
+        if(inputSlot+1 == 5)
+        {
+            encval = enc5.getValue();
+            encbtn = enc5.getButton();
+        }
+        inputStuffEnabled = true;
+
+        if(inputSlot+1 == 2)
+        {   // Encoder Left Bottom -> Distortion Level ?
+            if(encval)
             {
-                _volumeDB += enc3val;
-                if(_volumeDB > 12) _volumeDB = 12;
-                if(_volumeDB < -90) _volumeDB = -90;
-                float fraction = pow10f((float)_volumeDB/20.0);
-                uint32_t dspval = (uint32_t)(fraction * (float)0x0800000);
-                LOG <<"Volume:" <<LOG.dec <<_volumeDB <<" fract:" <<fraction <<" dsp:" <<LOG.hex <<dspval <<LOG.endl;
-                saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
+                drawHelpers = 100;
+
+                // new mapping -1..1    dsp kricht den log10 davon .1(max) .. 10(min)
+                _distortion -= 0.1f * encval;
+                if(_distortion > 1.0) _distortion = 1.0;
+                if(_distortion < -1.0)  _distortion = -1.0;
+
+                LOG <<"dist:" <<_distortion <<" pow10:" <<pow10f(_distortion) <<" dspval:" <<LOG.hex <<dspctrl.dsp.floatTo523(_distortion) <<LOG.dec <<LOG.endl;
+
+                if(dspctrl.dspEnabled)
+                {
+                    dspctrl.dsp.saveloadWrite(
+                        MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHA_ADDR, dspctrl.dsp.floatTo523( pow10f(_distortion) ),
+                        MOD_SOFTCLIP1_ALG0_SOFTCLIPALGG21ALPHAM1_ADDR, dspctrl.dsp.floatTo523( 1.0f / pow10f(_distortion) ) );
+                }
+
             }
         }
-        {   // Encoder Right Bottom -> Volume, Muting
-            auto enc5val = enc5.getValue();
-            auto enc5btn = enc5.getButton();
-            if(enc5val)
+        if(inputSlot+1 == 1)
+        {
+            // Encoder Left Top -> select EQ
+            if(encbtn == ClickEncoder::Clicked)
             {
-                _volumeDB += enc5val;
+            }
+            if(encval)
+            {
+                drawHelpers = 100;
+                if(encval > 0) dspctrl.eqBandNext();
+                else dspctrl.eqBandPrev();
+            }
+        }
+        if(inputSlot+1 == 4)
+        {
+            // Encoder Left Right -> change Gain
+            if(encval)
+            {
+                drawHelpers = 100;
+                dspctrl.eqVal(encval);
+            }
+        }
+
+        if(inputSlot+1 == 3)
+        {   // Encoder Center -> Volume
+            if(encval)
+            {
+                _volumeDB += encval;
                 if(_volumeDB > 12) _volumeDB = 12;
                 if(_volumeDB < -90) _volumeDB = -90;
-                float fraction = pow10f((float)_volumeDB/20.0);
-                uint32_t dspval = (uint32_t)(fraction * (float)0x0800000);
-                LOG <<"Volume:" <<LOG.dec <<_volumeDB <<" fract:" <<fraction <<" dsp:" <<LOG.hex <<dspval <<LOG.endl;
-                saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
+
+                if(dspctrl.dspEnabled)
+                {
+                    dspctrl.setVolume(_volumeDB);
+                }
             }
-            if(enc5btn == ClickEncoder::Clicked)
+        }
+
+        if(inputSlot+1 == 5)
+        {   // Encoder Right Bottom -> Volume, Muting
+            if(encval)
+            {
+                _volumeDB += encval;
+                if(_volumeDB > 12) _volumeDB = 12;
+                if(_volumeDB < -90) _volumeDB = -90;
+
+                if(dspctrl.dspEnabled)
+                {
+                    dspctrl.setVolume(_volumeDB);
+                }
+            }
+            if(encbtn == ClickEncoder::Clicked)
             {
                 // toggle muteSPK / muteHP / BOTH on
                 _mute = (_mute + 1) % 3;
-                uint32_t dspval = 0;
-                // mute speaker
-                dspval = (uint32_t)( (_mute & MUTE_SPK_MASK ? 0.0 : 1.0) * (float)0x0800000);
-                saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspval);
-                // mute headphone
-                dspval = (uint32_t)( (_mute & MUTE_HP_MASK ? 0.0 : 1.0) * (float)0x0800000);
-                saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspval);
+
+                if(dspctrl.dspEnabled)
+                {
+                    // mute speaker
+                    dspctrl.dsp.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
+                    // mute headphone
+                    dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
+                }
             }
         }
-        {   // Encoder Left Bottom -> Distortion Level ?
-        }
-        {   // Encoder Left Top -> Pages / PlaceParams like the knobs, let each knob control one param ?
-        }
-        {   // Encoder Right Top -> Param Values
-        }
 
+
+    }
+}
+
+void FDController::taskSerial()
+{
+    if(emSerial > 100)
+    {
+        emSerial = 0;
         if(Serial.available() > 0)
         {
             // read the incoming byte:
@@ -279,13 +290,15 @@ void FDController::loop()
                     <<"  + =\tVolume up 1 dB" <<LOG.endl
                     <<"  - /\tVolume down 1 dB" <<LOG.endl
                     <<"  SPACE\tturn on/off DSP communication - when off SigmaStudio can connect." <<LOG.endl
-                    <<"  s/S\tmute speakers" <<LOG.endl
+                    <<"  m/M\tmute speakers" <<LOG.endl
+                    <<"  qa ws ed rf - EQ settings up down"
                     <<"--------------------------------------------------------------------------" <<LOG.endl;
             }
             if(incomingByte == ' ')
             {
-                dspEnabled = !dspEnabled;
-                LOG <<"DSP connection " <<((dspEnabled)?"enabled":"disabled") <<LOG.endl;
+                dspOffCounter = 2*6; // one cycle is 5 sec
+                dspctrl.dspEnabled = !dspctrl.dspEnabled;
+                LOG <<"DSP connection " <<((dspctrl.dspEnabled)?"enabled":"disabled") <<LOG.endl;
             }
 
             if(incomingByte == '+' || incomingByte == '-' || incomingByte == '=' || incomingByte == '/')
@@ -297,9 +310,19 @@ void FDController::loop()
                 float fraction = pow10f((float)_volumeDB/20.0);
                 uint32_t dspval = (uint32_t)(fraction * (float)0x0800000);
                 LOG <<"Volume:" <<LOG.dec <<_volumeDB <<" fract:" <<fraction <<" dsp:" <<LOG.hex <<dspval <<LOG.endl;
-                saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
+                dspctrl.dsp.saveloadWrite(MOD_VOLUME_ALG0_TARGET_ADDR, dspval);
             }
-            if(incomingByte == 's' || incomingByte == 'S')
+            if(incomingByte == 'q' || incomingByte == 'a')
+            {
+                dspctrl.eqBand = 0;
+                dspctrl.eqVal( (incomingByte=='q') ? 1 : -1 );
+            }
+            if(incomingByte == 'w' || incomingByte == 's')
+            {
+                dspctrl.eqBand = 1;
+                dspctrl.eqVal( (incomingByte=='w') ? 1 : -1 );
+            }
+            if(incomingByte == 'm' || incomingByte == 'M')
             {
                 // _muteSPK = !_muteSPK;
                 // // mute speaker
@@ -308,6 +331,10 @@ void FDController::loop()
             }
         }
     }
+}
+
+void FDController::taskDisplay()
+{
     if (emDraw > 100)
     {
         emDraw = 0;
@@ -331,32 +358,57 @@ void FDController::loop()
 
         // volume
         int volx = 84;
-        display.drawRoundRect(volx,0,44,20,3,1);
+        int16_t  x1, y1;
+        uint16_t w, h;
+        char buf[5];
+        sprintf(buf, "%d", _volumeDB);
         display.setTextColor(3);
-        display.setCursor(volx+4, 3);
         display.setTextSize(2);
-        display.print(_volumeDB);
+        display.getTextBounds(buf, 0, 0, &x1, &y1, &w, &h);
+        // if(random(10) > 8) { LOG <<LOG.dec <<"x1:" <<x1  <<" x2:" <<y1  <<" w:"<<w  <<" h:" <<h <<LOG.endl; }
+        display.drawRoundRect(volx,0,44,20,3,1);
+        display.setCursor(volx+5+36-w, 3);
+        display.print(buf);
 
-        // level from 0? to -100
-        int16_t valL = max(_levels.inL, -32.0*2)  / -2; // should be within 0 - 32 ?
-        display.fillRect(0, valL, 6, 32 - valL, 3);
-        // LOG <<"draw l1 " <<_levels.inL <<" mapped vaL:" <<valL <<LOG.endl;
-        int16_t valR = max(_levels.inR, -32.0*2)  / -2; // should be within 0 - 32 ?
-        display.fillRect(8, valR, 6, 32 - valR, 3);
-
-        // int16_t valE = max(_levels.postEQ[1], -32.0*2)  / -2; // should be within 0 - 32 ?
-        // display.fillRect(20, valE, 3, 32 - valE, 3);
-        int16_t valD = max(_levels.distortion, -32.0*2)  / -2; // should be within 0 - 32 ?
-        display.fillRect(24, valD, 3, 32 - valD, 3);
-
-        //EQ
-        for(int i = 1; i < 8; i++)
+        if(dspctrl.dspEnabled)
         {
-            // min -64, scaled down by -2 -> 32 pixel
-            // min -64, scaled down by -3 -> 22 pixel
-            // min -48, scaled down by -1.5 -> 32 pixel
-            int16_t valE = max(_levels.postEQ[i], -48.0)  / -1.5; // should be within 0 - 32 ?
-            display.fillRect(30 + 6*i, 8+ valE, 5, 2 /*32 - valE*/, 3);
+            // Dist settings (dit 1..-1)
+            display.fillRect(20, _distortion*16+15, 8, 2, drawHelpers?3:1);
+
+            // levels from 0? to -100
+            int16_t valL = max(dspctrl.levels.inL*2, -32.0*2)  / -2; // should be within 0 - 32 ?
+            display.fillRect(0, valL, 6, 32 - valL, 3);
+            // LOG <<"draw l1 " <<_levels.inL <<" mapped vaL:" <<valL <<LOG.endl;
+            int16_t valR = max(dspctrl.levels.inR*2, -32.0*2)  / -2; // should be within 0 - 32 ?
+            display.fillRect(8, valR, 6, 32 - valR, 3);
+            // levels - distortion - todo rms it or read more often
+            // int16_t valE = max(_levels.postEQ[1], -32.0*2)  / -2; // should be within 0 - 32 ?
+            // display.fillRect(20, valE, 3, 32 - valE, 3);
+            int16_t valD = max(dspctrl.levels.distortion, -32.0*2)  / -2; // should be within 0 - 32 ?
+            display.fillRect(24, valD, 3, 32 - valD, 3);
+
+            // EQ Settings
+            for(int i = 0; i < 4; i++)
+            {
+                display.fillRect(36 + 12*i, 15-dspctrl.eqValues[i], 10, 2, (drawHelpers && dspctrl.eqBand==i)?3:1);
+            }
+            // Speki
+            for(int i = 1; i < 8; i++)
+            {
+                // min -64, scaled down by -2 -> 32 pixel
+                // min -64, scaled down by -3 -> 22 pixel
+                // min -48, scaled down by -1.5 -> 32 pixel
+                int16_t valE = max(dspctrl.levels.postEQ[i], -48.0)  / -1.5; // should be within 0 - 32 ?
+                display.fillRect(30 + 6*i, 8+ valE, 5, 2 /*32 - valE*/, 3);
+            }
+
+        }
+        else
+        {
+            display.setTextColor(3);
+            display.setTextSize(1);
+            display.setCursor(0, 5);
+            display.print("DSP\ncon\noff");
         }
 
         //Stats
@@ -376,7 +428,12 @@ void FDController::loop()
         display.swapBuffers();
 
         drawtime = micros() - time;
+        if(drawHelpers > 0) drawHelpers--;
     }
+}
+
+void FDController::taskLogger()
+{
     if (emLogger > 5000)
     {
         emLogger = 0;
@@ -395,108 +452,19 @@ void FDController::loop()
 
         // LOG <<"Input: " <<LOG.hex <<input <<LOG.dec <<LOG.endl;
         
-        if(!dspEnabled)
+        if(!dspctrl.dspEnabled && dspOffCounter == 0)
         {
             Wire.setSCL(pinSCL);
             Wire.setSDA(pinSDA);
             Wire.begin();
+            dspctrl.dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
             LOG << "DSP connection ON" <<LOG.endl;
         }
-        dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
-
-    }
-}
-
-void FDController::saveloadWrite(uint16_t address, uint32_t value)
-{
-    // 1. write data to 0x0810 (5 bytes for whatever reason - SigmaStudio does not show the 5th !)
-    // 2. write target addr to 0x0815 - doc echt
-    //    repeat for up to 5 val/addr pairs in to 0x0811,12,13,14 and 16,17,18,19
-    // 3 write exec command to CoreRegister 0x081C < 0x0034 ? das default steht in so nem header.. 1C ? + IST bit 
-
-    if(!dspEnabled) return;
-
-    uint16_t coreregval = REG_COREREGISTER_IC_1_VALUE | R13_SAFELOAD_IC_1_MASK;
-
-    // LOG <<LOG.hex <<"saveload hex: " <<LOG.endl;
-    // LOG <<uint8_t(0x08);          // address high byte
-    // LOG <<uint8_t(0x10);        // address low byte
-    // LOG <<" ";
-    // LOG <<uint8_t(value >> 24);   // address high byte
-    // LOG <<uint8_t(value >> 16); // address low byte
-    // LOG <<uint8_t(value >> 8);   // address high byte
-    // LOG <<uint8_t(value); // address low byte
-    // LOG <<LOG.endl;
-    // LOG <<uint8_t(0x08);          // address high byte
-    // LOG <<uint8_t(0x15);        // address low byte
-    // LOG <<" ";
-    // LOG <<uint8_t(address >> 8);   // address high byte
-    // LOG <<uint8_t(address); // address low byte
-    // LOG <<LOG.endl;
-    // LOG <<uint8_t(REG_COREREGISTER_IC_1_ADDR >> 8);          // address high byte
-    // LOG <<uint8_t(REG_COREREGISTER_IC_1_ADDR);        // address low byte
-    // LOG <<" ";
-    // LOG <<uint8_t(coreregval >> 8);   // address high byte
-    // LOG <<uint8_t(coreregval); // address low byte
-    // LOG <<LOG.dec <<LOG.endl;
-
-    // return;
-
-    uint8_t result = 0;
-    Wire.beginTransmission(_addr);
-    Wire.write(0x08);          // address high byte
-    Wire.write(0x10);        // address low byte
-    Wire.write(0);   // bits 39-32 ???
-    Wire.write(value >> 24);   // address high byte
-    Wire.write(value >> 16); // address low byte
-    Wire.write(value >> 8);   // address high byte
-    Wire.write(value & 0xff); // address low byte
-    WireEndTransmission();
-
-    Wire.beginTransmission(_addr);
-    Wire.write(0x08);          // address high byte
-    Wire.write(0x15);        // address low byte
-    Wire.write(address >> 8);   // address high byte
-    Wire.write(address); // address low byte
-    WireEndTransmission();
-
-    // // also write "step" for slew volumes ??? neee brauch mer nich
-    // value = 0x00000800;
-    // Wire.beginTransmission(_addr);
-    // Wire.write(0x08);          // address high byte
-    // Wire.write(0x11);        // address low byte
-    // Wire.write(0);   // bits 39-32 ???
-    // Wire.write(value >> 24);   // address high byte
-    // Wire.write(value >> 16); // address low byte
-    // Wire.write(value >> 8);   // address high byte
-    // Wire.write(value & 0xff); // address low byte
-    //  WireEndTransmission();
-    // 
-    // Wire.beginTransmission(_addr);
-    // Wire.write(0x08);          // address high byte
-    // Wire.write(0x16);        // address low byte
-    // Wire.write(MOD_VOLUME_ALG0_STEP_ADDR >> 8);   // address high byte
-    // Wire.write(MOD_VOLUME_ALG0_STEP_ADDR); // address low byte
-    // WireEndTransmission();
-    // 
-
-    Wire.beginTransmission(_addr);
-    Wire.write(REG_COREREGISTER_IC_1_ADDR >> 8);          // address high byte
-    Wire.write(REG_COREREGISTER_IC_1_ADDR);        // address low byte
-    Wire.write(coreregval >> 8);   // address high byte
-    Wire.write(coreregval); // address low byte
-    WireEndTransmission();
-}
-
-
-/// @brief Finish transmission, check result, stops DSP activity on error
-void FDController::WireEndTransmission(boolean sendStop)
-{
-    uint8_t result = Wire.endTransmission(sendStop);
-    if (result != 0)
-    {
-        LOG << "saveloadWrite:i2c error " << result << LOG.endl;
-        dspEnabled = false;
+        else if (dspOffCounter > 0)
+        {
+            dspOffCounter--;
+            LOG << "DSP OFF until ... " <<dspOffCounter*5 <<" sec"  <<LOG.endl;
+        }
     }
 }
 

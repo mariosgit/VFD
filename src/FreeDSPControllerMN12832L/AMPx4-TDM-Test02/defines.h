@@ -1,8 +1,8 @@
 /*
  * File:           defines.h
  *
- * Created:        Wednesday, September 25, 2024 6:47:41 PM
- * Description:    AMPx4-TDM-Test02 IC default download data definitions.
+ * Created:        Monday, October 21, 2024 11:15:55 PM
+ * Description:    AMPx4-TDM-W3fast IC default download data definitions.
  *
  * This software is distributed in the hope that it will be useful,
  * but is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR

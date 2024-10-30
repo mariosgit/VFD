@@ -1,0 +1,4 @@
+Instance  7 Signal SingleBandLevelDet3single_out trap value 101 register mult_out
+Instance  8 Signal SingleBandLevelDet5single_out trap value 134 register mult_out
+Instance  19 Signal SingleBandLevelDet1single_out trap value 410 register mult_out
+Instance  20 Signal SingleBandLevelDet2single_out trap value 443 register mult_out

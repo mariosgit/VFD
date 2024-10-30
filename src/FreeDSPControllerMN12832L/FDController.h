@@ -7,6 +7,8 @@
 #include <IntervalTimerEx.h>
 #include <ClickEncoder.h>
 
+#include "DSPCtrl.h"
+
 class FDController
 {
 public:
@@ -16,22 +18,18 @@ public:
     void loop();
 
     void inputService();
-    void saveloadWrite(uint16_t address, uint32_t value);
-    void WireEndTransmission(boolean sendStop=true);
 
+    DSPCtrl dspctrl;
     MN12832Lgrey display;
-
-    /// @brief DSP I2C address
-    uint8_t _addr = 0;
-    /// @brief If disabled, I2C comm stops, can connect sigmastudio then.
-    boolean dspEnabled = false;
-    uint16_t dspReadCycle = 0;
 
     elapsedMillis emChecker = 0;
     elapsedMillis emInput = 0;
+    elapsedMillis emSerial = 0;
     elapsedMillis emDraw = 0;
     elapsedMillis emLogger = 0;
 
+    uint32_t inputSlot = 0;
+    uint32_t dspOffCounter = 0;
     uint32_t frameCounter = 0;
     uint32_t drawtime = 0;
     int16_t textPos = 128;
@@ -39,16 +37,11 @@ public:
     // Create an IntervalTimer object
     IntervalTimerEx refreshTimer;
     IntervalTimerEx inputTimer;
+    bool inputStuffEnabled = true; // it's a interrupt disable kind off
 
-    struct Levels
-    {
-        float inL;
-        float inR;
-        float distortion;
-        float postEQ[10];
-    } _levels = {-99,-99,-99,{-99,-99,-99,-99,-99,-99,-99,-99,-99,-99}};
-
+    uint8_t drawHelpers = 0; // helpers are drawn when interaction is done.
     int16_t _volumeDB = -40;
+    float _distortion = 1.0; // 1 = none [-1;1] max;min
     uint8_t _mute = 1; // DSP starts with speaker muted
     const uint8_t MUTE_SPK_MASK = 1;
     const uint8_t MUTE_HP_MASK = 2;
@@ -66,4 +59,11 @@ public:
     ClickEncoder enc3;
     ClickEncoder enc4;
     ClickEncoder enc5;
+
+private:
+    void taskChecker();
+    void taskInput();
+    void taskSerial();
+    void taskDisplay();
+    void taskLogger();
 };
