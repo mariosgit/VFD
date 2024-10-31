@@ -57,7 +57,7 @@ FDController::FDController() : display(
     pinMode(pinFFblank, OUTPUT);
     digitalWrite(pinFFblank, HIGH);
     analogWriteFrequency(pinFFblank, 22000);
-    analogWrite(pinFFblank, 200); // 50% duty, 488Hz flicker !!!
+    analogWrite(pinFFblank, 100); // 50% duty, 488Hz flicker !!!
 
     pinMode(pinDBG9, OUTPUT);
     pinMode(pinDBG10, OUTPUT);
@@ -295,7 +295,7 @@ void FDController::taskSerial()
             }
             if(incomingByte == ' ')
             {
-                dspOffCounter = 2*6; // one cycle is 5 sec
+                dspOffCounter = 2*6 * 10; // one cycle is 5 sec
                 dspctrl.dspEnabled = !dspctrl.dspEnabled;
                 LOG <<"DSP connection " <<((dspctrl.dspEnabled)?"enabled":"disabled") <<LOG.endl;
             }
@@ -433,6 +433,28 @@ void FDController::taskDisplay()
 
         drawtime = micros() - time;
         if(drawHelpers > 0) drawHelpers--;
+
+
+
+        // LOG some stuff // sometimes
+        if(dspctrl.dspEnabled && random(10)==1)
+        {
+            // LOG <<"test..1:" <<dspctrl.toLog(1) <<" .5:" <<dspctrl.toLog(.5) <<" 2:" <<dspctrl.toLog(2) <<LOG.endl; 
+            LOG <<"peaks..."
+                <<" in:" <<dspctrl.toLog(dspctrl.levels.peakAnalogIn)
+                <<" postUserEQ:" <<dspctrl.toLog(dspctrl.levels.peakPostUserEQ)
+                <<" dist:" <<dspctrl.toLog(dspctrl.levels.avgDistortion)
+                <<" outLo:" <<dspctrl.toLog(dspctrl.levels.peakOutputLoX2)
+                <<LOG.endl;
+            dspctrl.levels.peakPostUserEQ = 0.0; 
+            dspctrl.levels.peakOutputLoX2 = 0.0;
+            dspctrl.levels.peakAnalogIn = 0.0;
+            dspctrl.levels.avgDistortion = 0.0;
+
+            // too much looks like this
+            // peaks... postUserEQ:2.48 outLo:1.04
+            // peaks... anlogIn:0.57 dist:0.00
+        }
     }
 }
 

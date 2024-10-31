@@ -320,6 +320,122 @@ Param Data:
 0x00, 	0xFF, 	0x64, 	0xC1
 ```
 
+##### Switching Sinus on off
+
+Second value is freq ? 65Hz
+
+off 
+
+```
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401mask
+Param Address:  0x0003
+Param Value:  255
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x00, 	0xFF
+
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401increment
+Param Address:  0x0004
+Param Value:  0.0027087926864624
+Bytes:  4
+Param Data:0x00, 	0x00, 	0x58, 	0xC3
+
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401ison
+Param Address:  0x0005
+Param Value:  0
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x00, 	0x00
+```
+
+on
+
+```
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401mask
+Param Address:  0x0003
+Param Value:  255
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x00, 	0xFF
+
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401increment
+Param Address:  0x0004
+Param Value:  0.0027087926864624
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x58, 	0xC3
+
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401ison
+Param Address:  0x0005
+Param Value:  1
+Bytes:  4 Param Data: 0x00, 	0x80, 	0x00, 	0x00
+```
+
+freq 80Hz
+
+```
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401mask
+Param Address:  0x0003
+Param Value:  255
+Bytes:  4
+Param Data:
+0x00, 	0x00, 	0x00, 	0xFF
+
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401increment
+Param Address:  0x0004
+Param Value:  0.00333333015441895
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x6D, 	0x3A
+
+Safeload Write
+Cell Name:  Tone1
+Param Name:  sin_lookupAlg19401ison
+Param Address:  0x0005
+Param Value:  0
+Bytes:  4
+Param Data: 0x00, 	0x00, 	0x00, 	0x00
+```
+
+##### Peak and Avg Readback
+
+```
+Read Init
+Cell Name:  ReadBackUserEQ
+Param Name:  ReadBackAlg1
+Param Address:  0x081A
+Bytes:  2
+Param Data:   0x05, 	0xB2
+
+Read Request
+Cell Name:  ReadBackUserEQ
+Param Name:  ReadBackAlg1
+Param Address:  0x081A
+Bytes:  3
+
+Read Result
+Cell Name:  ReadBackUserEQ
+Param Name:  ReadBackAlg1
+Param Address:  0x081A
+Bytes:  1
+Param Data:   0x10, 	0x52, 	0x1D
+```
+
+
+
+
+
 ### Comparing Biquad calculators...
 
 SigmaStudio Bandpass produces this 100Hz BW:2

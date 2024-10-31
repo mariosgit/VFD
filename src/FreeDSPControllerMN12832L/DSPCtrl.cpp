@@ -111,6 +111,24 @@ void DSPCtrl::readLevels()
             // LOG << "ac: ??? idx:" << idx << LOG.endl;
         }
 
+        // try reading some avg/peak values
+        dsp.setDataCapture(MOD_READBACKUSEREQ_ALG0_VAL0_VALUES, MOD_READBACKLOOUT_ALG0_VAL0_VALUES);
+        dsp.readDataCapture(value1, value2);
+        //convert 
+        float val1f = dsp.from519(value1);
+        float val2f = dsp.from519(value2);
+        levels.peakPostUserEQ = val1f > levels.peakPostUserEQ ? val1f : levels.peakPostUserEQ;
+        levels.peakOutputLoX2 = val2f > levels.peakOutputLoX2 ? val2f : levels.peakOutputLoX2;
+        // ^^^ reader should reset these !
+
+        dsp.setDataCapture(MOD_READBACKANAIN_ALG0_VAL0_VALUES, MOD_READBACKDISTAVG_ALG0_VAL0_VALUES);
+        dsp.readDataCapture(value1, value2);
+        //convert 
+        float val3f = dsp.from519(value1);
+        float val4f = dsp.from519(value2);
+        levels.peakAnalogIn = val3f > levels.peakAnalogIn ? val3f : levels.peakAnalogIn;
+        levels.avgDistortion = val4f;
+
         dspReadCycle++;
         if(dspReadCycle > 5)
         {

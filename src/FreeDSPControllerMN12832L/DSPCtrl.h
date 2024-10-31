@@ -20,6 +20,8 @@ public:
     void setLowShelf(float *coef, float frequency, float gain, float slope);
     void setHighShelf(float *coef, float frequency, float gain, float slope);
 
+    inline float toLog(float val) { return 20 * log10f(val); }
+
     /// @brief If disabled, I2C comm stops, can connect sigmastudio then.
     boolean dspEnabled = false;
     uint16_t dspReadCycle = 0;
@@ -34,8 +36,12 @@ public:
         float inR;
         float postall;
         float distortion;
+        float peakPostUserEQ;
+        float peakOutputLoX2;
+        float peakAnalogIn;
+        float avgDistortion;
         float postEQ[10];
-    } levels = {-99,-99,-99,-99,{-99,-99,-99,-99,-99,-99,-99,-99,-99,-99}};
+    } levels = {-99,-99,-99,-99,-99,-99, -99, -99, {-99,-99,-99,-99,-99,-99,-99,-99,-99,-99}};
 
     const float AUDIO_SAMPLE_RATE_EXACT = 48000.0f;
     SigmaDSP dsp;

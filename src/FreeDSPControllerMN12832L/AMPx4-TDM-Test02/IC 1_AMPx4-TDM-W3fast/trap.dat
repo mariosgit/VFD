@@ -1,11 +1,12 @@
-Instance  7 Signal SingleBandLevelDet3single_out trap value 109 register mult_out
-Instance  8 Signal SingleBandLevelDet5single_out trap value 142 register mult_out
-Instance  30 Signal ReadBackUserEQ_ReadBackAlg1 trap value 364 register MAC_out
-Instance  33 Signal ReadBackDistAvg_ReadBackAlg3 trap value 571 register MAC_out
-Instance  38 Signal SingleBandLevelDet2single_out trap value 666 register mult_out
-Instance  40 Signal SingleBandLevelDet1single_out trap value 711 register mult_out
-Instance  44 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1X trap value 806 register 
-Instance  44 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1X_4 trap value 814 register 
-Instance  44 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1Compression trap value 819 register 
-Instance  44 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1X_lo trap value 820 register 
-Instance  61 Signal ReadBackLoOut_ReadBackAlg2 trap value 929 register MAC_out
+Instance  8 Signal SingleBandLevelDet3single_out trap value 113 register mult_out
+Instance  9 Signal SingleBandLevelDet5single_out trap value 146 register mult_out
+Instance  11 Signal ReadBackAnaIn_ReadBackAlg4 trap value 169 register MAC_out
+Instance  34 Signal ReadBackUserEQ_ReadBackAlg1 trap value 405 register MAC_out
+Instance  37 Signal ReadBackDistAvg_ReadBackAlg3 trap value 612 register MAC_out
+Instance  42 Signal SingleBandLevelDet2single_out trap value 707 register mult_out
+Instance  44 Signal SingleBandLevelDet1single_out trap value 752 register mult_out
+Instance  48 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1X trap value 847 register 
+Instance  48 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1X_4 trap value 855 register 
+Instance  48 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1Compression trap value 860 register 
+Instance  48 Signal StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1X_lo trap value 861 register 
+Instance  65 Signal ReadBackLoOut_ReadBackAlg2 trap value 970 register MAC_out
