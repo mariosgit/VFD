@@ -8,6 +8,8 @@ class DSPCtrl {
 public:
     DSPCtrl();
 
+    void checkProgramm();
+
     void readLevels();
     void setVolume(int16_t volumeDB);
 

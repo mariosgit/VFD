@@ -60,6 +60,12 @@ Control more stuff.
         //       merge input level as 0 in the mux and remove the 2 inputLevels, frees 60 more instructions
 
 
+### Peak meter !?
+
+Avoid output cliping/overflows !
+https://ez.analog.com/dsp/sigmadsp/w/documents/14313/monitoring-average-and-instantaneous-signal-levels
+
+
 ## Done
 
 ### Spectrum Analyser

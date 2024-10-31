@@ -1,7 +1,7 @@
 /*
- * File:           C:\Users\mario\Devel\mariosgit\VFD\src\FreeDSPControllerMN12832L\AMPx4-TDM-Test02\SigmaKram_IC_1_REG.h
+ * File:           C:\Users\mario\DevelSelf\VFD\src\FreeDSPControllerMN12832L\AMPx4-TDM-Test02\SigmaKram_IC_1_REG.h
  *
- * Created:        Thursday, October 31, 2024 12:17:08 AM
+ * Created:        Thursday, October 31, 2024 3:33:52 PM
  * Description:    AMPx4-TDM-W3fast:IC 1 control register definitions.
  *
  * This software is distributed in the hope that it will be useful,

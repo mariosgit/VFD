@@ -6,9 +6,53 @@
 #include "AMPx4-TDM-Test02/SigmaKram_IC_1_PARAM.h"
 #include "AMPx4-TDM-Test02/SigmaKram_IC_1_REG.h"
 
+const uint8_t dspprog[] = {
+#include "AMPx4-TDM-Test02/AMPx4-TDM-W3fast_IC 2/E2Prom.hex"
+};
+
+#include <Wire.h>
 
 DSPCtrl::DSPCtrl() : dsp()
 {
+    // LOG <<"::";
+    // for(uint32_t i = 0; i < sizeof(dspprog); i++) // 5kb 51948->57068 schnickschnack
+    // {
+    //     LOG <<dspprog[i];
+    // }
+    // LOG <<"size:" <<sizeof(dspprog) <<LOG.endl;
+}
+
+/// @brief Compares EEPROM with the dumped files...
+/// move to SigmaDSP.h ?
+/// needs a DSP reset line ! Or can it be software rebooted !?
+void DSPCtrl::checkProgramm()
+{
+    uint8_t eeaddr = 0xa0 >> 1;
+
+    boolean good = true;
+    uint16_t from_addr = 0;
+    uint16_t amount = 10;
+    Wire.beginTransmission(eeaddr); // Start transmission to the EEPROM
+    Wire.send(from_addr); // Send the memory address to read from
+    Wire.endTransmission(); // End transmission to the EEPROM
+    Wire.requestFrom(eeaddr, amount); // Request one byte of data from the EEPROM
+    if(Wire.available()) // If a byte of data is available
+    {
+        for(int i =0; i < amount; i++)
+        {
+            uint8_t eebyte = Wire.receive(); // Return the byte of data
+            good &= (eebyte == dspprog[i]);
+        }
+    }
+    LOG <<"checkProgram:" <<(good?"good":"bad") <<LOG.endl;
+
+    // wird so nix, doch it is the eeprom content we included !
+    // EEPROM format  datasheet.. Page 28 of 52
+    // write(to dsp) 01 length16 00 register-adr data
+    // delay         02 time16
+    // nop (filler)  03
+
+    // try reading the eeprom ? // compare with real eeprom
 }
 
 void DSPCtrl::readLevels()

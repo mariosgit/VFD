@@ -54,7 +54,7 @@ Parameter Data :
 
 Cell Name         = Volume
 Parameter Name    = SWGain1940DBAlg1target
-Parameter Address = 173
+Parameter Address = 178
 Parameter Value   = 0.00758576393127441
 Parameter Data :
 0x00 ,	0x00 ,	0xF8 ,	0x92 ,	
@@ -63,7 +63,7 @@ Parameter Data :
 
 Cell Name         = Volume
 Parameter Name    = SWGain1940DBAlg1step
-Parameter Address = 174
+Parameter Address = 179
 Parameter Value   = 0.000244140625
 Parameter Data :
 0x00 ,	0x00 ,	0x08 ,	0x00 ,	
@@ -513,7 +513,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1gainHi
-Parameter Address = 129
+Parameter Address = 134
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -522,7 +522,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1gainLo
-Parameter Address = 130
+Parameter Address = 135
 Parameter Value   = 0.692307710647583
 Parameter Data :
 0x00, 0x58, 0x9D, 0x8A, 
@@ -531,7 +531,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1gainInv
-Parameter Address = 131
+Parameter Address = 136
 Parameter Value   = 1.44444441795349
 Parameter Data :
 0x00, 0xB8, 0xE3, 0x8E, 
@@ -540,7 +540,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1spread1
-Parameter Address = 169
+Parameter Address = 174
 Parameter Value   = 0.0629093647003174
 Parameter Data :
 0x00, 0x08, 0x0D, 0x6A, 
@@ -549,7 +549,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1comp_base
-Parameter Address = 132
+Parameter Address = 137
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
 0x00, 0x80, 0x00, 0x00, 
@@ -590,7 +590,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1RMS
-Parameter Address = 166
+Parameter Address = 171
 Parameter Value   = 0.0491397380828857
 Parameter Data :
 0x00, 0x06, 0x4A, 0x36, 
@@ -599,7 +599,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1decay
-Parameter Address = 167
+Parameter Address = 172
 Parameter Value   = 4.33921813964844E-05
 Parameter Data :
 0x00, 0x00, 0x01, 0x6C, 
@@ -608,7 +608,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1hold
-Parameter Address = 168
+Parameter Address = 173
 Parameter Value   = 24000
 Parameter Data :
 0x00, 0x00, 0x5D, 0xC0, 
@@ -617,7 +617,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1B0lo
-Parameter Address = 119
+Parameter Address = 124
 Parameter Data :
 0x00, 0x02, 0xC4, 0x78, 
 0x00, 0x05, 0x88, 0xEF, 
@@ -634,7 +634,7 @@ Parameter Data :
 
 Cell Name         = SPhat1
 Parameter Name    = SuperPhatAlg1spread2
-Parameter Address = 170
+Parameter Address = 175
 Parameter Value   = 0.0193037986755371
 Parameter Data :
 0x00, 0x02, 0x78, 0x8C, 
@@ -643,7 +643,7 @@ Parameter Data :
 
 Cell Name         = LvPostEQ1
 Parameter Name    = SingleBandLevelDet2TCONST
-Parameter Address = 177
+Parameter Address = 182
 Parameter Value   = 0.00240135192871094
 Parameter Data :
 0x00 ,	0x00 ,	0x4E ,	0xB0 ,	
@@ -652,7 +652,7 @@ Parameter Data :
 
 Cell Name         = LvPostEQ1
 Parameter Name    = SingleBandLevelDet2hold
-Parameter Address = 178
+Parameter Address = 183
 Parameter Value   = 480
 Parameter Data :
 0x00 ,	0x00 ,	0x01 ,	0xE0 ,	
@@ -661,7 +661,7 @@ Parameter Data :
 
 Cell Name         = LvPostEQ1
 Parameter Name    = SingleBandLevelDet2decay
-Parameter Address = 179
+Parameter Address = 184
 Parameter Value   = 0.000216960906982422
 Parameter Data :
 0x00 ,	0x00 ,	0x07 ,	0x1C ,	
@@ -670,7 +670,7 @@ Parameter Data :
 
 Cell Name         = MuteSPK
 Parameter Name    = MuteSWSlewAlg5mute
-Parameter Address = 175
+Parameter Address = 180
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -679,7 +679,7 @@ Parameter Data :
 
 Cell Name         = MuteSPK
 Parameter Name    = MuteSWSlewAlg5step
-Parameter Address = 176
+Parameter Address = 181
 Parameter Value   = 0.0009765625
 Parameter Data :
 0x00, 0x00, 0x20, 0x00, 
@@ -697,7 +697,7 @@ Parameter Data :
 
 Cell Name         = Nx2-2
 Parameter Name    = stereomux1940ns10
-Parameter Address = 171
+Parameter Address = 176
 Parameter Value   = 0
 Parameter Data :
 0x00, 0x00, 0x00, 0x00, 
@@ -706,7 +706,7 @@ Parameter Data :
 
 Cell Name         = Nx2-2
 Parameter Name    = stereomux1940ns11
-Parameter Address = 172
+Parameter Address = 177
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -715,7 +715,7 @@ Parameter Data :
 
 Cell Name         = Nx2-3
 Parameter Name    = stereomux1940ns20
-Parameter Address = 117
+Parameter Address = 119
 Parameter Value   = 0
 Parameter Data :
 0x00, 0x00, 0x00, 0x00, 
@@ -724,7 +724,7 @@ Parameter Data :
 
 Cell Name         = Nx2-3
 Parameter Name    = stereomux1940ns21
-Parameter Address = 118
+Parameter Address = 120
 Parameter Value   = 1
 Parameter Data :
 0x00, 0x80, 0x00, 0x00, 
@@ -733,7 +733,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_0
-Parameter Address = 204
+Parameter Address = 256
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -742,7 +742,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_0
-Parameter Address = 205
+Parameter Address = 257
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -751,7 +751,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_0
-Parameter Address = 206
+Parameter Address = 258
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -760,7 +760,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_1
-Parameter Address = 207
+Parameter Address = 259
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -769,7 +769,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_1
-Parameter Address = 208
+Parameter Address = 260
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -778,7 +778,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_1
-Parameter Address = 209
+Parameter Address = 261
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -787,7 +787,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_2
-Parameter Address = 210
+Parameter Address = 262
 Parameter Value   = 0.497928261756897
 Parameter Data :
 0x00 ,	0x3F ,	0xBC ,	0x1D ,	
@@ -796,7 +796,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_2
-Parameter Address = 211
+Parameter Address = 263
 Parameter Value   = -0.497928261756897
 Parameter Data :
 0x0F ,	0xC0 ,	0x43 ,	0xE3 ,	
@@ -805,7 +805,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_2
-Parameter Address = 212
+Parameter Address = 264
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -814,7 +814,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_3
-Parameter Address = 213
+Parameter Address = 265
 Parameter Value   = 0.993497490882874
 Parameter Data :
 0x00 ,	0x7F ,	0x2A ,	0xED ,	
@@ -823,7 +823,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_3
-Parameter Address = 214
+Parameter Address = 266
 Parameter Value   = -0.993497490882874
 Parameter Data :
 0x0F ,	0x80 ,	0xD5 ,	0x13 ,	
@@ -832,7 +832,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_3
-Parameter Address = 215
+Parameter Address = 267
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -841,7 +841,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1LowInvert
-Parameter Address = 203
+Parameter Address = 255
 Parameter Value   = -1
 Parameter Data :
 0x0F, 0x80, 0x00, 0x00, 
@@ -850,7 +850,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_0
-Parameter Address = 217
+Parameter Address = 269
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -859,7 +859,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_0
-Parameter Address = 218
+Parameter Address = 270
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -868,7 +868,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_0
-Parameter Address = 219
+Parameter Address = 271
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -877,7 +877,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_1
-Parameter Address = 220
+Parameter Address = 272
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -886,7 +886,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_1
-Parameter Address = 221
+Parameter Address = 273
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -895,7 +895,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_1
-Parameter Address = 222
+Parameter Address = 274
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -904,7 +904,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_2
-Parameter Address = 223
+Parameter Address = 275
 Parameter Value   = 0.497928261756897
 Parameter Data :
 0x00 ,	0x3F ,	0xBC ,	0x1D ,	
@@ -913,7 +913,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_2
-Parameter Address = 224
+Parameter Address = 276
 Parameter Value   = -0.497928261756897
 Parameter Data :
 0x0F ,	0xC0 ,	0x43 ,	0xE3 ,	
@@ -922,7 +922,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_2
-Parameter Address = 225
+Parameter Address = 277
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -931,7 +931,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_3
-Parameter Address = 226
+Parameter Address = 278
 Parameter Value   = 0.993497490882874
 Parameter Data :
 0x00 ,	0x7F ,	0x2A ,	0xED ,	
@@ -940,7 +940,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_3
-Parameter Address = 227
+Parameter Address = 279
 Parameter Value   = -0.993497490882874
 Parameter Data :
 0x0F ,	0x80 ,	0xD5 ,	0x13 ,	
@@ -949,7 +949,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_3
-Parameter Address = 228
+Parameter Address = 280
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -958,7 +958,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2LowInvert
-Parameter Address = 216
+Parameter Address = 268
 Parameter Value   = -1
 Parameter Data :
 0x0F, 0x80, 0x00, 0x00, 
@@ -967,7 +967,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_0
-Parameter Address = 204
+Parameter Address = 256
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -976,7 +976,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_0
-Parameter Address = 205
+Parameter Address = 257
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -985,7 +985,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_0
-Parameter Address = 206
+Parameter Address = 258
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -994,7 +994,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_1
-Parameter Address = 207
+Parameter Address = 259
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -1003,7 +1003,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_1
-Parameter Address = 208
+Parameter Address = 260
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -1012,7 +1012,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_1
-Parameter Address = 209
+Parameter Address = 261
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -1021,7 +1021,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_2
-Parameter Address = 210
+Parameter Address = 262
 Parameter Value   = 0.497928261756897
 Parameter Data :
 0x00 ,	0x3F ,	0xBC ,	0x1D ,	
@@ -1030,7 +1030,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_2
-Parameter Address = 211
+Parameter Address = 263
 Parameter Value   = -0.497928261756897
 Parameter Data :
 0x0F ,	0xC0 ,	0x43 ,	0xE3 ,	
@@ -1039,7 +1039,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_2
-Parameter Address = 212
+Parameter Address = 264
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -1048,7 +1048,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B0_3
-Parameter Address = 213
+Parameter Address = 265
 Parameter Value   = 0.993497490882874
 Parameter Data :
 0x00 ,	0x7F ,	0x2A ,	0xED ,	
@@ -1057,7 +1057,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1B1_3
-Parameter Address = 214
+Parameter Address = 266
 Parameter Value   = -0.993497490882874
 Parameter Data :
 0x0F ,	0x80 ,	0xD5 ,	0x13 ,	
@@ -1066,7 +1066,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1A1_3
-Parameter Address = 215
+Parameter Address = 267
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -1075,7 +1075,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP1LowInvert
-Parameter Address = 203
+Parameter Address = 255
 Parameter Value   = -1
 Parameter Data :
 0x0F, 0x80, 0x00, 0x00, 
@@ -1084,7 +1084,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_0
-Parameter Address = 217
+Parameter Address = 269
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -1093,7 +1093,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_0
-Parameter Address = 218
+Parameter Address = 270
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -1102,7 +1102,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_0
-Parameter Address = 219
+Parameter Address = 271
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -1111,7 +1111,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_1
-Parameter Address = 220
+Parameter Address = 272
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -1120,7 +1120,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_1
-Parameter Address = 221
+Parameter Address = 273
 Parameter Value   = 0.00650250911712646
 Parameter Data :
 0x00 ,	0x00 ,	0xD5 ,	0x13 ,	
@@ -1129,7 +1129,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_1
-Parameter Address = 222
+Parameter Address = 274
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -1138,7 +1138,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_2
-Parameter Address = 223
+Parameter Address = 275
 Parameter Value   = 0.497928261756897
 Parameter Data :
 0x00 ,	0x3F ,	0xBC ,	0x1D ,	
@@ -1147,7 +1147,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_2
-Parameter Address = 224
+Parameter Address = 276
 Parameter Value   = -0.497928261756897
 Parameter Data :
 0x0F ,	0xC0 ,	0x43 ,	0xE3 ,	
@@ -1156,7 +1156,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_2
-Parameter Address = 225
+Parameter Address = 277
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -1165,7 +1165,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B0_3
-Parameter Address = 226
+Parameter Address = 278
 Parameter Value   = 0.993497490882874
 Parameter Data :
 0x00 ,	0x7F ,	0x2A ,	0xED ,	
@@ -1174,7 +1174,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2B1_3
-Parameter Address = 227
+Parameter Address = 279
 Parameter Value   = -0.993497490882874
 Parameter Data :
 0x0F ,	0x80 ,	0xD5 ,	0x13 ,	
@@ -1183,7 +1183,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2A1_3
-Parameter Address = 228
+Parameter Address = 280
 Parameter Value   = 0.986994981765747
 Parameter Data :
 0x00 ,	0x7E ,	0x55 ,	0xDA ,	
@@ -1192,7 +1192,7 @@ Parameter Data :
 
 Cell Name         = Crossover1
 Parameter Name    = CrossoverFilter2WayAlgSP2LowInvert
-Parameter Address = 216
+Parameter Address = 268
 Parameter Value   = -1
 Parameter Data :
 0x0F, 0x80, 0x00, 0x00, 
@@ -1201,7 +1201,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ1
 Parameter Name    = EQ1940DualS70B1
-Parameter Address = 180
+Parameter Address = 185
 Parameter Value   = 1.00061571598053
 Parameter Data :
 0x00 ,	0x80 ,	0x14 ,	0x2D ,	
@@ -1210,7 +1210,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ1
 Parameter Name    = EQ1940DualS71B1
-Parameter Address = 181
+Parameter Address = 186
 Parameter Value   = -1.99785995483398
 Parameter Data :
 0x0F ,	0x00 ,	0x46 ,	0x20 ,	
@@ -1219,7 +1219,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ1
 Parameter Name    = EQ1940DualS72B1
-Parameter Address = 182
+Parameter Address = 187
 Parameter Value   = 0.997278809547424
 Parameter Data :
 0x00 ,	0x7F ,	0xA6 ,	0xD5 ,	
@@ -1228,7 +1228,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ1
 Parameter Name    = EQ1940DualS71A1
-Parameter Address = 183
+Parameter Address = 188
 Parameter Value   = 1.99785995483398
 Parameter Data :
 0x00 ,	0xFF ,	0xB9 ,	0xE0 ,	
@@ -1237,7 +1237,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ1
 Parameter Name    = EQ1940DualS72A1
-Parameter Address = 184
+Parameter Address = 189
 Parameter Value   = -0.997894525527954
 Parameter Data :
 0x0F ,	0x80 ,	0x44 ,	0xFE ,	
@@ -1246,7 +1246,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ2
 Parameter Name    = EQ1940DualS80B1
-Parameter Address = 188
+Parameter Address = 193
 Parameter Value   = 1
 Parameter Data :
 0x00 ,	0x80 ,	0x00 ,	0x00 ,	
@@ -1255,7 +1255,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ2
 Parameter Name    = EQ1940DualS81B1
-Parameter Address = 189
+Parameter Address = 194
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1264,7 +1264,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ2
 Parameter Name    = EQ1940DualS82B1
-Parameter Address = 190
+Parameter Address = 195
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1273,7 +1273,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ2
 Parameter Name    = EQ1940DualS81A1
-Parameter Address = 191
+Parameter Address = 196
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1282,7 +1282,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ2
 Parameter Name    = EQ1940DualS82A1
-Parameter Address = 192
+Parameter Address = 197
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1291,7 +1291,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ3
 Parameter Name    = EQ1940DualS90B1
-Parameter Address = 193
+Parameter Address = 198
 Parameter Value   = 1
 Parameter Data :
 0x00 ,	0x80 ,	0x00 ,	0x00 ,	
@@ -1300,7 +1300,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ3
 Parameter Name    = EQ1940DualS91B1
-Parameter Address = 194
+Parameter Address = 199
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1309,7 +1309,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ3
 Parameter Name    = EQ1940DualS92B1
-Parameter Address = 195
+Parameter Address = 200
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1318,7 +1318,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ3
 Parameter Name    = EQ1940DualS91A1
-Parameter Address = 196
+Parameter Address = 201
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1327,7 +1327,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ3
 Parameter Name    = EQ1940DualS92A1
-Parameter Address = 197
+Parameter Address = 202
 Parameter Value   = 0
 Parameter Data :
 0x00 ,	0x00 ,	0x00 ,	0x00 ,	
@@ -1336,7 +1336,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ4
 Parameter Name    = EQ1940DualS100B1
-Parameter Address = 198
+Parameter Address = 203
 Parameter Value   = 1.08134377002716
 Parameter Data :
 0x00 ,	0x8A ,	0x69 ,	0x79 ,	
@@ -1345,7 +1345,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ4
 Parameter Name    = EQ1940DualS101B1
-Parameter Address = 199
+Parameter Address = 204
 Parameter Value   = -0.806633353233337
 Parameter Data :
 0x0F ,	0x98 ,	0xC0 ,	0x3D ,	
@@ -1354,7 +1354,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ4
 Parameter Name    = EQ1940DualS102B1
-Parameter Address = 200
+Parameter Address = 205
 Parameter Value   = 0.293814778327942
 Parameter Data :
 0x00 ,	0x25 ,	0x9B ,	0xB9 ,	
@@ -1363,7 +1363,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ4
 Parameter Name    = EQ1940DualS101A1
-Parameter Address = 201
+Parameter Address = 206
 Parameter Value   = 0.687999367713928
 Parameter Data :
 0x00 ,	0x58 ,	0x10 ,	0x5D ,	
@@ -1372,7 +1372,7 @@ Parameter Data :
 
 Cell Name         = SPK EQ4
 Parameter Name    = EQ1940DualS102A1
-Parameter Address = 202
+Parameter Address = 207
 Parameter Value   = -0.256524682044983
 Parameter Data :
 0x0F ,	0xDF ,	0x2A ,	0x33 ,	
@@ -1381,7 +1381,7 @@ Parameter Data :
 
 Cell Name         = LvPostEQ2
 Parameter Name    = SingleBandLevelDet1TCONST
-Parameter Address = 185
+Parameter Address = 190
 Parameter Value   = 0.00240135192871094
 Parameter Data :
 0x00 ,	0x00 ,	0x4E ,	0xB0 ,	
@@ -1390,7 +1390,7 @@ Parameter Data :
 
 Cell Name         = LvPostEQ2
 Parameter Name    = SingleBandLevelDet1hold
-Parameter Address = 186
+Parameter Address = 191
 Parameter Value   = 480
 Parameter Data :
 0x00 ,	0x00 ,	0x01 ,	0xE0 ,	
@@ -1399,7 +1399,7 @@ Parameter Data :
 
 Cell Name         = LvPostEQ2
 Parameter Name    = SingleBandLevelDet1decay
-Parameter Address = 187
+Parameter Address = 192
 Parameter Value   = 0.000216960906982422
 Parameter Data :
 0x00 ,	0x00 ,	0x07 ,	0x1C ,	
@@ -1946,6 +1946,208 @@ Parameter Data :
 
 
 
+Cell Name         = ReadBackUserEQ
+Parameter Name    = ReadBackAlg1
+Parameter Address = 2074
+Readback Address = 0
+Parameter Data :
+0x05 ,	0xB2 ,	
+
+
+Cell Name         = ReadBackUserEQ
+Parameter Name    = ReadBackAlg1
+Parameter Address = 2074
+Readback Address = 0
+Parameter Value   = 0
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	
+
+
+Cell Name         = PeakEnv1
+Parameter Name    = MonoEnvelopePeakAlg1hold
+Parameter Address = 117
+Parameter Value   = 0
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x00 ,	
+
+
+
+Cell Name         = PeakEnv1
+Parameter Name    = MonoEnvelopePeakAlg1decay
+Parameter Address = 118
+Parameter Value   = 2.14576721191406E-06
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x12 ,	
+
+
+
+Cell Name         = ReadBackLoOut
+Parameter Name    = ReadBackAlg2
+Parameter Address = 2074
+Readback Address = 0
+Parameter Data :
+0x0E ,	0x86 ,	
+
+
+Cell Name         = ReadBackLoOut
+Parameter Name    = ReadBackAlg2
+Parameter Address = 2074
+Readback Address = 0
+Parameter Value   = 0
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	
+
+
+Cell Name         = PeakEnv1_2
+Parameter Name    = MonoEnvelopePeakAlg2hold
+Parameter Address = 283
+Parameter Value   = 0
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x00 ,	
+
+
+
+Cell Name         = PeakEnv1_2
+Parameter Name    = MonoEnvelopePeakAlg2decay
+Parameter Address = 284
+Parameter Value   = 2.14576721191406E-06
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x12 ,	
+
+
+
+Cell Name         = AvgEnv1
+Parameter Name    = MonoRunAvgDetectAlg1RMS
+Parameter Address = 121
+Parameter Value   = 0.000575780868530273
+Parameter Data :
+0x00 ,	0x00 ,	0x12 ,	0xDE ,	
+
+
+
+Cell Name         = AvgEnv1
+Parameter Name    = MonoRunAvgDetectAlg1hold
+Parameter Address = 122
+Parameter Value   = 0
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x00 ,	
+
+
+
+Cell Name         = AvgEnv1
+Parameter Name    = MonoRunAvgDetectAlg1decay
+Parameter Address = 123
+Parameter Value   = 2.14576721191406E-06
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x12 ,	
+
+
+
+Cell Name         = ReadBackDistAvg
+Parameter Name    = ReadBackAlg3
+Parameter Address = 2074
+Readback Address = 0
+Parameter Data :
+0x08 ,	0xEE ,	
+
+
+Cell Name         = ReadBackDistAvg
+Parameter Name    = ReadBackAlg3
+Parameter Address = 2074
+Readback Address = 0
+Parameter Value   = 0
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	
+
+
+Cell Name         = Compressor
+Parameter Name    = StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1
+Parameter Address = 208
+Parameter Data :
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x80, 0x00, 0x00, 
+0x00, 0x5A, 0x82, 0x7A, 
+0x00, 0x40, 0x00, 0x00, 
+0x00, 0x2D, 0x41, 0x3D, 
+0x00, 0x20, 0x00, 0x00, 
+0x00, 0x16, 0xA0, 0x9E, 
+0x00, 0x10, 0x00, 0x00, 
+
+
+
+Cell Name         = Compressor
+Parameter Name    = StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1hold
+Parameter Address = 253
+Parameter Value   = 0
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x00 ,	
+
+
+
+Cell Name         = Compressor
+Parameter Name    = StereoPeak_StResHiRange_NoExt_NoPos_2ndGen1decay
+Parameter Address = 254
+Parameter Value   = 2.14576721191406E-06
+Parameter Data :
+0x00 ,	0x00 ,	0x00 ,	0x12 ,	
+
+
+
+Cell Name         = NxM Mixer2_2
+Parameter Name    = NxNMixer1940Alg3_00_00
+Parameter Address = 281
+Parameter Value   = 0.501187205314636
+Parameter Data :
+0x00 ,	0x40 ,	0x26 ,	0xE7 ,	
+
+
+
+Cell Name         = NxM Mixer2_2
+Parameter Name    = NxNMixer1940Alg3_00_01
+Parameter Address = 282
+Parameter Value   = 0.501187205314636
+Parameter Data :
+0x00 ,	0x40 ,	0x26 ,	0xE7 ,	
+
+
+
 Parameter data for: IC 1 (Hexadecimal format starting at parameter address 0)
 See also SigmaKram.hex file
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
@@ -2066,7 +2268,12 @@ See also SigmaKram.hex file
 0x00 , 	0x38 , 	0x84 , 	0xA1 , 	
 0x0F , 	0xE2 , 	0xB8 , 	0x27 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x12 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x12 , 	0xDE , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x12 , 	
 0x00 , 	0x02 , 	0xC4 , 	0x78 , 	
 0x00 , 	0x05 , 	0x88 , 	0xEF , 	
 0x00 , 	0x02 , 	0xC4 , 	0x78 , 	
@@ -2151,6 +2358,53 @@ See also SigmaKram.hex file
 0x00 , 	0x25 , 	0x9B , 	0xB9 , 	
 0x00 , 	0x58 , 	0x10 , 	0x5D , 	
 0x0F , 	0xDF , 	0x2A , 	0x33 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x80 , 	0x00 , 	0x00 , 	
+0x00 , 	0x5A , 	0x82 , 	0x7A , 	
+0x00 , 	0x40 , 	0x00 , 	0x00 , 	
+0x00 , 	0x2D , 	0x41 , 	0x3D , 	
+0x00 , 	0x20 , 	0x00 , 	0x00 , 	
+0x00 , 	0x16 , 	0xA0 , 	0x9E , 	
+0x00 , 	0x10 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x12 , 	
 0x0F , 	0x80 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0xD5 , 	0x13 , 	
 0x00 , 	0x00 , 	0xD5 , 	0x13 , 	
@@ -2177,62 +2431,10 @@ See also SigmaKram.hex file
 0x00 , 	0x7F , 	0x2A , 	0xED , 	
 0x0F , 	0x80 , 	0xD5 , 	0x13 , 	
 0x00 , 	0x7E , 	0x55 , 	0xDA , 	
+0x00 , 	0x40 , 	0x26 , 	0xE7 , 	
+0x00 , 	0x40 , 	0x26 , 	0xE7 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
-0x00 , 	0x00 , 	0x00 , 	0x00 , 	
+0x00 , 	0x00 , 	0x00 , 	0x12 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
 0x00 , 	0x00 , 	0x00 , 	0x00 , 	
@@ -3092,7 +3294,12 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	00111000	10000100	10100001	
 00001111	11100010	10111000	00100111	
 00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00010010	
+00000000	00000000	00000000	00000000	
 00000000	10000000	00000000	00000000	
+00000000	00000000	00010010	11011110	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00010010	
 00000000	00000010	11000100	01111000	
 00000000	00000101	10001000	11101111	
 00000000	00000010	11000100	01111000	
@@ -3177,6 +3384,53 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	00100101	10011011	10111001	
 00000000	01011000	00010000	01011101	
 00001111	11011111	00101010	00110011	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	10000000	00000000	00000000	
+00000000	01011010	10000010	01111010	
+00000000	01000000	00000000	00000000	
+00000000	00101101	01000001	00111101	
+00000000	00100000	00000000	00000000	
+00000000	00010110	10100000	10011110	
+00000000	00010000	00000000	00000000	
+00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00010010	
 00001111	10000000	00000000	00000000	
 00000000	00000000	11010101	00010011	
 00000000	00000000	11010101	00010011	
@@ -3203,62 +3457,10 @@ Parameter data for: IC 1 (Binary format starting at parameter address 0)
 00000000	01111111	00101010	11101101	
 00001111	10000000	11010101	00010011	
 00000000	01111110	01010101	11011010	
+00000000	01000000	00100110	11100111	
+00000000	01000000	00100110	11100111	
 00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
-00000000	00000000	00000000	00000000	
+00000000	00000000	00000000	00010010	
 00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
 00000000	00000000	00000000	00000000	
