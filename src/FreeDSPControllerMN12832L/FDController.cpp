@@ -121,7 +121,7 @@ void FDController::loop()
 
 void FDController::taskChecker()
 {
-    if (emChecker > 1)
+    if (emChecker > 100/6)
     {
         emChecker = 0;
         // levels read every 4th
@@ -187,12 +187,12 @@ void FDController::taskInput()
         {
             inputStuffEnabled = false;
             encval = enc1.getValue();
-            encbtn = enc1.getButton();
+            // encbtn = enc1.getButton();
             inputStuffEnabled = true;
             // Encoder Left Top -> select EQ
-            if(encbtn == ClickEncoder::Clicked)
-            {
-            }
+            // if(encbtn == ClickEncoder::Clicked)
+            // {
+            // }
             if(encval)
             {
                 drawHelpers = 100;
@@ -204,7 +204,7 @@ void FDController::taskInput()
         {
             inputStuffEnabled = false;
             encval = enc4.getValue();
-            encbtn = enc4.getButton();
+            // encbtn = enc4.getButton();
             inputStuffEnabled = true;
             // Encoder Left Right -> change Gain
             if(encval)
@@ -260,7 +260,7 @@ void FDController::taskInput()
                     // mute speaker
                     dspctrl.dsp.saveloadWrite(MOD_MUTESPK_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_SPK_MASK ? 0.0 : 1.0)));
                     // mute headphone
-                    dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
+                    // dspctrl.dsp.saveloadWrite(MOD_MUTEHP_ALG0_MUTEONOFF_ADDR, dspctrl.dsp.floatTo523((_mute & MUTE_HP_MASK ? 0.0 : 1.0)));
                 }
             }
         }
@@ -359,7 +359,7 @@ void FDController::taskDisplay()
         int volx = 84;
         int16_t  x1, y1;
         uint16_t w, h;
-        char buf[5];
+        char buf[8];
         sprintf(buf, "%d", _volumeDB);
         display.setTextColor(3);
         display.setTextSize(2);
@@ -383,22 +383,27 @@ void FDController::taskDisplay()
             // levels - distortion - todo rms it or read more often
             // int16_t valE = max(_levels.postEQ[1], -32.0*2)  / -2; // should be within 0 - 32 ?
             // display.fillRect(20, valE, 3, 32 - valE, 3);
-            int16_t valD = max(dspctrl.levels.distortion, -32.0*2)  / -2; // should be within 0 - 32 ?
-            display.fillRect(24, valD, 3, 32 - valD, 3);
+            // int16_t valD = max(dspctrl.levels.distortion, -32.0*2)  / -2; // should be within 0 - 32 ?
+            // display.fillRect(24, valD, 3, 32 - valD, 3);
+            // int16_t valP = max(dspctrl.levels.postall, -32.0*2)  / -2; // should be within 0 - 32 ?
+            // display.fillRect(28, valD, 1, 32 - valP, 3);
+
+            // Die Levels sind zu langsam um auf den Distortion umzuschalten, decay einstallen !?
 
             // EQ Settings
-            for(int i = 0; i < 4; i++)
+            int eqpos = 30;
+            for(int i = 0; i < 8; i++)
             {
-                display.fillRect(36 + 12*i, 15-dspctrl.eqValues[i], 10, 2, (drawHelpers && dspctrl.eqBand==i)?3:1);
+                display.fillRect(eqpos + 6*i, 15-dspctrl.eqValues[i], 6, 2, (drawHelpers && dspctrl.eqBand==i)?3:1);
             }
             // Speki
-            for(int i = 1; i < 8; i++)
+            for(int i = 0; i < 8; i++)
             {
                 // min -64, scaled down by -2 -> 32 pixel
                 // min -64, scaled down by -3 -> 22 pixel
                 // min -48, scaled down by -1.5 -> 32 pixel
                 int16_t valE = max(dspctrl.levels.postEQ[i], -48.0)  / -1.5; // should be within 0 - 32 ?
-                display.fillRect(30 + 6*i, 8+ valE, 5, 2 /*32 - valE*/, 3);
+                display.fillRect(eqpos + 6*i, 8+ valE, 5, 2 /*32 - valE*/, 3);
             }
 
         }

@@ -56,6 +56,10 @@ Add IR receiver and Ambient Lt sensor.
 
 Control more stuff.
 
+        // todo: fix 8th frequency, post level could be sum behind speaker eq to track max level ?!
+        //       merge input level as 0 in the mux and remove the 2 inputLevels, frees 60 more instructions
+
+
 ## Done
 
 ### Spectrum Analyser
@@ -78,7 +82,7 @@ The emChecker loop sets these filters one after another and reads the levelmeter
 
 ## References
 
-![DSPplanW3fast](../../images/Screenshot%202024-10-17%20134303.png)
+![DSPplanW3fast](../../images/Screenshot%202024-10-31%20001735.png)
 
 [SigmaStudio docs, recipes for filters](https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/filters/general2ndorder)
 

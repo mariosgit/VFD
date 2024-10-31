@@ -15,42 +15,14 @@ void DSPCtrl::readLevels()
 {
     if(dspEnabled)
     {
-
-        // input things...
-        const int16_t trapLevel1 = MOD_LVIN1_ALG0_SINGLEBANDLEVELDET3_VALUES;
-        const int16_t trapLevel2 = MOD_LVIN2_ALG0_SINGLEBANDLEVELDET5_VALUES;
-        // post-eq, distortion
-        const int16_t trapLevel3 = MOD_LVPOSTEQ_ALG0_SINGLEBANDLEVELDET2_VALUES;
-        const int16_t trapLevel4 = MOD_LVDISTORTION_ALG0_SINGLEBANDLEVELDET1_VALUES;
-
-
-        // We read 4x8 times
+        // We read 5 times ? 
+        //  0 is left/right input levels
+        //  1,2,3,4, is Spectrum Analiysers 2 values each time, frequencies 64...8192
+        //  5 is distortion level and post volume level
         // toggling between reading volume and others
-        // could have used a second timer... :P
 
-        // 0 1 2 3 4 5 6 7    8 9 10 11 12 13 14 15   16 17 18 19 20 21 22 23    24..29..31
-        // |       |          |          |             |           |              |   |     read level meter
-        //   0       1          2           3             4           5            6   7    set EQ to preset dspReadCycle/4
-        //                                                                                  time for EQ to settle
-        //       |       |            |           |             |           |        |    | read EQ
-
-        if (dspReadCycle % 4 == 0) // as long as we use only these 2, setup only once
-        {
-            // setup DC to read LevelMeters
-            dsp.setDataCapture(trapLevel1, trapLevel2);
-        }
-        else
-        {
-            // setup DC to read Secondary LevelMeters (post EQ and Distortion)
-            dsp.setDataCapture(trapLevel3, trapLevel4);
-
-            // select the index of the postEQ filter 0-8 / flat,100,200,400,800,1600,3200,6400,12800 Hz
-            // no block write, -> sound crackls !!! useing saveload
-            if(dspReadCycle % 4 == 1)
-            {
-                dspEnabled &= dsp.saveloadWrite(MOD_EQFILTERIDX_DCINPALG1_ADDR, dspReadCycle/4);
-            }
-        }
+        // todo: fix 8th frequency, post level could be sum behind speaker eq to track max level ?!
+        //       merge input level as 0 in the mux and remove the 2 inputLevels, frees 60 more instructions
 
         int32_t value1, value2;
         dspEnabled &= dsp.readDataCapture(value1, value2);
@@ -66,12 +38,12 @@ void DSPCtrl::readLevels()
             float realval1 = -1.0f * (100.0f - (float)value1 / 5242.880f); // x / (1 << 19)
             float realval2 = -1.0f * (100.0f - (float)value2 / 5242.880f); // x / (1 << 19)
 
-            if(dspReadCycle % 4 == 0)
+            if(dspReadCycle == 0)
             {
                 levels.inL = realval1;
                 levels.inR = realval2;
 
-                // try clean conversion !? Still strange value range !
+                // experiment... try clean conversion !? Still strange value range !
                 if(random(100) == 10)
                 {
                     float from519 = dsp.from519(value1);
@@ -79,13 +51,15 @@ void DSPCtrl::readLevels()
                     // LOG <<"levels int:" <<LOG.dec <<value1 <<", db(old)" <<realval1 <<" float:" <<from519 <<" db(new):"<<logval1 <<LOG.dec <<LOG.endl;
                 }
             }
+            else if(dspReadCycle == 5)
+            {
+                levels.distortion = realval1;
+                levels.postall = realval2;
+            }
             else
             {
-                if(dspReadCycle % 4 == 3)
-                {
-                    levels.postEQ[dspReadCycle/4] = realval1;
-                } 
-                levels.distortion = realval2;
+                levels.postEQ[dspReadCycle*2-2] = realval1;
+                levels.postEQ[dspReadCycle*2-1] = realval2;
             }
         }
         else
@@ -94,10 +68,30 @@ void DSPCtrl::readLevels()
         }
 
         dspReadCycle++;
-        if(dspReadCycle > 8*4)
+        if(dspReadCycle > 5)
         {
             dspReadCycle = 0;
         }
+
+
+        if (dspReadCycle == 0) // as long as we use only these 2, setup only once
+        {
+            // setup DC to read LevelMeters
+            dsp.setDataCapture(MOD_LVIN1_ALG0_SINGLEBANDLEVELDET3_VALUES,
+                 MOD_LVIN2_ALG0_SINGLEBANDLEVELDET5_VALUES);
+        }
+        else
+        {
+            // setup DC to read Secondary LevelMeters (post EQ and Distortion)
+            dsp.setDataCapture(MOD_LVPOSTEQ1_ALG0_SINGLEBANDLEVELDET2_VALUES,
+                 MOD_LVPOSTEQ2_ALG0_SINGLEBANDLEVELDET1_VALUES);
+
+            // select the index of the postEQ filter 0-8 / flat,100,200,400,800,1600,3200,6400,12800 Hz
+            // no block write, -> sound crackls !!! useing saveload
+            dspEnabled &= dsp.saveloadWrite(MOD_EQFILTERIDX_DCINPALG1_ADDR, dspReadCycle-1);
+        }
+
+
 
     } // dspEnabled
 }
@@ -120,11 +114,16 @@ void DSPCtrl::eqVal(int diff)
     // LOG <<"current:" <<current <<LOG.endl;
     eqValues[eqBand] = current;
 
-    const uint32_t adrs[4] = {
+    const uint32_t adrs[8] = {
         MOD_ALLEQ1_ALG0_STAGE0_B0_ADDR,
         MOD_ALLEQ2_ALG0_STAGE0_B0_ADDR,
         MOD_ALLEQ3_ALG0_STAGE0_B0_ADDR,
-        MOD_ALLEQ4_ALG0_STAGE0_B0_ADDR};
+        MOD_ALLEQ4_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ5_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ6_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ7_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ8_ALG0_STAGE0_B0_ADDR
+    };
 
     float coeffs[5];
 
@@ -142,7 +141,7 @@ void DSPCtrl::eqVal(int diff)
     }
 
     LOG <<"algo:" <<" [" <<eqBand <<"] " <<eqFreq[eqBand] <<"Hz g:" <<current <<" wq:" <<0.5f <<" bqs:";
-    for(int i = 0; i < 6; i++) { LOG <<coeffs[i] <<", "; }
+    for(int i = 0; i < 5; i++) { LOG <<coeffs[i] <<", "; }
     LOG <<LOG.endl;
     if(dspEnabled)
     {
