@@ -88,10 +88,14 @@ The emChecker loop sets these filters one after another and reads the levelmeter
 
 ## References
 
-![DSPplanW3fast](../../images/Screenshot%202024-10-31%20001735.png)
+![DSPplanW3fast](../../images/Screenshot%202024-11-02%20142642.png)
 
 [SigmaStudio docs, recipes for filters](https://wiki.analog.com/resources/tools-software/sigmastudio/toolbox/filters/general2ndorder)
 
+
+Evaluation of EQ settings versus Max Gain... and finding most usefull frequency and Q settings... The mute in front off the EQ will be used as a level to scale down by the max EQ gain.
+
+![MaxEQGain](../../images/Screenshot%202024-11-02%20133045.png)
 
 #### The strangly vintage universe of SigmaDSP
 

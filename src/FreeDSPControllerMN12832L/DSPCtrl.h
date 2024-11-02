@@ -8,13 +8,15 @@ class DSPCtrl {
 public:
     DSPCtrl();
 
+    void init();
+
     void checkProgramm();
 
     void readLevels();
     void setVolume(int16_t volumeDB);
 
-    void eqBandNext() { eqBand = (eqBand + 1) % 8; };
-    void eqBandPrev() { eqBand = (eqBand - 1) % 8; if(eqBand < 0) eqBand += 8; };
+    void eqBandNext() { eqBand = (eqBand + 1) % 9; };
+    void eqBandPrev() { eqBand = (eqBand - 1) % 9; if(eqBand < 0) eqBand += 9; };
     void eqVal(int diff);
 
     void setLowShelf(float *coef, float frequency, float gain, float slope);
@@ -27,8 +29,9 @@ public:
     uint16_t dspReadCycle = 0;
 
     int8_t eqBand = 0;   // 8 bands
-    int8_t eqValues[8] = {0,0,0,0, 0,0,0,0};  // gain value for each band, +-16
-    const float eqFreq[8] = {64., 128., 256., 512., 1024., 2048, 4096, 8192};    // between analyser freqs 100,200, 400,800, 1600,3200, 6400,12800
+    int8_t eqValues[9] = {0,0,0,0, 0,0,0,0 ,0};  // gain value for each band, +-16
+    const float eqQues[9] = {1.2, 1.2, 1.2, 1.2,    1.2, 1.2, 1.2, 1.0,     0.77};
+    const float eqFreq[9] = {50., 100., 200., 400., 800., 1600, 3200, 6400, 12800};    // between analyser freqs 100,200, 400,800, 1600,3200, 6400,12800
 
     struct Levels
     {
