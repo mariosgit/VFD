@@ -57,7 +57,7 @@ FDController::FDController() : display(
     pinMode(pinFFblank, OUTPUT);
     digitalWrite(pinFFblank, HIGH);
     analogWriteFrequency(pinFFblank, 22000);
-    analogWrite(pinFFblank, 200); // 50% duty, 488Hz flicker !!!
+    analogWrite(pinFFblank, 100); // 50% duty, 488Hz flicker !!!
 
     pinMode(pinDBG9, OUTPUT);
     pinMode(pinDBG10, OUTPUT);
@@ -161,7 +161,7 @@ void FDController::taskInput()
         {   // Encoder Left Bottom -> Distortion Level ?
             inputStuffEnabled = false;
             encval = enc2.getValue();
-            encbtn = enc2.getButton();
+            // encbtn = enc2.getButton();
             inputStuffEnabled = true;
             if(encval)
             {
@@ -170,7 +170,7 @@ void FDController::taskInput()
                 // new mapping -1..1    dsp kricht den log10 davon .1(max) .. 10(min)
                 _distortion -= 0.1f * encval;
                 if(_distortion > 1.0) _distortion = 1.0;
-                if(_distortion < -1.0)  _distortion = -1.0;
+                if(_distortion < -0.0)  _distortion = -0.0;  // limit to 0..1 dirty enouth
 
                 LOG <<"dist:" <<_distortion <<" pow10:" <<pow10f(_distortion) <<" dspval:" <<LOG.hex <<dspctrl.dsp.floatTo523(_distortion) <<LOG.dec <<LOG.endl;
 
@@ -295,7 +295,7 @@ void FDController::taskSerial()
             }
             if(incomingByte == ' ')
             {
-                dspOffCounter = 2*6; // one cycle is 5 sec
+                dspOffCounter = 2*6 * 10; // one cycle is 5 sec
                 dspctrl.dspEnabled = !dspctrl.dspEnabled;
                 LOG <<"DSP connection " <<((dspctrl.dspEnabled)?"enabled":"disabled") <<LOG.endl;
             }
@@ -371,8 +371,6 @@ void FDController::taskDisplay()
 
         if(dspctrl.dspEnabled)
         {
-            // Dist settings (dit 1..-1)
-            display.fillRect(20, _distortion*16+15, 8, 2, drawHelpers?3:1);
 
             // levels from 0? to -100
             int16_t valL = max(dspctrl.levels.inL*2, -32.0*2)  / -2; // should be within 0 - 32 ?
@@ -383,21 +381,21 @@ void FDController::taskDisplay()
             // levels - distortion - todo rms it or read more often
             // int16_t valE = max(_levels.postEQ[1], -32.0*2)  / -2; // should be within 0 - 32 ?
             // display.fillRect(20, valE, 3, 32 - valE, 3);
-            // int16_t valD = max(dspctrl.levels.distortion, -32.0*2)  / -2; // should be within 0 - 32 ?
-            // display.fillRect(24, valD, 3, 32 - valD, 3);
-            // int16_t valP = max(dspctrl.levels.postall, -32.0*2)  / -2; // should be within 0 - 32 ?
-            // display.fillRect(28, valD, 1, 32 - valP, 3);
 
-            // Die Levels sind zu langsam um auf den Distortion umzuschalten, decay einstallen !?
+            // distortionavg is -40 up to 0
+            int16_t valD = max(dspctrl.toLog(dspctrl.levels.avgDistortion), -32.0) * -1; // should be within 0 - 32 ?
+            display.fillRect(22, valD, 3, 32 - valD, 3);
+            // Dist settings (dit 1..-1)
+            display.fillRect(18, _distortion*16+15, 4, 2, drawHelpers?3:1);
 
             // EQ Settings
-            int eqpos = 30;
-            for(int i = 0; i < 8; i++)
+            int eqpos = 28;
+            for(int i = 0; i < 9; i++)
             {
                 display.fillRect(eqpos + 6*i, 15-dspctrl.eqValues[i], 6, 2, (drawHelpers && dspctrl.eqBand==i)?3:1);
             }
             // Speki
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < 9; i++)
             {
                 // min -64, scaled down by -2 -> 32 pixel
                 // min -64, scaled down by -3 -> 22 pixel
@@ -416,23 +414,45 @@ void FDController::taskDisplay()
         }
 
         //Stats
-        display.drawRoundRect(84,21,18,11,3,1);
-        display.setTextColor(_mute & MUTE_HP_MASK ? 1:2);
-        display.setCursor(88, 23);
-        display.setTextSize(1);
-        display.print("HP");
-        if(_mute & MUTE_HP_MASK) display.drawLine(86, 30, 100, 23, 3); // strike through
-        display.drawRoundRect(102,21,26,11,3,1);
-        display.setTextColor(_mute & MUTE_SPK_MASK ?1:2);
-        display.setCursor(107, 23);
-        display.setTextSize(1);
-        display.print("SPK");
-        if(_mute & MUTE_SPK_MASK) display.drawLine(104, 30, 126, 23, 3); // strike through
+        // display.drawRoundRect(84,21,18,11,3,1);
+        // display.setTextColor(_mute & MUTE_HP_MASK ? 1:2);
+        // display.setCursor(88, 23);
+        // display.setTextSize(1);
+        // display.print("HP");
+        // if(_mute & MUTE_HP_MASK) display.drawLine(86, 30, 100, 23, 3); // strike through
+        // display.drawRoundRect(102,21,26,11,3,1);
+        // display.setTextColor(_mute & MUTE_SPK_MASK ?1:2);
+        // display.setCursor(107, 23);
+        // display.setTextSize(1);
+        // display.print("SPK");
+        // if(_mute & MUTE_SPK_MASK) display.drawLine(104, 30, 126, 23, 3); // strike through
 
         display.swapBuffers();
 
         drawtime = micros() - time;
         if(drawHelpers > 0) drawHelpers--;
+
+
+
+        // LOG some stuff // sometimes
+        if(dspctrl.dspEnabled && random(30)==1)
+        {
+            // LOG <<"test..1:" <<dspctrl.toLog(1) <<" .5:" <<dspctrl.toLog(.5) <<" 2:" <<dspctrl.toLog(2) <<LOG.endl; 
+            LOG <<"peaks..."
+                <<" in:" <<dspctrl.toLog(dspctrl.levels.peakAnalogIn)
+                <<" postUserEQ:" <<dspctrl.toLog(dspctrl.levels.peakPostUserEQ)
+                <<" dist:" <<dspctrl.toLog(dspctrl.levels.avgDistortion)
+                <<" outLo:" <<dspctrl.toLog(dspctrl.levels.peakOutputLoX2)
+                <<LOG.endl;
+            dspctrl.levels.peakPostUserEQ = 0.0; 
+            dspctrl.levels.peakOutputLoX2 = 0.0;
+            dspctrl.levels.peakAnalogIn = 0.0;
+            dspctrl.levels.avgDistortion = 0.0;
+
+            // too much looks like this
+            // peaks... postUserEQ:2.48 outLo:1.04
+            // peaks... anlogIn:0.57 dist:0.00
+        }
     }
 }
 
@@ -463,6 +483,7 @@ void FDController::taskLogger()
             Wire.begin();
             Wire.setClock(400000);
             dspctrl.dspEnabled = true; // initial turn on after DSP boot, or restart after bus collisions (with SigmaStudio)
+            dspctrl.init();
             LOG << "DSP connection ON" <<LOG.endl;
         }
         else if (dspOffCounter > 0)

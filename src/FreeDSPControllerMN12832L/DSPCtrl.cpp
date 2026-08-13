@@ -22,6 +22,11 @@ DSPCtrl::DSPCtrl() : dsp()
     // LOG <<"size:" <<sizeof(dspprog) <<LOG.endl;
 }
 
+void DSPCtrl::init()
+{
+    dsp.saveloadWrite(MOD_PEAKENVSPEKDECAY_DCINPALG2_ADDR, 10000); // decay of spektrum analyser
+}
+
 /// @brief Compares EEPROM with the dumped files...
 /// move to SigmaDSP.h ?
 /// needs a DSP reset line ! Or can it be software rebooted !?
@@ -78,12 +83,10 @@ void DSPCtrl::readLevels()
             // (1<<19) = 524.288
             // 5242.880f = (1<<19) / 100
 
-            // The captured data is in 5.19, 5.19 fixpoint to float.
-            float realval1 = -1.0f * (100.0f - (float)value1 / 5242.880f); // x / (1 << 19)
-            float realval2 = -1.0f * (100.0f - (float)value2 / 5242.880f); // x / (1 << 19)
-
             if(dspReadCycle == 0)
             {
+                float realval1 = -1.0f * (100.0f - (float)value1 / 5242.880f); // x / (1 << 19)
+                float realval2 = -1.0f * (100.0f - (float)value2 / 5242.880f); // x / (1 << 19)
                 levels.inL = realval1;
                 levels.inR = realval2;
 
@@ -95,13 +98,11 @@ void DSPCtrl::readLevels()
                     // LOG <<"levels int:" <<LOG.dec <<value1 <<", db(old)" <<realval1 <<" float:" <<from519 <<" db(new):"<<logval1 <<LOG.dec <<LOG.endl;
                 }
             }
-            else if(dspReadCycle == 5)
+            else // 9(+1) Spek Values - 1,2,3,4,5 
             {
-                levels.distortion = realval1;
-                levels.postall = realval2;
-            }
-            else
-            {
+                // The captured data is in 5.19, 5.19 fixpoint to float.
+                float realval1 = toLog(dsp.from519(value1));
+                float realval2 = toLog(dsp.from519(value2));
                 levels.postEQ[dspReadCycle*2-2] = realval1;
                 levels.postEQ[dspReadCycle*2-1] = realval2;
             }
@@ -110,6 +111,24 @@ void DSPCtrl::readLevels()
         {
             // LOG << "ac: ??? idx:" << idx << LOG.endl;
         }
+
+        // try reading some avg/peak values
+        dsp.setDataCapture(MOD_READBACKUSEREQ_ALG0_VAL0_VALUES, MOD_READBACKLOOUT_ALG0_VAL0_VALUES);
+        dsp.readDataCapture(value1, value2);
+        //convert 
+        float val1f = dsp.from519(value1);
+        float val2f = dsp.from519(value2);
+        levels.peakPostUserEQ = val1f > levels.peakPostUserEQ ? val1f : levels.peakPostUserEQ;
+        levels.peakOutputLoX2 = val2f > levels.peakOutputLoX2 ? val2f : levels.peakOutputLoX2;
+        // ^^^ reader should reset these !
+
+        dsp.setDataCapture(MOD_READBACKANAIN_ALG0_VAL0_VALUES, MOD_READBACKDISTAVG_ALG0_VAL0_VALUES);
+        dsp.readDataCapture(value1, value2);
+        //convert 
+        float val3f = dsp.from519(value1);
+        float val4f = dsp.from519(value2);
+        levels.peakAnalogIn = val3f > levels.peakAnalogIn ? val3f : levels.peakAnalogIn;
+        levels.avgDistortion = val4f;
 
         dspReadCycle++;
         if(dspReadCycle > 5)
@@ -127,8 +146,8 @@ void DSPCtrl::readLevels()
         else
         {
             // setup DC to read Secondary LevelMeters (post EQ and Distortion)
-            dsp.setDataCapture(MOD_LVPOSTEQ1_ALG0_SINGLEBANDLEVELDET2_VALUES,
-                 MOD_LVPOSTEQ2_ALG0_SINGLEBANDLEVELDET1_VALUES);
+            dsp.setDataCapture(MOD_READBACKSPEK1_ALG0_VAL0_VALUES,
+                 MOD_READBACKSPECK2_ALG0_VAL0_VALUES);
 
             // select the index of the postEQ filter 0-8 / flat,100,200,400,800,1600,3200,6400,12800 Hz
             // no block write, -> sound crackls !!! useing saveload
@@ -158,7 +177,7 @@ void DSPCtrl::eqVal(int diff)
     // LOG <<"current:" <<current <<LOG.endl;
     eqValues[eqBand] = current;
 
-    const uint32_t adrs[8] = {
+    const uint32_t adrs[9] = {
         MOD_ALLEQ1_ALG0_STAGE0_B0_ADDR,
         MOD_ALLEQ2_ALG0_STAGE0_B0_ADDR,
         MOD_ALLEQ3_ALG0_STAGE0_B0_ADDR,
@@ -166,7 +185,8 @@ void DSPCtrl::eqVal(int diff)
         MOD_ALLEQ5_ALG0_STAGE0_B0_ADDR,
         MOD_ALLEQ6_ALG0_STAGE0_B0_ADDR,
         MOD_ALLEQ7_ALG0_STAGE0_B0_ADDR,
-        MOD_ALLEQ8_ALG0_STAGE0_B0_ADDR
+        MOD_ALLEQ8_ALG0_STAGE0_B0_ADDR,
+        MOD_ALLEQ9_ALG0_STAGE0_B0_ADDR
     };
 
     float coeffs[5];
