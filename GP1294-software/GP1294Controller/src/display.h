@@ -3,7 +3,7 @@
 #include "config.h"
 
 #include <U8g2lib.h>
-
+#include <GP1294AI.h>
 
 /**
  * Will do the display drawing.
@@ -25,8 +25,9 @@ private:
     int threadId = 0;
 
     // (const u8g2_cb_t *rotation, uint8_t cs, uint8_t dc, uint8_t reset = (uint8_t)255U)
-    U8G2_GP1294AI_256X48_F_4W_HW_SPI u8g2;
+    // U8G2_GP1294AI_256X48_F_4W_HW_SPI u8g2;
     // F version has 1536 buf size ! Correct, was machen die anderen ???
+    GP1294AI gfx;
 
     char textbuffer[100] = "Hello World!";
 

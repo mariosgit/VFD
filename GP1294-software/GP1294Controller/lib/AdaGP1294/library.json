@@ -1,0 +1,16 @@
+{
+  "name": "GP1294AI",
+  "keywords": "display, vfd",
+  "description": "Arduino library to display on a GP1294AI VFD",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/mariosgit/GP1294AIoderso.git"
+  },
+  "frameworks": "arduino",
+  "platforms": ["atmelavr, teensy"],
+  "dependencies":
+  {
+    "adafruit/Adafruit GFX Library": "^1.12.6"
+  }
+}

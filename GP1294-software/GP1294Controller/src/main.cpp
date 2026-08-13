@@ -26,6 +26,10 @@ void setup()
 {
     Serial.begin(115200);
 
+    if (CrashReport) {
+        while (!Serial && millis() < 3000);
+        Serial.print(CrashReport);
+    }
     Wire1.begin();
     Wire1.setSDA(pinSDA);
     Wire1.setSCL(pinSCL);
@@ -52,7 +56,7 @@ void setup()
 
     input.begin(50);   // x
     ampctl.begin(100); // :adr
-    display.begin(20); // .
+    display.begin(50); // .
 }
 
 void loop()
@@ -61,15 +65,17 @@ void loop()
     {
         emChecker = 0;
 
-        Threads::Scope m(my_lock); // lock on creation
-        // do stuff...
+        Serial.println("hallo");
+
+        // Threads::Scope m(my_lock); // lock on creation
+        // // do stuff...
 
         Serial.println(threads.threadsInfo());
 
-        // Serial.print("main id: "); Serial.println(threads.id());
-        // Serial.print("in   id: "); Serial.println(input.id());
-        // Serial.print("amp  id: "); Serial.println(ampctl.id());
-        // Serial.print("disp id: "); Serial.println(display.id());
+        Serial.print("main id: "); Serial.println(threads.id());
+        Serial.print("in   id: "); Serial.println(input.id());
+        Serial.print("amp  id: "); Serial.println(ampctl.id());
+        Serial.print("disp id: "); Serial.println(display.id());
 
         // 0:Stack size:10240|Used:537329664|Remains:-537319424|State:RUNNING|
         // 1:Stack size:1024|Used:72|Remains:952|State:RUNNING|
@@ -85,7 +91,7 @@ void loop()
         // 3:Stack size:1024|Used:312|Remains:712|State:RUNNING|
     }
 
-    if(emIRevent > 50 && IrReceiver.decode())
+    if(0 && emIRevent > 50 && IrReceiver.decode())
     {
         emIRevent = 0;
 
@@ -134,5 +140,5 @@ void loop()
         IrReceiver.resume(); // Enable receiving of the next value
     }
 
-    // threads.idle();
+    threads.yield();
 }

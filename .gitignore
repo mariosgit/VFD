@@ -55,3 +55,4 @@ GP1294-software/attinclickEncoder
 GP1294-software/TinyWireS/
 
 .env
+GP1294-software/GP1294Controller/compile_commands.json

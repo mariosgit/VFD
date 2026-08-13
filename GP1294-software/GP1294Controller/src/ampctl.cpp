@@ -22,8 +22,8 @@ void AmpControl::run()
     while (1)
     {
         // Serial.print("Scanning...");
-        Serial.print(":");
-        Serial.println(i2cScanAdr);
+        // Serial.print(":");
+        // Serial.println(i2cScanAdr);
 
         nDevices = 0;
         // for (i2cScanAdr = 1; i2cScanAdr < 127; i2cScanAdr++)
@@ -36,6 +36,7 @@ void AmpControl::run()
 
             if (error == 0)
             {
+                Serial.println();
                 Serial.print("I2C device found at address 0x");
                 if (i2cScanAdr < 16)
                     Serial.print("0");
@@ -46,6 +47,7 @@ void AmpControl::run()
             }
             else if (error == 4)
             {
+                Serial.println();
                 // Serial.print("Unknown error at address 0x");
                 if (i2cScanAdr < 16)
                     Serial.print("0");
